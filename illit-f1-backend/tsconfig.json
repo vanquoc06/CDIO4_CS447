@@ -1,24 +1,28 @@
 {
   "compilerOptions": {
-    /* Môi trường & Phiên bản */
     "target": "es2020",
     "module": "commonjs",
+    "lib": ["es2020"],
     "esModuleInterop": true,
     "forceConsistentCasingInFileNames": true,
+    "resolveJsonModule": true,
+    "declaration": true,
+    "declarationMap": true,
+    "sourceMap": true,
 
-    /* Thư mục gốc và thư mục Build */
     "rootDir": "./src",
     "outDir": "./dist",
 
-    /* Kiểm tra kiểu dữ liệu (Strict Mode) */
     "strict": true,
-    "skipLibCheck": true
+    "skipLibCheck": true,
+    "noImplicitAny": true,
+    "strictNullChecks": true,
+    "strictFunctionTypes": true,
+    "noUnusedLocals": false,
+    "noUnusedParameters": false,
+    "noImplicitReturns": true,
+    "noFallthroughCasesInSwitch": true
   },
-  "include": [
-    "src/**/*"
-  ],
-  "exclude": [
-    "node_modules",
-    "**/*.spec.ts"
-  ]
+  "include": ["src/**/*"],
+  "exclude": ["node_modules", "**/*.spec.ts", "dist"]
 }

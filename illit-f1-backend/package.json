@@ -1,15 +1,21 @@
 {
   "name": "illit-f1-backend",
   "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
+  "description": "F1 E-commerce Backend API with AI Chatbot",
+  "main": "dist/index.js",
   "scripts": {
     "dev": "nodemon src/index.ts",
     "build": "tsc",
-    "start": "node dist/index.js"
+    "start": "node dist/index.js",
+    "prisma:generate": "prisma generate",
+    "prisma:migrate": "prisma migrate dev",
+    "prisma:studio": "prisma studio",
+    "prisma:seed": "ts-node prisma/seed.ts",
+    "lint": "tsc --noEmit",
+    "type-check": "tsc --noEmit"
   },
-  "keywords": [],
-  "author": "",
+  "keywords": ["f1", "ecommerce", "api", "ai", "chatbot"],
+  "author": "ILLIT F1 Team",
   "license": "ISC",
   "dependencies": {
     "@google/generative-ai": "^0.24.1",
@@ -32,3 +38,4 @@
     "typescript": "^6.0.3"
   }
 }
+
