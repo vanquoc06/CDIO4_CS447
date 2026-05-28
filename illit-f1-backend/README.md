@@ -2,6 +2,10 @@
 
 API backend cho hệ thống e-commerce F1 với AI chatbot, quản lý sản phẩm, đơn hàng và người dùng.
 
+> **🚀 [QUICKSTART.md](./QUICKSTART.md)** - Chạy API trong 5 phút  
+> **📖 [INDEX.md](./INDEX.md)** - Chỉ mục tài liệu toàn bộ  
+> **📝 [CHECKLIST.md](./CHECKLIST.md)** - Kiểm tra tiến độ
+
 ## 🚀 Công nghệ
 
 - **Node.js** + **Express.js** (v5.2.1)

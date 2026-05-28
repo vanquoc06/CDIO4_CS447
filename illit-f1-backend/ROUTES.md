@@ -47,6 +47,21 @@
 │   │   ├── GET /teams                # List teams
 │   │   └── GET /teams/:teamId        # Team detail
 │   └── GET /standings                # Championship standings
+├── /chatbot                          # AI Chatbot
+│   ├── POST /sessions                # Create chat session (auth)
+│   ├── GET /sessions                 # Get my sessions (auth)
+│   ├── GET /sessions/:sessionId      # Get session detail (auth)
+│   ├── GET /sessions/:sessionId/messages       # Get messages (auth)
+│   ├── POST /sessions/:sessionId/messages      # Send message (auth)
+│   ├── DELETE /sessions/:sessionId   # Delete session (auth)
+│   └── DELETE /sessions/:sessionId/messages    # Clear messages (auth)
+├── /roles                            # Quản lý roles
+│   ├── GET /                         # List all roles
+│   ├── GET /:roleId                  # Get role detail
+│   ├── GET /user/:userId             # Get user roles
+│   ├── POST /                        # Create role (auth)
+│   ├── POST /assign                  # Assign role to user (auth)
+│   └── POST /remove                  # Remove role from user (auth)
 └── /ai
     └── POST /chat                    # Chat with AI (auth)
 ```

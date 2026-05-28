@@ -8,6 +8,7 @@ import {
   deleteReview
 } from '../controllers/review.controller';
 import { verifyToken } from '../middlewares/auth.middleware';
+import { checkModerator } from '../middlewares/admin.middleware';
 
 const router = Router();
 

@@ -17,6 +17,7 @@
 - [x] Token verification middleware
 - [x] User registration
 - [x] User login
+- [x] Admin/Moderator middleware
 
 ### Core Services
 - [x] User Service (CRUD)
@@ -25,8 +26,9 @@
 - [x] Cart Service (add, remove, update)
 - [x] Review Service (CRUD + ratings)
 - [x] Voucher Service (validation + calculation)
-- [x] AI Chatbot (Gemini integration)
+- [x] AI Chatbot (Gemini integration + session management)
 - [x] F1 Data Service (races, drivers, teams, standings)
+- [x] Role Service (RBAC + permissions)
 
 ### Database
 - [x] Prisma ORM setup
@@ -41,6 +43,7 @@
 - [x] ARCHITECTURE.md
 - [x] SETUP.md
 - [x] CONTRIBUTING.md
+- [x] TODO.md
 
 ---
 

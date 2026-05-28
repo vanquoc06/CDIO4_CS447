@@ -11,6 +11,8 @@ import cartRoutes from './routes/cart.routes';
 import reviewRoutes from './routes/review.routes';
 import voucherRoutes from './routes/voucher.routes';
 import raceRoutes from './routes/race.routes';
+import chatbotRoutes from './routes/chatbot.routes';
+import roleRoutes from './routes/role.routes';
 import { errorHandler, notFoundHandler } from './middlewares/error.middleware';
 
 dotenv.config();
@@ -62,6 +64,8 @@ app.use('/api/cart', cartRoutes);
 app.use('/api/reviews', reviewRoutes);
 app.use('/api/vouchers', voucherRoutes);
 app.use('/api/f1', raceRoutes);
+app.use('/api/chatbot', chatbotRoutes);
+app.use('/api/roles', roleRoutes);
 
 // 404 handler
 app.use(notFoundHandler);
@@ -73,5 +77,5 @@ app.listen(port, () => {
   logger.info(`🚀 Server đang chạy tại http://localhost:${port}`);
   logger.info(`📊 Database: ${process.env.DATABASE_URL?.split(';')[1] || 'connecting...'}`);
   logger.info(`🔒 JWT Secret: ${process.env.JWT_SECRET ? '✓ Configured' : '✗ Missing'}`);
-  logger.info(`📍 Available routes: /api/{users,products,orders,cart,reviews,vouchers,f1,ai}`);
+  logger.info(`📍 Available routes: /api/{users,products,orders,cart,reviews,vouchers,f1,ai,chatbot,roles}`);
 });

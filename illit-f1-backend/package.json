@@ -9,10 +9,16 @@
     "start": "node dist/index.js",
     "prisma:generate": "prisma generate",
     "prisma:migrate": "prisma migrate dev",
+    "prisma:migrate:deploy": "prisma migrate deploy",
+    "prisma:db:push": "prisma db push",
+    "prisma:db:pull": "prisma db pull",
+    "prisma:status": "prisma migrate status",
     "prisma:studio": "prisma studio",
     "prisma:seed": "ts-node prisma/seed.ts",
     "lint": "tsc --noEmit",
-    "type-check": "tsc --noEmit"
+    "type-check": "tsc --noEmit",
+    "test": "echo 'Tests not yet implemented'",
+    "test:watch": "echo 'Watch mode not yet implemented'"
   },
   "keywords": ["f1", "ecommerce", "api", "ai", "chatbot"],
   "author": "ILLIT F1 Team",
