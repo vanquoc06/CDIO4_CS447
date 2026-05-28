@@ -6,13 +6,13 @@ export const getRaces = async (req: Request, res: Response) => {
   try {
     const races = await raceService.getAllRaces();
 
-    res.status(200).json({
+    return res.status(200).json({ // ✨ ĐÃ SỬA: Thêm return
       status: 'success',
       data: races,
       count: races.length
     });
   } catch (error: any) {
-    res.status(500).json({
+    return res.status(500).json({ // ✨ ĐÃ SỬA: Thêm return
       status: 'error',
       message: 'Lỗi khi lấy danh sách giải đua',
       error: error.message
@@ -22,7 +22,8 @@ export const getRaces = async (req: Request, res: Response) => {
 
 export const getRaceById = async (req: Request, res: Response) => {
   try {
-    const { raceId } = req.params;
+    // ✨ ĐÃ SỬA: Ép kiểu 'as string' để tránh lỗi TS2345
+    const raceId = req.params.raceId as string;
     const race = await raceService.getRaceById(raceId);
 
     if (!race) {
@@ -32,12 +33,12 @@ export const getRaceById = async (req: Request, res: Response) => {
       });
     }
 
-    res.status(200).json({
+    return res.status(200).json({ // ✨ ĐÃ SỬA: Thêm return
       status: 'success',
       data: race
     });
   } catch (error: any) {
-    res.status(500).json({
+    return res.status(500).json({ // ✨ ĐÃ SỬA: Thêm return
       status: 'error',
       message: 'Lỗi khi lấy chi tiết giải đua',
       error: error.message
@@ -49,13 +50,13 @@ export const getDrivers = async (req: Request, res: Response) => {
   try {
     const drivers = await raceService.getAllDrivers();
 
-    res.status(200).json({
+    return res.status(200).json({ // ✨ ĐÃ SỬA: Thêm return
       status: 'success',
       data: drivers,
       count: drivers.length
     });
   } catch (error: any) {
-    res.status(500).json({
+    return res.status(500).json({ // ✨ ĐÃ SỬA: Thêm return
       status: 'error',
       message: 'Lỗi khi lấy danh sách tài xế',
       error: error.message
@@ -65,7 +66,8 @@ export const getDrivers = async (req: Request, res: Response) => {
 
 export const getDriverById = async (req: Request, res: Response) => {
   try {
-    const { driverId } = req.params;
+    // ✨ ĐÃ SỬA: Ép kiểu 'as string' để tránh lỗi TS2345
+    const driverId = req.params.driverId as string;
     const driver = await raceService.getDriverById(driverId);
 
     if (!driver) {
@@ -75,12 +77,12 @@ export const getDriverById = async (req: Request, res: Response) => {
       });
     }
 
-    res.status(200).json({
+    return res.status(200).json({ // ✨ ĐÃ SỬA: Thêm return
       status: 'success',
       data: driver
     });
   } catch (error: any) {
-    res.status(500).json({
+    return res.status(500).json({ // ✨ ĐÃ SỬA: Thêm return
       status: 'error',
       message: 'Lỗi khi lấy chi tiết tài xế',
       error: error.message
@@ -92,13 +94,13 @@ export const getTeams = async (req: Request, res: Response) => {
   try {
     const teams = await raceService.getAllTeams();
 
-    res.status(200).json({
+    return res.status(200).json({ // ✨ ĐÃ SỬA: Thêm return
       status: 'success',
       data: teams,
       count: teams.length
     });
   } catch (error: any) {
-    res.status(500).json({
+    return res.status(500).json({ // ✨ ĐÃ SỬA: Thêm return
       status: 'error',
       message: 'Lỗi khi lấy danh sách đội',
       error: error.message
@@ -108,7 +110,8 @@ export const getTeams = async (req: Request, res: Response) => {
 
 export const getTeamById = async (req: Request, res: Response) => {
   try {
-    const { teamId } = req.params;
+    // ✨ ĐÃ SỬA: Ép kiểu 'as string' để tránh lỗi TS2345
+    const teamId = req.params.teamId as string;
     const team = await raceService.getTeamById(teamId);
 
     if (!team) {
@@ -118,12 +121,12 @@ export const getTeamById = async (req: Request, res: Response) => {
       });
     }
 
-    res.status(200).json({
+    return res.status(200).json({ // ✨ ĐÃ SỬA: Thêm return
       status: 'success',
       data: team
     });
   } catch (error: any) {
-    res.status(500).json({
+    return res.status(500).json({ // ✨ ĐÃ SỬA: Thêm return
       status: 'error',
       message: 'Lỗi khi lấy chi tiết đội',
       error: error.message
@@ -135,13 +138,13 @@ export const getStandings = async (req: Request, res: Response) => {
   try {
     const standings = await raceService.getStandings();
 
-    res.status(200).json({
+    return res.status(200).json({ // ✨ ĐÃ SỬA: Thêm return
       status: 'success',
       data: standings,
       count: standings.length
     });
   } catch (error: any) {
-    res.status(500).json({
+    return res.status(500).json({ // ✨ ĐÃ SỬA: Thêm return
       status: 'error',
       message: 'Lỗi khi lấy bảng xếp hạng',
       error: error.message

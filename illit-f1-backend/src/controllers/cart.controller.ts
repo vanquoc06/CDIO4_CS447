@@ -9,12 +9,12 @@ export const getCart = async (req: Request, res: Response) => {
 
     const cart = await cartService.getOrCreateCart(userId, sessionId);
 
-    res.status(200).json({
+    return res.status(200).json({ // ✨ ĐÃ SỬA: Thêm return
       status: 'success',
       data: cart
     });
   } catch (error: any) {
-    res.status(500).json({
+    return res.status(500).json({ // ✨ ĐÃ SỬA: Thêm return
       status: 'error',
       message: 'Lỗi khi lấy giỏ hàng',
       error: error.message
@@ -35,13 +35,13 @@ export const addToCart = async (req: Request, res: Response) => {
 
     const item = await cartService.addToCart(cartId, variantId, quantity);
 
-    res.status(201).json({
+    return res.status(201).json({ // ✨ ĐÃ SỬA: Thêm return
       status: 'success',
       message: 'Thêm vào giỏ hàng thành công!',
       data: item
     });
   } catch (error: any) {
-    res.status(500).json({
+    return res.status(500).json({ // ✨ ĐÃ SỬA: Thêm return
       status: 'error',
       message: 'Lỗi khi thêm vào giỏ hàng',
       error: error.message
@@ -51,16 +51,17 @@ export const addToCart = async (req: Request, res: Response) => {
 
 export const removeFromCart = async (req: Request, res: Response) => {
   try {
-    const { cartItemId } = req.params;
+    // ✨ ĐÃ SỬA: Ép kiểu 'as string' để sửa lỗi TS2345
+    const cartItemId = req.params.cartItemId as string; 
 
     await cartService.removeFromCart(cartItemId);
 
-    res.status(200).json({
+    return res.status(200).json({ // ✨ ĐÃ SỬA: Thêm return
       status: 'success',
       message: 'Xóa khỏi giỏ hàng thành công!'
     });
   } catch (error: any) {
-    res.status(500).json({
+    return res.status(500).json({ // ✨ ĐÃ SỬA: Thêm return
       status: 'error',
       message: 'Lỗi khi xóa khỏi giỏ hàng',
       error: error.message
@@ -70,7 +71,8 @@ export const removeFromCart = async (req: Request, res: Response) => {
 
 export const updateQuantity = async (req: Request, res: Response) => {
   try {
-    const { cartItemId } = req.params;
+    // ✨ ĐÃ SỬA: Ép kiểu 'as string' để sửa lỗi TS2345
+    const cartItemId = req.params.cartItemId as string; 
     const { quantity } = req.body;
 
     if (!quantity || quantity < 0) {
@@ -82,13 +84,13 @@ export const updateQuantity = async (req: Request, res: Response) => {
 
     const item = await cartService.updateCartItemQuantity(cartItemId, quantity);
 
-    res.status(200).json({
+    return res.status(200).json({ // ✨ ĐÃ SỬA: Thêm return
       status: 'success',
       message: 'Cập nhật số lượng thành công!',
       data: item
     });
   } catch (error: any) {
-    res.status(500).json({
+    return res.status(500).json({ // ✨ ĐÃ SỬA: Thêm return
       status: 'error',
       message: 'Lỗi khi cập nhật số lượng',
       error: error.message
@@ -98,17 +100,18 @@ export const updateQuantity = async (req: Request, res: Response) => {
 
 export const clearCart = async (req: Request, res: Response) => {
   try {
-    const { cartId } = req.params;
+    // ✨ ĐÃ SỬA: Ép kiểu 'as string' để sửa lỗi TS2345
+    const cartId = req.params.cartId as string; 
 
     const cart = await cartService.clearCart(cartId);
 
-    res.status(200).json({
+    return res.status(200).json({ // ✨ ĐÃ SỬA: Thêm return
       status: 'success',
       message: 'Xóa giỏ hàng thành công!',
       data: cart
     });
   } catch (error: any) {
-    res.status(500).json({
+    return res.status(500).json({ // ✨ ĐÃ SỬA: Thêm return
       status: 'error',
       message: 'Lỗi khi xóa giỏ hàng',
       error: error.message

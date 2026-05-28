@@ -33,7 +33,7 @@ export const validateUserInput = (req: Request, res: Response, next: NextFunctio
     });
   }
 
-  next();
+  return next(); // ✨ ĐÃ SỬA: Thêm return ở đây
 };
 
 export const validateProductInput = (req: Request, res: Response, next: NextFunction) => {
@@ -60,5 +60,5 @@ export const validateProductInput = (req: Request, res: Response, next: NextFunc
     });
   }
 
-  next();
+  return next(); // ✨ ĐÃ SỬA: Thêm return ở đây
 };

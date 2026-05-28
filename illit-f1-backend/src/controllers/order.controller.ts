@@ -7,13 +7,13 @@ export const getOrders = async (req: Request, res: Response) => {
     const userId = (req as any).user?.user_id;
     const orders = await orderService.getAllOrders(userId);
 
-    res.status(200).json({
+    return res.status(200).json({
       status: 'success',
       data: orders,
       count: orders.length
     });
   } catch (error: any) {
-    res.status(500).json({
+    return res.status(500).json({
       status: 'error',
       message: 'Lỗi khi lấy danh sách đơn hàng',
       error: error.message
@@ -23,7 +23,8 @@ export const getOrders = async (req: Request, res: Response) => {
 
 export const getOrderById = async (req: Request, res: Response) => {
   try {
-    const { orderId } = req.params;
+    // ✨ ĐÃ SỬA: Ép kiểu 'as string' để sửa lỗi TS2345
+    const orderId = req.params.orderId as string; 
     const order = await orderService.getOrderById(orderId);
 
     if (!order) {
@@ -33,12 +34,12 @@ export const getOrderById = async (req: Request, res: Response) => {
       });
     }
 
-    res.status(200).json({
+    return res.status(200).json({
       status: 'success',
       data: order
     });
   } catch (error: any) {
-    res.status(500).json({
+    return res.status(500).json({
       status: 'error',
       message: 'Lỗi khi lấy chi tiết đơn hàng',
       error: error.message
@@ -67,13 +68,13 @@ export const createOrder = async (req: Request, res: Response) => {
       items
     });
 
-    res.status(201).json({
+    return res.status(201).json({
       status: 'success',
       message: 'Tạo đơn hàng thành công!',
       data: newOrder
     });
   } catch (error: any) {
-    res.status(500).json({
+    return res.status(500).json({
       status: 'error',
       message: 'Lỗi server khi tạo đơn hàng',
       error: error.message
@@ -83,7 +84,8 @@ export const createOrder = async (req: Request, res: Response) => {
 
 export const updateOrderStatus = async (req: Request, res: Response) => {
   try {
-    const { orderId } = req.params;
+    // ✨ ĐÃ SỬA: Ép kiểu 'as string' để sửa lỗi TS2345
+    const orderId = req.params.orderId as string; 
     const { status } = req.body;
 
     if (!status) {
@@ -95,13 +97,13 @@ export const updateOrderStatus = async (req: Request, res: Response) => {
 
     const order = await orderService.updateOrderStatus(orderId, status);
 
-    res.status(200).json({
+    return res.status(200).json({
       status: 'success',
       message: 'Cập nhật trạng thái đơn hàng thành công!',
       data: order
     });
   } catch (error: any) {
-    res.status(500).json({
+    return res.status(500).json({
       status: 'error',
       message: 'Lỗi server khi cập nhật đơn hàng',
       error: error.message
@@ -111,15 +113,16 @@ export const updateOrderStatus = async (req: Request, res: Response) => {
 
 export const deleteOrder = async (req: Request, res: Response) => {
   try {
-    const { orderId } = req.params;
+    // ✨ ĐÃ SỬA: Ép kiểu 'as string' để sửa lỗi TS2345
+    const orderId = req.params.orderId as string; 
     await orderService.deleteOrder(orderId);
 
-    res.status(200).json({
+    return res.status(200).json({
       status: 'success',
       message: 'Xóa đơn hàng thành công!'
     });
   } catch (error: any) {
-    res.status(500).json({
+    return res.status(500).json({
       status: 'error',
       message: 'Lỗi server khi xóa đơn hàng',
       error: error.message

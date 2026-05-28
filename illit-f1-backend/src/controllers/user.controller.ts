@@ -6,13 +6,13 @@ import * as userService from '../services/user.service';
 export const getUsers = async (req: Request, res: Response) => {
   try {
     const users = await userService.getAllUsers();
-    res.status(200).json({
+    return res.status(200).json({ // Thêm return
       status: 'success',
       data: users,
       count: users.length
     });
   } catch (error: any) {
-    res.status(500).json({
+    return res.status(500).json({ // Thêm return
       status: 'error',
       message: 'Lỗi khi lấy danh sách người dùng',
       error: error.message
@@ -25,7 +25,7 @@ export const createUser = async (req: Request, res: Response) => {
   try {
     const newUser = await userService.createUser(req.body);
 
-    res.status(201).json({
+    return res.status(201).json({ // Thêm return
       status: 'success',
       message: 'Tạo tài khoản thành công!',
       data: newUser
@@ -38,7 +38,7 @@ export const createUser = async (req: Request, res: Response) => {
       });
     }
 
-    res.status(500).json({
+    return res.status(500).json({ // ✨ ĐÃ SỬA: Thêm return ở đây để hết lỗi TS7030
       status: 'error',
       message: 'Lỗi server khi tạo người dùng',
       error: error.message
@@ -51,13 +51,13 @@ export const loginUser = async (req: Request, res: Response) => {
   try {
     const result = await userService.loginUser(req.body);
 
-    res.status(200).json({
+    return res.status(200).json({ // Thêm return
       status: 'success',
       message: 'Đăng nhập thành công!',
       data: result
     });
   } catch (error: any) {
-    res.status(401).json({
+    return res.status(401).json({ // Thêm return
       status: 'fail',
       message: error.message
     });

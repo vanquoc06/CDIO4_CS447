@@ -17,12 +17,12 @@ export const chat = async (req: Request, res: Response) => {
     // Gửi câu hỏi cho Gemini và chờ câu trả lời
     const aiResponse = await aiService.chatWithAI(prompt);
 
-    res.status(200).json({
+    return res.status(200).json({ // ✨ ĐÃ SỬA: Thêm return ở đây
       status: 'success',
       data: aiResponse
     });
   } catch (error: any) {
-    res.status(500).json({
+    return res.status(500).json({ // ✨ ĐÃ SỬA: Thêm return ở đây để sửa dứt điểm lỗi TS7030
       status: 'error',
       message: error.message
     });

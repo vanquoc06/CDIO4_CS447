@@ -9,13 +9,13 @@ export const createSession = async (req: Request, res: Response) => {
 
     const session = await chatbotService.createChatSession(userId);
 
-    res.status(201).json({
+    return res.status(201).json({ // ✨ ĐÃ SỬA: Thêm return
       status: 'success',
       message: 'Tạo phiên chat thành công!',
       data: session
     });
   } catch (error: any) {
-    res.status(500).json({
+    return res.status(500).json({ // ✨ ĐÃ SỬA: Thêm return
       status: 'error',
       message: 'Lỗi khi tạo phiên chat',
       error: error.message
@@ -29,13 +29,13 @@ export const getSessions = async (req: Request, res: Response) => {
 
     const sessions = await chatbotService.getUserSessions(userId);
 
-    res.status(200).json({
+    return res.status(200).json({ // ✨ ĐÃ SỬA: Thêm return
       status: 'success',
       data: sessions,
       count: sessions.length
     });
   } catch (error: any) {
-    res.status(500).json({
+    return res.status(500).json({ // ✨ ĐÃ SỬA: Thêm return
       status: 'error',
       message: 'Lỗi khi lấy danh sách phiên chat',
       error: error.message
@@ -45,7 +45,8 @@ export const getSessions = async (req: Request, res: Response) => {
 
 export const getSession = async (req: Request, res: Response) => {
   try {
-    const { sessionId } = req.params;
+    // ✨ ĐÃ SỬA: Ép kiểu 'as string' để tránh lỗi TS2345
+    const sessionId = req.params.sessionId as string;
 
     const session = await chatbotService.getChatSession(sessionId);
 
@@ -56,12 +57,12 @@ export const getSession = async (req: Request, res: Response) => {
       });
     }
 
-    res.status(200).json({
+    return res.status(200).json({ // ✨ ĐÃ SỬA: Thêm return
       status: 'success',
       data: session
     });
   } catch (error: any) {
-    res.status(500).json({
+    return res.status(500).json({ // ✨ ĐÃ SỬA: Thêm return
       status: 'error',
       message: 'Lỗi khi lấy phiên chat',
       error: error.message
@@ -71,7 +72,8 @@ export const getSession = async (req: Request, res: Response) => {
 
 export const sendMessage = async (req: Request, res: Response) => {
   try {
-    const { sessionId } = req.params;
+    // ✨ ĐÃ SỬA: Ép kiểu 'as string' để tránh lỗi TS2345
+    const sessionId = req.params.sessionId as string;
     const { message } = req.body;
 
     if (!message || !message.trim()) {
@@ -90,7 +92,7 @@ export const sendMessage = async (req: Request, res: Response) => {
     // Save AI response
     await chatbotService.saveChatMessage(sessionId, 'bot', aiResponse);
 
-    res.status(200).json({
+    return res.status(200).json({ // ✨ ĐÃ SỬA: Thêm return
       status: 'success',
       message: 'Tin nhắn đã được gửi',
       data: {
@@ -99,7 +101,7 @@ export const sendMessage = async (req: Request, res: Response) => {
       }
     });
   } catch (error: any) {
-    res.status(500).json({
+    return res.status(500).json({ // ✨ ĐÃ SỬA: Thêm return
       status: 'error',
       message: 'Lỗi khi gửi tin nhắn',
       error: error.message
@@ -109,18 +111,19 @@ export const sendMessage = async (req: Request, res: Response) => {
 
 export const getMessages = async (req: Request, res: Response) => {
   try {
-    const { sessionId } = req.params;
+    // ✨ ĐÃ SỬA: Ép kiểu 'as string' để tránh lỗi TS2345
+    const sessionId = req.params.sessionId as string;
     const limit = req.query.limit ? parseInt(req.query.limit as string) : 50;
 
     const messages = await chatbotService.getChatMessages(sessionId, limit);
 
-    res.status(200).json({
+    return res.status(200).json({ // ✨ ĐÃ SỬA: Thêm return
       status: 'success',
       data: messages,
       count: messages.length
     });
   } catch (error: any) {
-    res.status(500).json({
+    return res.status(500).json({ // ✨ ĐÃ SỬA: Thêm return
       status: 'error',
       message: 'Lỗi khi lấy danh sách tin nhắn',
       error: error.message
@@ -130,16 +133,17 @@ export const getMessages = async (req: Request, res: Response) => {
 
 export const deleteSession = async (req: Request, res: Response) => {
   try {
-    const { sessionId } = req.params;
+    // ✨ ĐÃ SỬA: Ép kiểu 'as string' để tránh lỗi TS2345
+    const sessionId = req.params.sessionId as string;
 
     await chatbotService.deleteSession(sessionId);
 
-    res.status(200).json({
+    return res.status(200).json({ // ✨ ĐÃ SỬA: Thêm return
       status: 'success',
       message: 'Xóa phiên chat thành công!'
     });
   } catch (error: any) {
-    res.status(500).json({
+    return res.status(500).json({ // ✨ ĐÃ SỬA: Thêm return
       status: 'error',
       message: 'Lỗi khi xóa phiên chat',
       error: error.message
@@ -149,16 +153,17 @@ export const deleteSession = async (req: Request, res: Response) => {
 
 export const clearMessages = async (req: Request, res: Response) => {
   try {
-    const { sessionId } = req.params;
+    // ✨ ĐÃ SỬA: Ép kiểu 'as string' để tránh lỗi TS2345
+    const sessionId = req.params.sessionId as string;
 
     await chatbotService.clearSessionMessages(sessionId);
 
-    res.status(200).json({
+    return res.status(200).json({ // ✨ ĐÃ SỬA: Thêm return
       status: 'success',
       message: 'Xóa hết tin nhắn thành công!'
     });
   } catch (error: any) {
-    res.status(500).json({
+    return res.status(500).json({ // ✨ ĐÃ SỬA: Thêm return
       status: 'error',
       message: 'Lỗi khi xóa tin nhắn',
       error: error.message

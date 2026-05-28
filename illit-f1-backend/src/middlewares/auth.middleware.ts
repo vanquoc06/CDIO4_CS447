@@ -20,10 +20,12 @@ export const verifyToken = (req: Request, res: Response, next: NextFunction) => 
     const decoded = jwt.verify(token, process.env.JWT_SECRET as string);
     (req as any).user = decoded;
     logger.debug('Token verified', { userId: (decoded as any).user_id });
-    next();
+    
+    return next(); 
   } catch (error: any) {
     logger.warn('Invalid or expired token', { error: error.message });
-    res.status(401).json({
+    
+    return res.status(401).json({ 
       status: 'fail',
       message: 'Token không hợp lệ hoặc đã hết hạn!'
     });

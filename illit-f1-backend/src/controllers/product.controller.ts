@@ -5,13 +5,13 @@ import * as productService from '../services/product.service';
 export const getProducts = async (req: Request, res: Response) => {
   try {
     const products = await productService.getAllProducts();
-    res.status(200).json({
+    return res.status(200).json({ // ✨ ĐÃ SỬA: Thêm return
       status: 'success',
       data: products,
       count: products.length
     });
   } catch (error: any) {
-    res.status(500).json({
+    return res.status(500).json({ // ✨ ĐÃ SỬA: Thêm return
       status: 'error',
       message: 'Lỗi khi lấy danh sách sản phẩm',
       error: error.message
@@ -23,7 +23,7 @@ export const createProduct = async (req: Request, res: Response) => {
   try {
     const newProduct = await productService.createProduct(req.body);
 
-    res.status(201).json({
+    return res.status(201).json({ // ✨ ĐÃ SỬA: Thêm return
       status: 'success',
       message: 'Thêm sản phẩm thành công!',
       data: newProduct
@@ -36,7 +36,8 @@ export const createProduct = async (req: Request, res: Response) => {
         message: 'Mã SKU của biến thể đã tồn tại trong hệ thống!'
       });
     }
-    res.status(500).json({
+    
+    return res.status(500).json({ // ✨ ĐÃ SỬA: Thêm return ở đây để sửa dứt điểm lỗi TS7030
       status: 'error',
       message: 'Lỗi server khi tạo sản phẩm',
       error: error.message

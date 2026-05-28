@@ -6,13 +6,13 @@ export const getRoles = async (req: Request, res: Response) => {
   try {
     const roles = await roleService.getAllRoles();
 
-    res.status(200).json({
+    return res.status(200).json({ // ✨ ĐÃ SỬA: Thêm return
       status: 'success',
       data: roles,
       count: roles.length
     });
   } catch (error: any) {
-    res.status(500).json({
+    return res.status(500).json({ // ✨ ĐÃ SỬA: Thêm return
       status: 'error',
       message: 'Lỗi khi lấy danh sách roles',
       error: error.message
@@ -22,7 +22,7 @@ export const getRoles = async (req: Request, res: Response) => {
 
 export const getRoleById = async (req: Request, res: Response) => {
   try {
-    const { roleId } = req.params;
+    const roleId = req.params.roleId as string;
 
     const role = await roleService.getRoleById(parseInt(roleId));
 
@@ -33,12 +33,12 @@ export const getRoleById = async (req: Request, res: Response) => {
       });
     }
 
-    res.status(200).json({
+    return res.status(200).json({ // ✨ ĐÃ SỬA: Thêm return
       status: 'success',
       data: role
     });
   } catch (error: any) {
-    res.status(500).json({
+    return res.status(500).json({ // ✨ ĐÃ SỬA: Thêm return
       status: 'error',
       message: 'Lỗi khi lấy chi tiết role',
       error: error.message
@@ -59,7 +59,7 @@ export const createRole = async (req: Request, res: Response) => {
 
     const role = await roleService.createRole(role_name);
 
-    res.status(201).json({
+    return res.status(201).json({ // ✨ ĐÃ SỬA: Thêm return
       status: 'success',
       message: 'Tạo role thành công!',
       data: role
@@ -72,7 +72,7 @@ export const createRole = async (req: Request, res: Response) => {
       });
     }
 
-    res.status(500).json({
+    return res.status(500).json({ // ✨ ĐÃ SỬA: Thêm return
       status: 'error',
       message: 'Lỗi khi tạo role',
       error: error.message
@@ -93,13 +93,13 @@ export const assignRole = async (req: Request, res: Response) => {
 
     const userRole = await roleService.assignRoleToUser(userId, roleId);
 
-    res.status(201).json({
+    return res.status(201).json({ // ✨ ĐÃ SỬA: Thêm return
       status: 'success',
       message: 'Gán role cho user thành công!',
       data: userRole
     });
   } catch (error: any) {
-    res.status(400).json({
+    return res.status(400).json({ // ✨ ĐÃ SỬA: Thêm return
       status: 'fail',
       message: error.message
     });
@@ -119,12 +119,12 @@ export const removeRole = async (req: Request, res: Response) => {
 
     await roleService.removeRoleFromUser(userId, roleId);
 
-    res.status(200).json({
+    return res.status(200).json({ // ✨ ĐÃ SỬA: Thêm return
       status: 'success',
       message: 'Xóa role khỏi user thành công!'
     });
   } catch (error: any) {
-    res.status(400).json({
+    return res.status(400).json({ // ✨ ĐÃ SỬA: Thêm return
       status: 'fail',
       message: error.message
     });
@@ -133,17 +133,18 @@ export const removeRole = async (req: Request, res: Response) => {
 
 export const getUserRoles = async (req: Request, res: Response) => {
   try {
-    const { userId } = req.params;
+    // ✨ ĐÃ SỬA: Ép kiểu 'as string' để tránh lỗi lỏng lẻo dữ liệu TS2345
+    const userId = req.params.userId as string;
 
     const roles = await roleService.getUserRoles(userId);
 
-    res.status(200).json({
+    return res.status(200).json({ // ✨ ĐÃ SỬA: Thêm return
       status: 'success',
       data: roles,
       count: roles.length
     });
   } catch (error: any) {
-    res.status(500).json({
+    return res.status(500).json({ // ✨ ĐÃ SỬA: Thêm return
       status: 'error',
       message: 'Lỗi khi lấy roles của user',
       error: error.message
