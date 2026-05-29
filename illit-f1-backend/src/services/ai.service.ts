@@ -19,6 +19,6 @@ export const chatWithAI = async (prompt: string) => {
     return response.text();
   } catch (error) {
     console.error("Lỗi AI:", error);
-    throw new Error("Não bộ AI đang gặp sự cố kết nối!");
+    throw new Error("Trí tuệ nhân tạo đang gặp sự cố kết nối!");
   }
 };
