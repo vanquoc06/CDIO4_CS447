@@ -1,0 +1,217 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlserver"
+  url      = env("DATABASE_URL")
+}
+
+model Cart_Items {
+  cart_item_id     String            @id(map: "PK__Cart_Ite__5D9A6C6ED5523966") @default(dbgenerated("newid()"), map: "DF__Cart_Item__cart___66603565") @db.UniqueIdentifier
+  cart_id          String?           @db.UniqueIdentifier
+  variant_id       String?           @db.UniqueIdentifier
+  quantity         Int
+  added_at         DateTime?         @default(now(), map: "DF__Cart_Item__added__6A30C649") @db.DateTime
+  Carts            Carts?            @relation(fields: [cart_id], references: [cart_id], onDelete: NoAction, onUpdate: NoAction, map: "FK__Cart_Item__cart___6754599E")
+  Product_Variants Product_Variants? @relation(fields: [variant_id], references: [variant_id], onDelete: NoAction, onUpdate: NoAction, map: "FK__Cart_Item__varia__68487DD7")
+}
+
+model Carts {
+  cart_id    String       @id(map: "PK__Carts__2EF52A27B0057A63") @default(dbgenerated("newid()"), map: "DF__Carts__cart_id__60A75C0F") @db.UniqueIdentifier
+  user_id    String?      @db.UniqueIdentifier
+  session_id String?      @db.VarChar(255)
+  created_at DateTime?    @default(now(), map: "DF__Carts__created_a__628FA481") @db.DateTime
+  updated_at DateTime?    @default(now(), map: "DF__Carts__updated_a__6383C8BA") @db.DateTime
+  Cart_Items Cart_Items[]
+  Users      Users?       @relation(fields: [user_id], references: [user_id], onDelete: NoAction, onUpdate: NoAction, map: "FK__Carts__user_id__619B8048")
+}
+
+model Chatbot_Messages {
+  message_id       String            @id(map: "PK__Chatbot___0BBF6EE630B9E44D") @default(dbgenerated("newid()"), map: "DF__Chatbot_M__messa__151B244E") @db.UniqueIdentifier
+  session_id       String?           @db.UniqueIdentifier
+  sender           String?           @db.VarChar(10)
+  message_text     String            @db.NVarChar(Max)
+  sent_at          DateTime?         @default(now(), map: "DF__Chatbot_M__sent___17F790F9") @db.DateTime
+  Chatbot_Sessions Chatbot_Sessions? @relation(fields: [session_id], references: [session_id], onDelete: NoAction, onUpdate: NoAction, map: "FK__Chatbot_M__sessi__160F4887")
+}
+
+model Chatbot_Sessions {
+  session_id         String             @id(map: "PK__Chatbot___69B13FDC68D6B718") @default(dbgenerated("newid()"), map: "DF__Chatbot_S__sessi__0F624AF8") @db.UniqueIdentifier
+  user_id            String?            @db.UniqueIdentifier
+  started_at         DateTime?          @default(now(), map: "DF__Chatbot_S__start__114A936A") @db.DateTime
+  last_interacted_at DateTime?          @default(now(), map: "DF__Chatbot_S__last___123EB7A3") @db.DateTime
+  Chatbot_Messages   Chatbot_Messages[]
+  Users              Users?             @relation(fields: [user_id], references: [user_id], onDelete: NoAction, onUpdate: NoAction, map: "FK__Chatbot_S__user___10566F31")
+}
+
+model Drivers {
+  driver_id    String         @id(map: "PK__Drivers__A411C5BDE596E766") @default(dbgenerated("newid()"), map: "DF__Drivers__driver___7E37BEF6") @db.UniqueIdentifier
+  first_name   String         @db.NVarChar(50)
+  last_name    String         @db.NVarChar(50)
+  nationality  String?        @db.NVarChar(50)
+  dob          DateTime?      @db.Date
+  is_deleted   Boolean?       @default(false, map: "DF__Drivers__is_dele__7F2BE32F")
+  Race_Results Race_Results[]
+}
+
+model F1_Knowledge_Base {
+  doc_id           String    @id(map: "PK__F1_Knowl__8AD029249FF352B2") @default(dbgenerated("newid()"), map: "DF__F1_Knowle__doc_i__0B91BA14") @db.UniqueIdentifier
+  title            String    @db.NVarChar(255)
+  content_chunk    String    @db.NVarChar(Max)
+  vector_embedding String?   @db.NVarChar(Max)
+  metadata         String?   @db.NVarChar(Max)
+  created_at       DateTime? @default(now(), map: "DF__F1_Knowle__creat__0C85DE4D") @db.DateTime
+
+  @@index([title], map: "IX_F1Knowledge_Title")
+}
+
+model Order_Items {
+  item_id               String            @id(map: "PK__Order_It__52020FDDED9EE1E3") @default(dbgenerated("newid()"), map: "DF__Order_Ite__item___5AEE82B9") @db.UniqueIdentifier
+  order_id              String?           @db.UniqueIdentifier
+  variant_id            String?           @db.UniqueIdentifier
+  sku_code_snapshot     String            @db.VarChar(100)
+  product_name_snapshot String            @db.NVarChar(200)
+  quantity              Int
+  price_at_purchase     Decimal           @db.Decimal(18, 2)
+  Orders                Orders?           @relation(fields: [order_id], references: [order_id], onDelete: NoAction, onUpdate: NoAction, map: "FK__Order_Ite__order__5BE2A6F2")
+  Product_Variants      Product_Variants? @relation(fields: [variant_id], references: [variant_id], onDelete: NoAction, onUpdate: NoAction, map: "FK__Order_Ite__varia__5CD6CB2B")
+}
+
+model Orders {
+  order_id         String        @id(map: "PK__Orders__4659622974FA15E0") @default(dbgenerated("newid()"), map: "DF__Orders__order_id__5441852A") @db.UniqueIdentifier
+  user_id          String?       @db.UniqueIdentifier
+  guest_email      String?       @db.VarChar(255)
+  guest_phone      String?       @db.VarChar(20)
+  total_amount     Decimal       @db.Decimal(18, 2)
+  status           String?       @default("Pending", map: "DF__Orders__status__5629CD9C") @db.VarChar(50)
+  shipping_address String        @db.NVarChar(Max)
+  created_at       DateTime?     @default(now(), map: "DF__Orders__created___5812160E") @db.DateTime
+  Order_Items      Order_Items[]
+  Users            Users?        @relation(fields: [user_id], references: [user_id], onDelete: NoAction, onUpdate: NoAction, map: "FK__Orders__user_id__5535A963")
+
+  @@index([user_id, guest_email], map: "IX_Orders_UserEmail")
+}
+
+model Product_Reviews {
+  review_id   String    @id(map: "PK__Product___60883D90EAECD821") @default(dbgenerated("newid()"), map: "DF__Product_R__revie__72C60C4A") @db.UniqueIdentifier
+  product_id  String?   @db.UniqueIdentifier
+  user_id     String?   @db.UniqueIdentifier
+  rating      Int
+  comment     String?   @db.NVarChar(Max)
+  image_url   String?   @db.VarChar(Max)
+  created_at  DateTime? @default(now(), map: "DF__Product_R__creat__76969D2E") @db.DateTime
+  is_approved Boolean?  @default(true, map: "DF__Product_R__is_ap__778AC167")
+  Products    Products? @relation(fields: [product_id], references: [product_id], onDelete: NoAction, onUpdate: NoAction, map: "FK__Product_R__produ__73BA3083")
+  Users       Users?    @relation(fields: [user_id], references: [user_id], onDelete: NoAction, onUpdate: NoAction, map: "FK__Product_R__user___74AE54BC")
+}
+
+model Product_Variants {
+  variant_id     String        @id(map: "PK__Product___EACC68B7904E0FB4") @default(dbgenerated("newid()"), map: "DF__Product_V__varia__4D94879B") @db.UniqueIdentifier
+  product_id     String?       @db.UniqueIdentifier
+  sku_code       String        @unique(map: "UQ__Product___843F428FDB194C22") @db.VarChar(100)
+  color          String?       @db.NVarChar(50)
+  size           String?       @db.VarChar(10)
+  price_override Decimal?      @db.Decimal(18, 2)
+  stock_quantity Int?          @default(0, map: "DF__Product_V__stock__4F7CD00D")
+  version        Int?          @default(1, map: "DF__Product_V__versi__5070F446")
+  is_deleted     Boolean?      @default(false, map: "DF__Product_V__is_de__5165187F")
+  Cart_Items     Cart_Items[]
+  Order_Items    Order_Items[]
+  Products       Products?     @relation(fields: [product_id], references: [product_id], onDelete: NoAction, onUpdate: NoAction, map: "FK__Product_V__produ__4E88ABD4")
+
+  @@index([sku_code], map: "IX_ProductVariants_SKU")
+}
+
+model Products {
+  product_id       String             @id(map: "PK__Products__47027DF5BE4780A0") @default(dbgenerated("newid()"), map: "DF__Products__produc__47DBAE45") @db.UniqueIdentifier
+  name             String             @db.NVarChar(200)
+  description      String?            @db.NVarChar(Max)
+  base_price       Decimal            @db.Decimal(18, 2)
+  is_deleted       Boolean?           @default(false, map: "DF__Products__is_del__48CFD27E")
+  created_at       DateTime?          @default(now(), map: "DF__Products__create__49C3F6B7") @db.DateTime
+  Product_Reviews  Product_Reviews[]
+  Product_Variants Product_Variants[]
+}
+
+model Race_Results {
+  result_id      String          @id(map: "PK__Race_Res__AFB3C31698FDF716") @default(dbgenerated("newid()"), map: "DF__Race_Resu__resul__04E4BC85") @db.UniqueIdentifier
+  race_id        String?         @db.UniqueIdentifier
+  driver_id      String?         @db.UniqueIdentifier
+  team_id        String?         @db.UniqueIdentifier
+  position       Int
+  points         Decimal         @db.Decimal(5, 1)
+  finish_time    String?         @db.VarChar(50)
+  fastest_lap    Boolean?        @default(false, map: "DF__Race_Resu__faste__08B54D69")
+  Drivers        Drivers?        @relation(fields: [driver_id], references: [driver_id], onDelete: NoAction, onUpdate: NoAction, map: "FK__Race_Resu__drive__06CD04F7")
+  Race_Schedules Race_Schedules? @relation(fields: [race_id], references: [race_id], onDelete: NoAction, onUpdate: NoAction, map: "FK__Race_Resu__race___05D8E0BE")
+  Teams          Teams?          @relation(fields: [team_id], references: [team_id], onDelete: NoAction, onUpdate: NoAction, map: "FK__Race_Resu__team___07C12930")
+
+  @@index([position], map: "IX_RaceResults_Position")
+}
+
+model Race_Schedules {
+  race_id           String         @id(map: "PK__Race_Sch__1C8FE2F996DACF6D") @default(dbgenerated("newid()"), map: "DF__Race_Sche__race___02084FDA") @db.UniqueIdentifier
+  race_name         String         @db.NVarChar(100)
+  circuit_name      String         @db.NVarChar(100)
+  country           String         @db.NVarChar(50)
+  race_date         DateTime       @db.DateTime
+  total_laps        Int?
+  circuit_length_km Decimal?       @db.Decimal(5, 3)
+  Race_Results      Race_Results[]
+}
+
+model Roles {
+  role_id    Int          @id(map: "PK__Roles__760965CC284CB31A") @default(autoincrement())
+  role_name  String       @unique(map: "UQ__Roles__783254B148647BB3") @db.VarChar(50)
+  User_Roles User_Roles[]
+}
+
+model Teams {
+  team_id      String         @id(map: "PK__Teams__F82DEDBCFE0BD6C5") @default(dbgenerated("newid()"), map: "DF__Teams__team_id__7A672E12") @db.UniqueIdentifier
+  name         String         @db.NVarChar(100)
+  principal    String?        @db.NVarChar(100)
+  chassis      String?        @db.NVarChar(50)
+  power_unit   String?        @db.NVarChar(50)
+  is_deleted   Boolean?       @default(false, map: "DF__Teams__is_delete__7B5B524B")
+  Race_Results Race_Results[]
+}
+
+model User_Roles {
+  user_id     String    @db.UniqueIdentifier
+  role_id     Int
+  assigned_at DateTime? @default(now(), map: "DF__User_Role__assig__44FF419A") @db.DateTime
+  Roles       Roles     @relation(fields: [role_id], references: [role_id], onUpdate: NoAction, map: "FK__User_Role__role___440B1D61")
+  Users       Users     @relation(fields: [user_id], references: [user_id], onUpdate: NoAction, map: "FK__User_Role__user___4316F928")
+
+  @@id([user_id, role_id], map: "PK__User_Rol__6EDEA153972D19DF")
+}
+
+model Users {
+  user_id          String             @id(map: "PK__Users__B9BE370F788B42ED") @default(dbgenerated("newid()"), map: "DF__Users__user_id__38996AB5") @db.UniqueIdentifier
+  email            String             @unique(map: "UQ__Users__AB6E616439E3AECA") @db.VarChar(255)
+  password_hash    String             @db.VarChar(255)
+  full_name        String             @db.NVarChar(100)
+  phone_number     String?            @db.VarChar(20)
+  status           String?            @default("active", map: "DF__Users__status__398D8EEE") @db.VarChar(20)
+  is_deleted       Boolean?           @default(false, map: "DF__Users__is_delete__3B75D760")
+  created_at       DateTime?          @default(now(), map: "DF__Users__created_a__3C69FB99") @db.DateTime
+  updated_at       DateTime?          @default(now(), map: "DF__Users__updated_a__3D5E1FD2") @db.DateTime
+  Carts            Carts[]
+  Chatbot_Sessions Chatbot_Sessions[]
+  Orders           Orders[]
+  Product_Reviews  Product_Reviews[]
+  User_Roles       User_Roles[]
+}
+
+model Vouchers {
+  voucher_id       String    @id(map: "PK__Vouchers__80B6FFA8133A6399") @default(dbgenerated("newid()"), map: "DF__Vouchers__vouche__6E01572D") @db.UniqueIdentifier
+  code             String    @unique(map: "UQ__Vouchers__357D4CF930A7DBBA") @db.VarChar(50)
+  discount_percent Decimal?  @db.Decimal(5, 2)
+  discount_amount  Decimal?  @db.Decimal(18, 2)
+  min_order_value  Decimal?  @default(0, map: "DF__Vouchers__min_or__6EF57B66") @db.Decimal(18, 2)
+  max_usage        Int?
+  valid_from       DateTime? @db.DateTime
+  valid_until      DateTime? @db.DateTime
+  is_active        Boolean?  @default(true, map: "DF__Vouchers__is_act__6FE99F9F")
+}
