@@ -1,0 +1,195 @@
+.results {
+  margin: -20px -24px 0;
+  padding-bottom: 48px;
+}
+
+.results-topbar {
+  display: flex;
+  align-items: center;
+  gap: 28px;
+  min-height: 42px;
+  padding: 0 38px;
+  border-top: 1px solid #22232d;
+  background: #050507;
+}
+
+.season-select,
+.results-tab {
+  height: 42px;
+  border: 0;
+  border-bottom: 3px solid transparent;
+  background: transparent;
+  color: #d6d7dc;
+  cursor: pointer;
+  font-size: 13px;
+  font-weight: 900;
+}
+
+.season-select {
+  min-width: 52px;
+  color: #fff;
+  font-size: 11px;
+}
+
+.results-tab.active {
+  border-bottom-color: #e10600;
+  color: #fff;
+}
+
+.results-filter {
+  margin: 42px 0 34px 38px;
+  padding: 8px 24px;
+  border: 1px solid #fff;
+  border-radius: 999px;
+  background: transparent;
+  color: #fff;
+  cursor: pointer;
+  font-size: 13px;
+  font-weight: 900;
+}
+
+.results-title {
+  margin: 0 38px 34px;
+  font-size: 34px;
+  font-weight: 900;
+  line-height: 1;
+  text-transform: uppercase;
+}
+
+.awards-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 18px;
+  margin: 0 38px 28px;
+}
+
+.award-card {
+  padding: 24px;
+  border-radius: 10px;
+  background: #050507;
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.24);
+}
+
+.award-card h3 {
+  margin: 0 0 12px;
+  font-size: 18px;
+  font-weight: 900;
+  line-height: 1.1;
+}
+
+.award-card p {
+  margin: 0 6px 0;
+  color: #d7d8df;
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.table-shell {
+  overflow-x: auto;
+  margin: 0 38px;
+  padding: 50px 58px 10px;
+  border-radius: 6px;
+  background: #030304;
+}
+
+.results-table {
+  width: 100%;
+  min-width: 820px;
+  border-collapse: collapse;
+}
+
+.results-table th {
+  padding: 0 0 16px;
+  border-bottom: 1px solid #8a8d95;
+  color: #9b9da5;
+  font-size: 11px;
+  font-weight: 900;
+  text-align: left;
+  text-transform: uppercase;
+}
+
+.results-table td {
+  padding: 16px 0;
+  border-bottom: 1px solid #20212a;
+  color: #fff;
+  font-size: 13px;
+  font-weight: 900;
+}
+
+.results-table th:last-child,
+.results-table td:last-child {
+  text-align: right;
+}
+
+.gp-cell,
+.person-cell {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.gp-cell b {
+  font-weight: 400;
+}
+
+.result-dot {
+  display: inline-grid;
+  width: 20px;
+  height: 20px;
+  overflow: hidden;
+  place-items: center;
+  border-radius: 999px;
+  background: var(--dot-color);
+}
+
+.result-dot img {
+  width: 22px;
+  height: 22px;
+  object-fit: cover;
+  object-position: top center;
+}
+
+.team-badge {
+  display: inline-block;
+  width: 17px;
+  height: 17px;
+  border-radius: 999px;
+  background: var(--dot-color);
+}
+
+.race-time {
+  font-family: Consolas, Monaco, monospace;
+}
+
+.standings-table th:first-child,
+.standings-table td:first-child {
+  width: 12%;
+}
+
+.standings-table th:last-child,
+.standings-table td:last-child {
+  width: 12%;
+}
+
+@media (max-width: 800px) {
+  .results {
+    margin-inline: -12px;
+  }
+
+  .results-topbar {
+    gap: 18px;
+    overflow-x: auto;
+    padding: 0 18px;
+  }
+
+  .results-filter,
+  .results-title,
+  .table-shell {
+    margin-left: 18px;
+    margin-right: 18px;
+  }
+
+  .table-shell {
+    padding: 32px 26px 8px;
+  }
+}

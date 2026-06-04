@@ -1,0 +1,484 @@
+.schedule {
+  padding-bottom: 32px;
+}
+
+.schedule-title-row {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 24px;
+  margin-bottom: 34px;
+}
+
+.schedule-title-row .page-title {
+  max-width: 860px;
+  margin-bottom: 0;
+  font-size: clamp(34px, 4.4vw, 58px);
+  line-height: 0.94;
+}
+
+.calendar-btn {
+  flex: 0 0 auto;
+  margin-top: 8px;
+  padding: 12px 22px;
+  border: 0;
+  border-radius: 999px;
+  background: #e10600;
+  color: #fff;
+  cursor: pointer;
+  font-size: 13px;
+  font-weight: 900;
+}
+
+.calendar-btn.compact {
+  margin-top: 0;
+  padding: 9px 18px;
+  font-size: 12px;
+}
+
+.weekend-session-panel {
+  margin-bottom: 38px;
+  padding: 0 36px 0;
+  border-radius: 2px;
+  background: #030304;
+}
+
+.weekend-session-toolbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  padding: 10px 0 24px;
+  border-bottom: 1px solid #20212a;
+}
+
+.time-toggle {
+  display: flex;
+  width: 210px;
+  padding: 3px;
+  border-radius: 999px;
+  background: #2b2c34;
+}
+
+.time-toggle button {
+  flex: 1;
+  padding: 7px 12px;
+  border: 0;
+  border-radius: 999px;
+  background: transparent;
+  color: #fff;
+  cursor: pointer;
+  font-size: 11px;
+  font-weight: 900;
+}
+
+.time-toggle button.active {
+  background: #fff;
+  color: #050507;
+}
+
+.weekend-session-list {
+  display: grid;
+}
+
+.session-row {
+  display: grid;
+  grid-template-columns: 56px minmax(180px, 1.2fr) repeat(4, minmax(92px, 1fr));
+  align-items: center;
+  gap: 24px;
+  min-height: 88px;
+  border-bottom: 1px solid #20212a;
+}
+
+.session-date strong {
+  display: block;
+  font-size: 22px;
+  font-weight: 900;
+  line-height: 1;
+}
+
+.session-date span {
+  color: #d7d8df;
+  font-size: 10px;
+  font-weight: 900;
+}
+
+.session-main {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+}
+
+.chequered-flag {
+  color: #a9abb4;
+  font-size: 12px;
+  line-height: 1.2;
+}
+
+.session-main h3 {
+  margin: 0;
+  font-size: 16px;
+  font-weight: 900;
+  letter-spacing: 0.2px;
+}
+
+.session-main p {
+  margin: 3px 0 0;
+  color: #c8c9d0;
+  font-size: 11px;
+  font-weight: 900;
+  letter-spacing: 0.7px;
+}
+
+.session-row a {
+  color: #fff;
+  font-size: 12px;
+  font-weight: 900;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+.schedule-featured {
+  display: grid;
+  grid-template-columns: minmax(0, 3fr) minmax(240px, 1.25fr);
+  gap: 22px;
+  margin-bottom: 38px;
+}
+
+.schedule-featured h2 {
+  margin: 0 0 14px;
+  font-size: 20px;
+  font-weight: 900;
+}
+
+.featured-races {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 18px;
+}
+
+.featured-race-card {
+  position: relative;
+  min-height: 245px;
+  overflow: hidden;
+  border-radius: 6px;
+  background: #050507;
+}
+
+.featured-race-card::after {
+  position: absolute;
+  inset: 0;
+  content: "";
+  background: linear-gradient(180deg, rgba(0, 0, 0, 0.12), rgba(0, 0, 0, 0.82));
+}
+
+.featured-race-card img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  min-height: 245px;
+  object-fit: cover;
+}
+
+.featured-race-copy {
+  position: absolute;
+  z-index: 1;
+  left: 18px;
+  right: 18px;
+  bottom: 18px;
+}
+
+.featured-race-copy span {
+  display: block;
+  margin-bottom: 4px;
+  font-size: 10px;
+  font-weight: 900;
+  text-transform: uppercase;
+}
+
+.featured-race-copy h3 {
+  margin: 0;
+  font-size: 24px;
+  font-weight: 900;
+  line-height: 1;
+}
+
+.featured-race-copy p {
+  margin: 7px 0 0;
+  font-size: 13px;
+  font-weight: 900;
+  letter-spacing: 1px;
+}
+
+.schedule-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 18px;
+}
+
+.race-calendar {
+  margin-top: 32px;
+}
+
+.race-calendar h2 {
+  margin: 0 0 18px;
+  font-size: 28px;
+  font-weight: 900;
+}
+
+.calendar-table {
+  display: grid;
+  gap: 14px;
+}
+
+.calendar-race-row {
+  display: grid;
+  grid-template-columns: 50px minmax(180px, 1.5fr) 90px 110px auto;
+  gap: 14px;
+  align-items: center;
+  padding: 18px 20px;
+  border-radius: 10px;
+  background: #050507;
+}
+
+.race-flag {
+  font-size: 12px;
+  font-weight: 900;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: #a9abb4;
+}
+
+.race-name {
+  font-size: 15px;
+  font-weight: 900;
+  color: #fff;
+}
+
+.race-round,
+.race-date,
+.race-sponsor {
+  color: #c8c9d0;
+  font-size: 12px;
+  font-weight: 900;
+}
+
+.race-sponsor {
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+.schedule-card {
+  display: flex;
+  min-height: 188px;
+  flex-direction: column;
+  justify-content: space-between;
+  overflow: hidden;
+  border-radius: 7px;
+  background: #050507;
+}
+
+.schedule-card.next-race {
+  outline: 2px solid #e10600;
+}
+
+.schedule-card-top {
+  display: flex;
+  justify-content: space-between;
+  gap: 14px;
+  padding: 14px 14px 0;
+}
+
+.round-label {
+  color: #c8c8d0;
+  font-size: 10px;
+  font-weight: 900;
+  letter-spacing: 0.4px;
+  text-transform: uppercase;
+}
+
+.schedule-card-top .race-date {
+  padding: 4px 8px;
+  border-radius: 3px;
+  background: #1f1f2e;
+  color: #fff;
+  font-size: 10px;
+  font-weight: 900;
+  letter-spacing: 0.5px;
+}
+
+.schedule-card-body {
+  min-height: 86px;
+  padding: 8px 14px 14px;
+}
+
+.schedule-card h2 {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin: 0 0 8px;
+  font-size: 24px;
+  font-weight: 900;
+  line-height: 1.05;
+}
+
+.schedule-flag {
+  font-size: 15px;
+}
+
+.schedule-card-body > .race-date {
+  display: none;
+}
+
+.race-sponsor {
+  max-width: 92%;
+  margin: 0;
+  color: #c4c5cb;
+  font-size: 11px;
+  font-weight: 800;
+  line-height: 1.35;
+  text-transform: uppercase;
+}
+
+.podium-strip {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 3px;
+  padding: 0 14px 14px;
+}
+
+.podium-pill {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  min-width: 0;
+  height: 38px;
+  padding: 5px 7px;
+  border-radius: 4px;
+  background: #1b1b2a;
+}
+
+.podium-pill strong {
+  color: #fff;
+  font-size: 13px;
+  font-weight: 900;
+  line-height: 1;
+}
+
+.podium-pill strong small {
+  display: block;
+  font-size: 7px;
+}
+
+.podium-pill img {
+  width: 28px;
+  height: 28px;
+  flex: 0 0 28px;
+  border-radius: 999px;
+  background: #303040;
+  object-fit: cover;
+  object-position: top center;
+}
+
+.podium-pill span {
+  min-width: 0;
+  color: #fff;
+  font-size: 11px;
+  font-weight: 900;
+  line-height: 1.05;
+}
+
+.podium-pill span small {
+  display: block;
+  overflow: hidden;
+  color: #d9dae0;
+  font-size: 9px;
+  font-weight: 800;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.schedule-preview {
+  height: 76px;
+  margin: 0 14px 14px;
+  overflow: hidden;
+  border-radius: 4px;
+}
+
+.schedule-preview img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+@media (max-width: 1050px) {
+  .schedule-featured,
+  .schedule-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .schedule-featured > div:first-child {
+    grid-column: 1 / -1;
+  }
+
+  .session-row {
+    grid-template-columns: 48px minmax(170px, 1fr) repeat(2, minmax(92px, 1fr));
+    gap: 18px;
+    padding: 14px 0;
+  }
+}
+
+@media (max-width: 720px) {
+  .schedule-title-row {
+    flex-direction: column;
+    margin-bottom: 24px;
+  }
+
+  .calendar-btn {
+    margin-top: 0;
+  }
+
+  .schedule-featured,
+  .featured-races,
+  .schedule-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .featured-race-card,
+  .featured-race-card img {
+    min-height: 210px;
+  }
+
+  .weekend-session-panel {
+    padding: 0 16px;
+  }
+
+  .weekend-session-toolbar {
+    align-items: stretch;
+    flex-direction: column;
+  }
+
+  .time-toggle {
+    width: 100%;
+  }
+
+  .session-row {
+    grid-template-columns: 48px minmax(0, 1fr);
+    gap: 14px;
+  }
+
+  .session-row a {
+    display: none;
+  }
+}
+
+@media (max-width: 420px) {
+  .podium-strip {
+    grid-template-columns: 1fr;
+  }
+
+  .schedule-card {
+    min-height: 250px;
+  }
+}
