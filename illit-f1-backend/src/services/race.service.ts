@@ -94,7 +94,7 @@ export const getStandings = async () => {
   });
 
   const driverStandings = new Map();
-  results.forEach(result => {
+  results.forEach((result: any) => {
     const driverId = result.driver_id;
     if (!driverStandings.has(driverId)) {
       driverStandings.set(driverId, {

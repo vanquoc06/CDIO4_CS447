@@ -84,7 +84,7 @@ export const getUserRoles = async (userId: string) => {
     include: { Roles: true }
   });
 
-  return userRoles.map(ur => ur.Roles);
+  return userRoles.map((ur: any) => ur.Roles);
 };
 
 export const checkUserRole = async (userId: string, roleName: string): Promise<boolean> => {

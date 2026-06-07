@@ -24,10 +24,10 @@ export const checkAdmin = async (req: Request, res: Response, next: NextFunction
       });
     }
 
-    next();
+    return next();
   } catch (error: any) {
     logger.error('Error in admin middleware', { error: error.message });
-    res.status(500).json({
+    return res.status(500).json({
       status: 'error',
       message: 'Lỗi khi kiểm tra quyền admin'
     });
@@ -55,10 +55,10 @@ export const checkModerator = async (req: Request, res: Response, next: NextFunc
       });
     }
 
-    next();
+    return next();
   } catch (error: any) {
     logger.error('Error in moderator middleware', { error: error.message });
-    res.status(500).json({
+    return res.status(500).json({
       status: 'error',
       message: 'Lỗi khi kiểm tra quyền moderator'
     });
