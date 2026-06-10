@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>ILLIT F1 | Tin tức & Thông tin kỹ thuật</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Anybody:wght@400;700;800;900&family=Hanken+Grotesk:wght@400;500;700&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<link rel="stylesheet" href="../css/news.css"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "surface-container-lowest": "#0d0d16",
+                    "on-secondary": "#00363a",
+                    "error": "#ffb4ab",
+                    "inverse-on-surface": "#302f39",
+                    "tertiary-fixed": "#e2e2e2",
+                    "outline-variant": "#5f3e39",
+                    "primary": "#ffb4a7",
+                    "surface-bright": "#393842",
+                    "on-primary-container": "#5b0300",
+                    "on-background": "#e4e1ee",
+                    "on-secondary-container": "#00686f",
+                    "surface-dim": "#13131b",
+                    "on-tertiary": "#2f3131",
+                    "outline": "#b08780",
+                    "on-secondary-fixed-variant": "#004f54",
+                    "on-primary-fixed": "#400200",
+                    "on-error-container": "#ffdad6",
+                    "tertiary-fixed-dim": "#c6c6c7",
+                    "surface-container-low": "#1b1b24",
+                    "on-primary-fixed-variant": "#910900",
+                    "surface-tint": "#ffb4a7",
+                    "on-surface": "#e4e1ee",
+                    "surface-container-highest": "#34343e",
+                    "surface": "#13131b",
+                    "secondary-fixed": "#7df4ff",
+                    "on-tertiary-fixed": "#1a1c1c",
+                    "primary-container": "#ff553d",
+                    "secondary-container": "#00eefc",
+                    "surface-container-high": "#292933",
+                    "secondary": "#d3fbff",
+                    "error-container": "#93000a",
+                    "on-primary": "#670400",
+                    "on-error": "#690005",
+                    "surface-variant": "#34343e",
+                    "primary-fixed": "#ffdad4",
+                    "on-surface-variant": "#eabcb4",
+                    "surface-container": "#1f1f28",
+                    "inverse-surface": "#e4e1ee",
+                    "tertiary-container": "#909191",
+                    "on-tertiary-fixed-variant": "#454747",
+                    "on-secondary-fixed": "#002022",
+                    "inverse-primary": "#be0e00",
+                    "on-tertiary-container": "#282a2a",
+                    "tertiary": "#c6c6c7",
+                    "background": "#13131b",
+                    "secondary-fixed-dim": "#00dbe9",
+                    "primary-fixed-dim": "#ffb4a7"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "base": "8px",
+                    "margin-desktop": "64px",
+                    "gutter": "16px",
+                    "max-width": "1440px",
+                    "margin-mobile": "20px"
+            },
+            "fontFamily": {
+                    "label-data": ["JetBrains Mono"],
+                    "body-lg": ["Hanken Grotesk"],
+                    "headline-md": ["Anybody"],
+                    "body-md": ["Hanken Grotesk"],
+                    "headline-lg-mobile": ["Anybody"],
+                    "headline-lg": ["Anybody"],
+                    "display-xl": ["Anybody"]
+            },
+            "fontSize": {
+                    "label-data": ["12px", {"lineHeight": "16px", "letterSpacing": "0.1em", "fontWeight": "500"}],
+                    "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
+                    "headline-md": ["24px", {"lineHeight": "28px", "letterSpacing": "0.01em", "fontWeight": "700"}],
+                    "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                    "headline-lg-mobile": ["32px", {"lineHeight": "36px", "letterSpacing": "-0.02em", "fontWeight": "800"}],
+                    "headline-lg": ["48px", {"lineHeight": "52px", "letterSpacing": "-0.02em", "fontWeight": "800"}],
+                    "display-xl": ["84px", {"lineHeight": "90px", "letterSpacing": "-0.04em", "fontWeight": "900"}]
+            }
+          },
+        },
+      }
+    </script>
+</head>
+<body class="font-body-md text-on-background">
+<!-- Top Navigation Bar -->
+<header class="bg-surface-container-lowest text-primary font-label-data text-label-data uppercase tracking-widest flex justify-between items-center w-full px-margin-desktop py-4 sticky top-0 z-50 bg-opacity-90 backdrop-blur-md border-b-2 border-outline-variant">
+<a href="homepage.html" class="font-headline-md text-headline-md italic font-black text-on-surface tracking-tighter hover:text-primary transition-all">ILLIT F1</a>
+<nav class="hidden md:flex gap-8 items-center">
+        <!-- header links removed per request -->
+</nav>
+<div class="flex items-center gap-6">
+<span class="material-symbols-outlined cursor-pointer hover:scale-110 transition-transform">search</span>
+<span class="material-symbols-outlined cursor-pointer hover:scale-110 transition-transform">shopping_cart</span>
+<span class="material-symbols-outlined cursor-pointer hover:scale-110 transition-transform">account_circle</span>
+</div>
+</header>
+<!-- Breaking News Ticker (click to return home) -->
+<a href="homepage.html" class="block">
+        <div class="w-full bg-primary-container py-2 border-y border-outline-variant overflow-hidden z-40">
+                <div class="ticker-wrap font-label-data text-label-data text-on-primary-container font-bold flex items-center">
+                        <div class="ticker">
+                                <span class="mx-8 underline">TIN NÓNG: CẬP NHẬT KHÍ ĐỘNG HỌC DƯỚI GẦM CHO SILVERSTONE ĐƯỢC XÁC NHẬN</span>
+                                <span class="mx-8 underline">ĐỒN ĐẠI: THÔNG SỐ ĐỘNG CƠ MỚI BỊ RÒ RỈ TỪ TRUNG TÂM THỬ NGHIỆM</span>
+                                <span class="mx-8 underline">CHÍNH THỨC: ILLIT F1 HỢP TÁC VỚI CÔNG TY TÍNH TOÁN LƯỢNG TỬ CHO PHÂN TÍCH DỮ LIỆU</span>
+                                <span class="mx-8 underline">CẬP NHẬT TAY ĐUA: LECLERC GIỮ POLE POSITION TRONG BUỔI LỌC XE MÔ PHỎNG</span>
+                        </div>
+                </div>
+        </div>
+</a>
+<main class="max-w-max-width mx-auto px-margin-mobile md:px-margin-desktop py-12">
+<!-- Hero Featured News -->
+<section class="mb-16">
+<div class="relative w-full aspect-[21/9] bg-surface-container overflow-hidden group">
+<img class="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-700 scale-105 group-hover:scale-100" alt="A high-performance Formula One car captured in a motion-blur shot during a night race." src="https://lh3.googleusercontent.com/aida-public/AB6AXuD5vfKmP2MUaWIuwuyUR8Xkgkcbr60UICJajX4n36rWuR7735IrBfUkzczIMrK63OeS-j00fm8W0UhWLoZ2o1G1yWM8P7ZUqw7vfeqeti2Q9ZY8Mtri3I0a_wbV1Xql_edF9UnRzP8mPwRJiiVcu6xWcUW1eGZYkoQ4NfNZFZWhnRrMYF-Z7GukFT7cM7cxKojyX2l433ckODdTGnxQIEZl3st5kvK6kKCvzyud9uDlbM7Ut2SPjp-Li209s9O2Tk-D2RG2HZ1SB5U"/>
+<div class="absolute inset-0 bg-gradient-to-t from-surface-container-lowest via-transparent to-transparent"></div>
+<div class="absolute bottom-12 left-12 right-12 max-w-2xl">
+<span class="bg-primary-container text-on-primary-container font-label-data text-label-data px-4 py-1 uppercase parallelogram inline-block mb-4">
+<span class="parallelogram-content">TECH EXCLUSIVE</span>
+</span>
+<h1 class="font-display-xl text-display-xl mb-6 leading-none">THE CARBON EVOLUTION</h1>
+<p class="font-body-lg text-body-lg text-on-surface-variant max-w-xl mb-8">Deep dive into the material science behind our new chassis. 14% more rigid, 8% lighter, and optimized for maximum downforce.</p>
+<button class="bg-primary-container text-on-primary-container font-label-data text-label-data px-8 py-4 parallelogram hover:brightness-125 transition-all">
+<span class="parallelogram-content font-bold">READ TECHNICAL REPORT</span>
+</button>
+</div>
+</div>
+</section>
+<!-- Category Filter -->
+<!-- Category Filter removed per request -->
+<!-- News Grid -->
+<div class="grid grid-cols-1 md:grid-cols-12 gap-8">
+<!-- Bento Grid Layout -->
+<div class="md:col-span-8 group cursor-pointer">
+<div class="relative aspect-video bg-surface-container overflow-hidden">
+<img class="w-full h-full object-cover opacity-80 group-hover:opacity-100 transition-opacity" alt="A detailed, close-up shot of an F1 steering wheel, showcasing intricate buttons, dials, and a central digital display glowing with telemetry data." src="https://lh3.googleusercontent.com/aida-public/AB6AXuB3E_eXNetv0LmMkx5JLLSyB7SUUQk7fnnRSZBgGkauBe_jIAhntBeBdLnaOvnene5uQno4bmS7XOOHWakBiNLL4Sj2MHJMdv5b9ijpKYmLnA-o_QRdgKF5K2FHSCx8ynK4WfkIT3sYgD8CTVJlocTbdAe6HDa2jYGMq_c9LaUNaD_cZ1_YHNqlAX9pKpZzsNMsiOkb57XIjnSjl4l-kLJAylJFH0TxU_rdOsDrEE9aiYsagswJDoKXih7emaA90J7l0uemT6LjMQo"/>
+<div class="absolute top-4 right-4 bg-primary px-3 py-1 font-label-data text-[10px] text-on-primary font-bold">LATEST</div>
+</div>
+<div class="mt-6">
+<h3 class="font-headline-lg text-headline-lg-mobile md:text-headline-md mb-4 group-hover:text-primary transition-colors">Digital Cockpits: The Future of Driver Interface</h3>
+<p class="text-on-surface-variant font-body-md mb-6">How ILLIT F1 is leveraging augmented reality to provide drivers with real-time strategic overlays during high-speed maneuvers.</p>
+<div class="flex items-center gap-4 text-on-tertiary-fixed-variant font-label-data text-[10px]">
+<span>DR. ELARA VANCE</span>
+<span>|</span>
+<span>TECH REPORT</span>
+<span>|</span>
+<span>12 MIN READ</span>
+</div>
+</div>
+</div>
+<!-- Side category links and secondary cards removed so News shows main articles only -->
+</div>
+<!-- Newsletter / Subscription HUD -->
+<section class="mt-24 relative p-12 border border-outline-variant bg-surface-container-low overflow-hidden">
+<div class="hud-grid absolute inset-0 opacity-20"></div>
+<div class="relative z-10 flex flex-col md:flex-row justify-between items-center gap-12">
+<div class="max-w-xl">
+<h2 class="font-headline-lg text-headline-lg-mobile md:text-headline-lg mb-4 italic font-black uppercase tracking-tighter">SUBSCRIBE TO THE STREAM</h2>
+<p class="font-body-lg text-body-lg text-on-surface-variant">Get un-redacted technical reports and paddock rumors delivered directly to your tactical display.</p>
+</div>
+<div class="w-full md:w-auto flex flex-col gap-4">
+<input class="bg-transparent border-b-2 border-outline-variant focus:border-primary text-primary font-label-data text-label-data py-4 w-full md:w-80 transition-colors outline-none" placeholder="NHẬP EMAIL" type="email"/>
+<button class="bg-on-surface text-surface-container-lowest font-label-data text-label-data font-bold px-8 py-4 parallelogram hover:bg-primary transition-colors">
+<span class="parallelogram-content">ĐĂNG KÝ</span>
+</button>
+</div>
+</div>
+</section>
+</main>
+<!-- Footer -->
+<footer class="w-full px-margin-desktop py-base flex flex-col md:flex-row justify-between items-center gap-gutter bg-surface-dim border-t border-outline-variant mt-24">
+<div class="font-headline-md text-headline-md font-black text-on-surface">ILLIT F1</div>
+<nav class="flex gap-8 font-label-data text-label-data">
+<a class="text-on-surface-variant hover:text-primary transition-colors" href="#">Dữ liệu</a>
+<a class="text-on-surface-variant hover:text-primary transition-colors" href="#">Pit Wall</a>
+<a class="text-on-surface-variant hover:text-primary transition-colors" href="#">Quyền riêng tư</a>
+<a class="text-on-surface-variant hover:text-primary transition-colors" href="#">Điều khoản</a>
+<a class="text-on-surface-variant hover:text-primary transition-colors" href="#">API</a>
+</nav>
+<div class="font-label-data text-label-data text-on-surface-variant">
+            © 2024 ILLIT F1 ENGINEERING. STATUS: <span class="text-primary">OPTIMAL</span>
+</div>
+</footer>
+<!-- AI Chat HUD Floating Element -->
+<div class="fixed bottom-8 right-8 z-[100] group" id="ai-chat">
+<div class="absolute bottom-full right-0 mb-4 w-80 bg-surface-container-highest border border-primary p-4 hidden group-hover:block backdrop-blur-xl">
+<div class="hud-grid absolute inset-0 opacity-10"></div>
+<div class="relative z-10">
+<div class="flex items-center gap-2 mb-4 border-b border-primary pb-2">
+<span class="material-symbols-outlined text-primary text-sm">robot_2</span>
+<span class="font-label-data text-[10px] text-primary">TRỢ LÝ AI V.2.0</span>
+</div>
+<div class="font-label-data text-[11px] text-on-surface leading-relaxed mb-4 h-32 overflow-y-auto">
+<p class="mb-2 text-primary">&gt; KHỞI TẠO KÊNH...</p>
+<p class="mb-2">&gt; ĐANG PHÂN TÍCH DỮ LIỆU MỚI...</p>
+<p>&gt; BẠN MUỐN XEM PHÂN TÍCH CFD ĐẦY ĐỦ CHO CÁNH TRƯỚC MỚI KHÔNG?</p>
+</div>
+<input class="w-full bg-surface-dim border border-outline-variant p-2 font-label-data text-[10px] text-primary outline-none focus:border-primary" placeholder="NHẬP LỆNH..." type="text"/>
+</div>
+</div>
+<button class="w-16 h-16 bg-primary-container text-on-primary-container flex items-center justify-center parallelogram neon-glow hover:brightness-125 transition-all">
+<span class="material-symbols-outlined parallelogram-content" style="font-variation-settings: 'FILL' 1;">bolt</span>
+</button>
+</div>
+<script src="../js/news.js"></script>
+</body></html>

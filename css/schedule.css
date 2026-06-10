@@ -1,0 +1,23 @@
+/* TRANG LỊCH TRÌNH - Race Calendar CSS */
+
+.parallelogram {
+    clip-path: polygon(10% 0, 100% 0, 90% 100%, 0 100%);
+}
+
+.parallelogram-sm {
+    clip-path: polygon(5% 0, 100% 0, 95% 100%, 0 100%);
+}
+
+.carbon-texture {
+    background-image: radial-gradient(circle at 2px 2px, rgba(255,255,255,0.05) 1px, transparent 0);
+    background-size: 4px 4px;
+}
+
+.glow-hover:hover {
+    box-shadow: 0 0 15px rgba(0, 240, 255, 0.3);
+    border-color: #00F0FF;
+}
+
+.active-skew:active {
+    transform: skewX(12deg);
+}

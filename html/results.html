@@ -1,0 +1,331 @@
+<!DOCTYPE html><html class="dark" lang="vi"><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<title>ILLIT F1 | Đội hình tay đua</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Anybody:ital,wght@0,400;0,700;0,900;1,900&amp;family=Hanken+Grotesk:wght@400;500&amp;family=JetBrains+Mono:wght@500;700&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../css/results.css"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "surface-container-lowest": "#0d0d16",
+                    "on-secondary": "#00363a",
+                    "error": "#ffb4ab",
+                    "inverse-on-surface": "#302f39",
+                    "tertiary-fixed": "#e2e2e2",
+                    "outline-variant": "#5f3e39",
+                    "primary": "#ffb4a7",
+                    "surface-bright": "#393842",
+                    "on-primary-container": "#5b0300",
+                    "on-background": "#e4e1ee",
+                    "on-secondary-container": "#00686f",
+                    "surface-dim": "#13131b",
+                    "on-tertiary": "#2f3131",
+                    "outline": "#b08780",
+                    "on-secondary-fixed-variant": "#004f54",
+                    "on-primary-fixed": "#400200",
+                    "on-error-container": "#ffdad6",
+                    "tertiary-fixed-dim": "#c6c6c7",
+                    "surface-container-low": "#1b1b24",
+                    "on-primary-fixed-variant": "#910900",
+                    "surface-tint": "#ffb4a7",
+                    "on-surface": "#e4e1ee",
+                    "surface-container-highest": "#34343e",
+                    "surface": "#13131b",
+                    "secondary-fixed": "#7df4ff",
+                    "on-tertiary-fixed": "#1a1c1c",
+                    "primary-container": "#ff553d",
+                    "secondary-container": "#00eefc",
+                    "surface-container-high": "#292933",
+                    "secondary": "#d3fbff",
+                    "error-container": "#93000a",
+                    "on-primary": "#670400",
+                    "on-error": "#690005",
+                    "surface-variant": "#34343e",
+                    "primary-fixed": "#ffdad4",
+                    "on-surface-variant": "#eabcb4",
+                    "surface-container": "#1f1f28",
+                    "inverse-surface": "#e4e1ee",
+                    "tertiary-container": "#909191",
+                    "on-tertiary-fixed-variant": "#454747",
+                    "on-secondary-fixed": "#002022",
+                    "inverse-primary": "#be0e00",
+                    "on-tertiary-container": "#282a2a",
+                    "tertiary": "#c6c6c7",
+                    "background": "#13131b",
+                    "secondary-fixed-dim": "#00dbe9",
+                    "primary-fixed-dim": "#ffb4a7"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "base": "8px",
+                    "margin-desktop": "64px",
+                    "gutter": "16px",
+                    "max-width": "1440px",
+                    "margin-mobile": "20px"
+            },
+            "fontFamily": {
+                    "label-data": ["JetBrains Mono"],
+                    "body-lg": ["Hanken Grotesk"],
+                    "headline-md": ["Anybody"],
+                    "body-md": ["Hanken Grotesk"],
+                    "headline-lg-mobile": ["Anybody"],
+                    "headline-lg": ["Anybody"],
+                    "display-xl": ["Anybody"]
+            },
+            "fontSize": {
+                    "label-data": ["12px", {"lineHeight": "16px", "letterSpacing": "0.1em", "fontWeight": "500"}],
+                    "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
+                    "headline-md": ["24px", {"lineHeight": "28px", "letterSpacing": "0.01em", "fontWeight": "700"}],
+                    "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                    "headline-lg-mobile": ["32px", {"lineHeight": "36px", "letterSpacing": "-0.02em", "fontWeight": "800"}],
+                    "headline-lg": ["48px", {"lineHeight": "52px", "letterSpacing": "-0.02em", "fontWeight": "800"}],
+                    "display-xl": ["84px", {"lineHeight": "90px", "letterSpacing": "-0.04em", "fontWeight": "900"}]
+            }
+          },
+        },
+      }
+    </script>
+</head>
+<body class="bg-background text-on-background font-body-md overflow-x-hidden">
+<!-- Top Navigation Bar -->
+<nav class="flex justify-between items-center w-full px-margin-desktop py-4 sticky top-0 z-50 bg-surface-container-lowest border-b-2 border-outline-variant">
+  <div class="font-headline-md text-headline-md italic font-black text-on-surface tracking-tighter uppercase">
+    ILLIT F1
+  </div>
+  <div class="hidden md:flex gap-8 items-center">
+    <a class="font-label-data text-label-data uppercase tracking-widest text-on-surface opacity-70 hover:opacity-100 hover:text-primary transition-all duration-300" href="schedule.html">Lịch</a>
+    <a class="font-label-data text-label-data uppercase tracking-widest text-on-surface opacity-70 hover:opacity-100 hover:text-primary transition-all duration-300" href="results.html">Kết quả</a>
+    <a class="font-label-data text-label-data uppercase tracking-widest text-primary relative after:content-[''] after:absolute after:-bottom-2 after:left-0 after:w-full after:h-0.5 after:bg-primary" href="news.html">Tin tức</a>
+    <a class="font-label-data text-label-data uppercase tracking-widest text-on-surface opacity-70 hover:opacity-100 hover:text-primary transition-all duration-300" href="drivers.html">Tay đua</a>
+    <a class="font-label-data text-label-data uppercase tracking-widest text-on-surface opacity-70 hover:opacity-100 hover:text-primary transition-all duration-300" href="#">Đội</a>
+  </div>
+  <div class="flex items-center gap-6">
+    <button class="material-symbols-outlined text-on-surface hover:text-primary transition-colors">shopping_cart</button>
+    <button class="material-symbols-outlined text-on-surface hover:text-primary transition-colors">account_circle</button>
+  </div>
+</nav>
+<!-- Hero Section -->
+<header class="relative w-full h-[614px] flex items-end px-margin-desktop pb-16 overflow-hidden">
+<div class="absolute inset-0 z-0">
+<img class="w-full h-full object-cover opacity-40 grayscale hover:grayscale-0 transition-all duration-700" data-alt="A cinematic, low-angle shot of a high-performance Formula One car racing through a dark, neon-lit urban circuit at night. The lighting is dominated by deep blacks and high-contrast Racing Red streaks from the car's tail lights. Motion blur captures the immense speed, while subtle cyan grid overlays hint at technical telemetry. The overall atmosphere is aggressive, precise, and technologically advanced, reflecting the ILLIT F1 brand identity." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAfahAutrwOMT52zzb3GhcenAy-bpJnSKPPun2nnyumdLt6K_AKcXWpg7FOCoYyxqOhKE9qtqhsuztawkkdbkK5vx-QKEmJX0w3PGyqMguxI0imh6tdpgx74bJYknlh5Ksw5IEpOjsZ51pJGgtKC0bqCzoNmjNYbuVftD80rkmAMOTxL9vDj-OuUL0UZdJxYJk_JgSiBo06lkK6WlEwzQiGAtIjYy2OPMNid_iSmO1Jn8zzYx9w-EwM-gDQqeWx3AwmUvNq7F3rSwM">
+<div class="absolute inset-0 bg-gradient-to-t from-background via-transparent to-transparent"></div>
+</div>
+<div class="relative z-10 max-w-4xl">
+<h1 class="font-display-xl text-display-xl uppercase italic leading-none mb-4">
+                THẾ <span class="text-primary-container">LƯỚI</span><br>2024
+            </h1>
+<p class="font-body-lg text-body-lg text-on-surface-variant max-w-xl">
+                Kỹ thuật chính xác kết hợp với tài năng con người thô. Khám phá đội ngũ thượng thừa đẩy giới hạn vật lý và hiệu suất.
+            </p>
+</div>
+</header>
+<!-- Main Content: Bento Grid Driver Lineup -->
+<main class="px-margin-desktop py-20 bg-surface-dim">
+<div class="grid grid-cols-1 md:grid-cols-12 gap-gutter">
+<!-- Driver Card 1 (Large Featured) -->
+<div class="md:col-span-8 group relative overflow-hidden bg-surface-container-high border border-outline-variant transition-all duration-500 hover:border-primary">
+<div class="absolute top-6 left-6 z-20">
+<span class="font-label-data text-label-data bg-primary-container text-on-primary-container px-3 py-1 parallelogram inline-block">
+<span class="parallelogram-content">HẠNG #01</span>
+</span>
+</div>
+<div class="flex flex-col md:flex-row h-full">
+<div class="w-full md:w-1/2 relative overflow-hidden h-[400px] md:h-auto">
+<img class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" data-alt="A high-contrast studio portrait of a professional racing driver in a dark grey fireproof suit. The lighting is dramatic and directional, highlighting sharp facial features and the technical texture of the suit. The background is a dark, gunmetal grey with subtle carbon fiber patterns. Vibrant red accent lighting catches the edge of the driver's helmet held under one arm, creating a mood of intense focus and elite athleticism." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAkhuZOdP5GCfFqQoLgblH-yzsqdZ9O2dxNBwoYgfipCZSefqfB6tMshC4S0p4uSc8aOPoMXZKBU012YV0ED6j2zLLRG8QuPHCHMMTn_JwTvGOhLgyJpXsqTcOm-VtbkKgLBvqouDjH_RXDsxRMnv_52m3ZOuhSaTynEpP1QoRqS5mxJT_Iieowew2fDJdyclgJbOCSAORecuzFVj9j5n6_03KUlxZHajT0ahEESMGnHplgRKR6sAlQQkymEFEtkbsVbrfZWy8sWI0">
+<div class="absolute inset-0 bg-gradient-to-r from-transparent via-transparent to-surface-container-high hidden md:block"></div>
+</div>
+<div class="w-full md:w-1/2 p-8 flex flex-col justify-center relative">
+<div class="font-display-xl text-[120px] absolute -right-4 -top-8 opacity-5 text-on-surface pointer-events-none italic font-black">44</div>
+<h2 class="font-headline-lg text-headline-lg italic uppercase leading-none mb-2">MAX <br><span class="text-primary">VELOCITY</span></h2>
+<div class="flex items-center gap-4 mb-8">
+<span class="font-label-data text-label-data text-on-surface-variant border-r border-outline-variant pr-4">ĐỘI ĐUA ILLIT</span>
+<span class="font-label-data text-label-data text-primary">TRẠNG THÁI: TỐI ƯU</span>
+</div>
+<div class="grid grid-cols-3 gap-4 mb-10">
+<div>
+<p class="font-label-data text-label-data text-on-surface-variant uppercase">CHIẾN THẮNG</p>
+<p class="font-headline-md text-headline-md">12</p>
+</div>
+<div>
+<p class="font-label-data text-label-data text-on-surface-variant uppercase">CHỌN BẬC</p>
+<p class="font-headline-md text-headline-md">18</p>
+</div>
+<div>
+<p class="font-label-data text-label-data text-on-surface-variant uppercase">ĐIỂM</p>
+<p class="font-headline-md text-headline-md">342</p>
+</div>
+</div>
+<!-- Telemetry Hover Overlay -->
+<div class="absolute inset-0 bg-surface-container-highest p-8 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-center border-l-4 border-primary">
+<h3 class="font-label-data text-label-data text-secondary mb-4 flex items-center gap-2">
+<span class="material-symbols-outlined text-[16px]">analytics</span> DỮ LIỆU TRỰC TIẾP
+                            </h3>
+<div class="space-y-4">
+<div class="w-full">
+<div class="flex justify-between font-label-data text-[10px] mb-1"><span class="">THỜI GIAN PHẢN ỨNG</span> <span class="">0.18s</span></div>
+<div class="h-1 bg-surface-variant w-full overflow-hidden">
+<div class="h-full bg-primary w-[92%]"></div>
+</div>
+</div>
+<div class="w-full">
+<div class="flex justify-between font-label-data text-[10px] mb-1"><span class="">LỰC G TRUNG BÌNH GÓC VÒNG</span> <span class="">5.2G</span></div>
+<div class="h-1 bg-surface-variant w-full overflow-hidden">
+<div class="h-full bg-secondary-fixed-dim w-[85%]"></div>
+</div>
+</div>
+<div class="w-full">
+<div class="flex justify-between font-label-data text-[10px] mb-1"><span class="">QUẢN LÝ LỐP</span> <span class="">TỐT NHẤT</span></div>
+<div class="h-1 bg-surface-variant w-full overflow-hidden">
+<div class="h-full bg-primary w-[98%]"></div>
+</div>
+</div>
+</div>
+<button class="mt-8 parallelogram bg-primary text-on-primary py-3 px-6 w-fit font-label-data text-label-data hover:bg-white hover:text-black transition-colors">
+<span class="parallelogram-content">BỘ DỮ LIỆU ĐẦY ĐỦ</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Driver Card 2 (Standard) -->
+<div class="md:col-span-4 group bg-surface-container border border-outline-variant hover:border-secondary transition-all">
+<div class="relative h-64 overflow-hidden">
+<img class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" data-alt="A portrait of a young, athletic racing driver wearing a sleek white and cyan racing suit. The driver is standing against a dark, metallic background with vertical neon cyan lighting strips. The composition is sharp and modern, emphasizing technical precision. The lighting casts a cool, futuristic glow on the driver's profile, aligning with the high-tech, performance-oriented aesthetic of the ILLIT F1 brand." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDYbYhlA-L6FTDbl0ij4Ivh5cQFVWM-kCogKgCb24GKPqqqlbCEuxNwh2zthaDZAoPSWDeMzvMRG2Mifbsgf7lCpLSuQYnQ4EGCoCb-_Z_XJoJ9BqzjJCqhCQS9Ex7UtohYiuFnSJJZWz1doyWvFEIygfbY_IPuzPgy0A2Ko7V1YeJ4vu1ylDgYI5MdhB4vfu4ecAoOpzMPRuQjU60iZ8aloruFDEnYXvO8oAJ5zhepN91UDkDHIuHfl2oMTvntHdFeXxsJuco9II8">
+<div class="absolute bottom-0 right-0 font-display-xl text-6xl text-white opacity-20 italic font-black p-4">11</div>
+</div>
+<div class="p-6">
+<h3 class="font-headline-md text-headline-md italic uppercase mb-1">LUCA <span class="text-secondary-fixed-dim">BIANCHI</span></h3>
+<p class="font-label-data text-label-data text-on-surface-variant mb-6 uppercase">CYBERDRIVE GP</p>
+<div class="flex justify-between border-t border-outline-variant pt-4">
+<div class="text-center">
+<span class="block font-label-data text-[10px] opacity-50 uppercase">ĐIỂM</span>
+<span class="font-headline-md text-[20px]">189</span>
+</div>
+<div class="text-center">
+<span class="block font-label-data text-[10px] opacity-50 uppercase">VỊ TRÍ</span>
+<span class="font-headline-md text-[20px]">04</span>
+</div>
+<div class="text-center">
+<span class="block font-label-data text-[10px] opacity-50 uppercase">CHỌN BẬC</span>
+<span class="font-headline-md text-[20px]">06</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Driver Card 3 (Standard) -->
+<div class="md:col-span-4 group bg-surface-container border border-outline-variant hover:border-primary transition-all">
+<div class="relative h-64 overflow-hidden">
+<img class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" data-alt="Close-up shot of a racing driver's helmet visor reflecting the vibrant lights of a pit lane. The helmet is finished in a high-gloss carbon fiber weave with aggressive red decals. The reflection shows a blurred, technical environment with glowing monitors and mechanical parts. The mood is intense and highly detailed, focusing on the equipment's material quality and the high-stakes atmosphere of professional racing." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAHUCWdG4D93Zh-ul5bm6YUI5lUP2y0nd5cabQF3b_YiA9wBl6peWxAT5adhORlHRHZE5V1a4UCcjLKrt5gJUzT-bQPnCtGgAkOFcp7EaXGKkUtPnJd3Jl5m8Koma9LKJXOUdGcj8l4rbv609K9tNVOQZbCEUjfeSKtx4oCrHcqesD1JVwtTvhpCzVOqVi6e59kks2pEg59FZ5f9cttxGQK42Ul2mTp1w4ykP_cIv6XJHdVLSRlk2C5gA6HGzXN7kymgbJMogIdkUE">
+<div class="absolute bottom-0 right-0 font-display-xl text-6xl text-white opacity-20 italic font-black p-4">07</div>
+</div>
+<div class="p-6">
+<h3 class="font-headline-md text-headline-md italic uppercase mb-1">SOFIA <span class="text-primary">RHODES</span></h3>
+<p class="font-label-data text-label-data text-on-surface-variant mb-6 uppercase">APEX DYNAMICS</p>
+<div class="flex justify-between border-t border-outline-variant pt-4">
+<div class="text-center">
+<span class="block font-label-data text-[10px] opacity-50 uppercase">ĐIỂM</span>
+<span class="font-headline-md text-[20px]">154</span>
+</div>
+<div class="text-center">
+<span class="block font-label-data text-[10px] opacity-50 uppercase">VỊ TRÍ</span>
+<span class="font-headline-md text-[20px]">06</span>
+</div>
+<div class="text-center">
+<span class="block font-label-data text-[10px] opacity-50 uppercase">CHỌN BẬC</span>
+<span class="font-headline-md text-[20px]">03</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Driver Card 4 (Standard) -->
+<div class="md:col-span-4 group bg-surface-container border border-outline-variant hover:border-secondary transition-all">
+<div class="relative h-64 overflow-hidden">
+<img class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" data-alt="A dynamic action shot of a racing driver stepping into a high-tech cockpit. The lighting is low-key with sharp cyan highlights outlining the aerodynamic curves of the car's halo and steering wheel. The driver's movements are blurred to suggest readiness and speed. The scene is set in a dark, professional garage with subtle tool racks and telemetry screens in the background, creating a highly technical and exclusive atmosphere." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDIalQ4JW9v4s15h2yzGm8B2Pp0dQRVJgOTTiAcA_M95FGDZ2lcvuqa4IhiJw9SCBv3oj1X-CGFDvhAHhJLSI432O0r_uLsY9GS_Lfx925ZqLvWl1ufPPbd1L8gnoYBOtjDyZ3zeIAsEVcO4f4ZcLk3TnxFp8wWq0PBs_eL6jLeF3BEFYl1qV6g_IJXA0Wyij0YSXFSbM-ZN06lK_tRkw2Ef_R5oN9rYpon5BcVgdqdsgeCi2PLkks9lNc_rQIAJXBTCsCXvI5SDk4">
+<div class="absolute bottom-0 right-0 font-display-xl text-6xl text-white opacity-20 italic font-black p-4">22</div>
+</div>
+<div class="p-6">
+<h3 class="font-headline-md text-headline-md italic uppercase mb-1">JAXON <span class="text-secondary-fixed-dim">REED</span></h3>
+<p class="font-label-data text-label-data text-on-surface-variant mb-6 uppercase">NOVA TECH F1</p>
+<div class="flex justify-between border-t border-outline-variant pt-4">
+<div class="text-center">
+<span class="block font-label-data text-[10px] opacity-50 uppercase">ĐIỂM</span>
+<span class="font-headline-md text-[20px]">112</span>
+</div>
+<div class="text-center">
+<span class="block font-label-data text-[10px] opacity-50 uppercase">VỊ TRÍ</span>
+<span class="font-headline-md text-[20px]">09</span>
+</div>
+<div class="text-center">
+<span class="block font-label-data text-[10px] opacity-50 uppercase">CHỌN BẬC</span>
+<span class="font-headline-md text-[20px]">01</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Stats/Telemetry CTA Card -->
+<div class="md:col-span-4 bg-primary-container p-8 flex flex-col justify-between parallelogram">
+<div class="parallelogram-content">
+<h3 class="font-headline-md text-on-primary-container leading-tight mb-4">TRUNG TÂM <br> HIỆU SUẤT THỜI GIAN THỰC</h3>
+<p class="font-body-md text-on-primary-container opacity-80 mb-6">Truy cập dữ liệu telemetry thô giúp chúng tôi dẫn đầu giải đấu. Trực tiếp từ ECU đến màn hình của bạn.</p>
+</div>
+<div class="parallelogram-content">
+<button class="w-full bg-on-primary-container text-white py-4 font-label-data uppercase tracking-widest hover:bg-white hover:text-black transition-colors">
+                        KHỞI CHẠY BẢNG ĐIỀU KHIỂN
+                    </button>
+</div>
+</div>
+</div>
+</main>
+<!-- Interactive AI Telemetry Section (Floating HUD Feel) -->
+<section class="px-margin-desktop py-20 bg-background relative overflow-hidden">
+<div class="absolute inset-0 carbon-pattern opacity-10"></div>
+<div class="relative z-10 flex flex-col md:flex-row items-center gap-16">
+<div class="w-full md:w-1/2">
+<h2 class="font-headline-lg text-headline-lg-mobile md:text-headline-lg uppercase italic mb-8">CHIẾN LƯỢC <span class="text-primary">GARA AI</span></h2>
+<div class="bg-surface-container-high border border-secondary/30 p-6 rounded-lg font-label-data text-secondary overflow-hidden">
+<div class="space-y-2 h-64 overflow-y-auto" id="ai-terminal"></div>
+</div>
+</div>
+<div class="w-full md:w-1/2">
+<p class="font-body-lg text-body-lg mb-8">Trí tuệ nhân tạo nội bộ của chúng tôi phân tích hàng triệu điểm dữ liệu mỗi giây để mang đến lợi thế chiến lược trong tích tắc cho tay đua.</p>
+<div class="flex flex-wrap gap-4">
+<button class="parallelogram border-2 border-white px-8 py-3 font-label-data hover:bg-white hover:text-black transition-all">
+<span class="parallelogram-content">XEM THÔNG SỐ ĐỘNG CƠ</span>
+</button>
+<button class="parallelogram bg-secondary-container text-on-secondary-container px-8 py-3 font-label-data hover:bg-secondary transition-all">
+<span class="parallelogram-content">BÁO CÁO CHIẾN LƯỢC</span>
+</button>
+</div>
+</div>
+</div>
+</section>
+<!-- Footer -->
+<footer class="bg-surface-dim border-t border-outline-variant w-full px-margin-desktop py-base flex flex-col md:flex-row justify-between items-center gap-gutter">
+<div class="font-headline-md text-headline-md font-black text-on-surface uppercase italic">
+            ILLIT F1
+        </div>
+<div class="flex gap-8">
+<a class="font-label-data text-label-data text-on-surface-variant hover:text-primary transition-colors" href="#">Dữ liệu</a>
+<a class="font-label-data text-label-data text-on-surface-variant hover:text-primary transition-colors" href="#">Pit Wall</a>
+<a class="font-label-data text-label-data text-on-surface-variant hover:text-primary transition-colors" href="#">Quyền riêng tư</a>
+<a class="font-label-data text-label-data text-on-surface-variant hover:text-primary transition-colors" href="#">Điều khoản</a>
+<a class="font-label-data text-label-data text-on-surface-variant hover:text-primary transition-colors" href="#">API</a>
+</div>
+<div class="font-label-data text-label-data text-on-surface-variant opacity-50">
+            © 2024 ILLIT F1 ENGINEERING. TRẠNG THÁI: TỐI ƯU
+        </div>
+</footer>
+<script src="../js/results.js"></script>
+
+</body></html>
