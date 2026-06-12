@@ -1,0 +1,100 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlserver"
+  url      = env("DATABASE_URL")
+}
+
+// ==========================================
+// 1. PHÂN HỆ QUẢN LÝ NGƯỜI DÙNG & PHÂN QUYỀN (Hệ thống quản lý)
+// ==========================================
+
+model Roles {
+  role_id    Int          @id @default(autoincrement())
+  role_name  String       @unique(map: "UQ__Roles__783254B148647BB3") @db.VarChar(50) // ADMIN, STAFF, USER
+  User_Roles User_Roles[]
+}
+
+model User_Roles {
+  user_id     String    @db.UniqueIdentifier
+  role_id     Int
+  assigned_at DateTime? @default(now(), map: "DF__User_Role__assig__44FF419A") @db.DateTime
+  Roles       Roles     @relation(fields: [role_id], references: [role_id], onUpdate: NoAction, map: "FK__User_Role__role___440B1D61")
+  Users       Users     @relation(fields: [user_id], references: [user_id], onUpdate: NoAction, map: "FK__User_Role__user___4316F928")
+
+  @@id([user_id, role_id], map: "PK__User_Rol__6EDEA153972D19DF")
+}
+
+model Users {
+  user_id          String             @id(map: "PK__Users__B9BE370F788B42ED") @default(dbgenerated("newid()")) @db.UniqueIdentifier
+  email            String             @unique(map: "UQ__Users__AB6E616439E3AECA") @db.VarChar(255)
+  password_hash    String             @db.VarChar(255)
+  full_name        String             @db.NVarChar(100)
+  phone_number     String?            @db.VarChar(20)
+  status           String?            @default("active") @db.VarChar(20) // active, blocked
+  is_deleted       Boolean?           @default(false)
+  created_at       DateTime?          @default(now()) @db.DateTime
+  updated_at       DateTime?          @default(now()) @db.DateTime
+  Chatbot_Sessions Chatbot_Sessions[]
+  User_Roles       User_Roles[]
+}
+
+// ==========================================
+// 2. PHÂN HỆ QUẢN LÝ DỮ LIỆU F1 (Đối tượng quản trị chính)
+// ==========================================
+
+model Teams {
+  team_id    String    @id(map: "PK__Teams__F82DEDBCFE0BD6C5") @default(dbgenerated("newid()")) @db.UniqueIdentifier
+  name       String    @db.NVarChar(100)
+  principal  String?   @db.NVarChar(100) // Trưởng đội đua
+  chassis    String?   @db.NVarChar(50) // Khung gầm xe
+  power_unit String?   @db.NVarChar(50) // Động cơ sử dụng
+  is_deleted Boolean?  @default(false)
+  Drivers    Drivers[] // Một đội đua có nhiều tay đua tại thời điểm quản lý
+}
+
+model Drivers {
+  driver_id   String    @id(map: "PK__Drivers__A411C5BDE596E766") @default(dbgenerated("newid()")) @db.UniqueIdentifier
+  team_id     String?   @db.UniqueIdentifier // Thuộc đội đua nào
+  first_name  String    @db.NVarChar(50)
+  last_name   String    @db.NVarChar(50)
+  nationality String?   @db.NVarChar(50)
+  dob         DateTime? @db.Date
+  is_deleted  Boolean?  @default(false)
+  Teams       Teams?    @relation(fields: [team_id], references: [team_id], onDelete: NoAction, onUpdate: NoAction)
+}
+
+// ==========================================
+// 3. PHÂN HỆ LỊCH SỬ CHATBOT AI & CƠ SỞ TRI THỨC (RAG DATA)
+// ==========================================
+
+model Chatbot_Sessions {
+  session_id         String             @id(map: "PK__Chatbot___69B13FDC68D6B718") @default(dbgenerated("newid()")) @db.UniqueIdentifier
+  user_id            String?            @db.UniqueIdentifier
+  started_at         DateTime?          @default(now()) @db.DateTime
+  last_interacted_at DateTime?          @default(now()) @db.DateTime
+  Chatbot_Messages   Chatbot_Messages[]
+  Users              Users?             @relation(fields: [user_id], references: [user_id], onDelete: NoAction, onUpdate: NoAction, map: "FK__Chatbot_S__user___10566F31")
+}
+
+model Chatbot_Messages {
+  message_id       String            @id(map: "PK__Chatbot___0BBF6EE630B9E44D") @default(dbgenerated("newid()")) @db.UniqueIdentifier
+  session_id       String?           @db.UniqueIdentifier
+  sender           String?           @db.VarChar(10) // 'user' hoặc 'bot'
+  message_text     String            @db.NVarChar(Max)
+  sent_at          DateTime?         @default(now()) @db.DateTime
+  Chatbot_Sessions Chatbot_Sessions? @relation(fields: [session_id], references: [session_id], onDelete: NoAction, onUpdate: NoAction, map: "FK__Chatbot_M__sessi__160F4887")
+}
+
+model F1_Knowledge_Base {
+  doc_id           String    @id(map: "PK__F1_Knowl__8AD029249FF352B2") @default(dbgenerated("newid()")) @db.UniqueIdentifier
+  title            String    @db.NVarChar(255) // Tiêu đề tài liệu quản lý (Ví dụ: Luật F1 2026, Thông tin chặng Monaco)
+  content_chunk    String    @db.NVarChar(Max) // Nội dung văn bản chia nhỏ để AI học/tra cứu
+  vector_embedding String?   @db.NVarChar(Max) // Lưu mảng dữ liệu Vector để làm tìm kiếm thông minh RAG
+  metadata         String?   @db.NVarChar(Max) // Các thông tin bổ sung đi kèm văn bản
+  created_at       DateTime? @default(now()) @db.DateTime
+
+  @@index([title], map: "IX_F1Knowledge_Title")
+}
