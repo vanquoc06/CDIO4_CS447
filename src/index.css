@@ -1,0 +1,111 @@
+@import "tailwindcss";
+
+@theme {
+  --font-mono: 'JetBrains Mono', monospace;
+  --font-display: 'Anybody', sans-serif;
+  --font-body: 'Hanken Grotesk', sans-serif;
+}
+
+/* ===== GLOBAL STYLES ===== */
+body {
+  background-color: #13131b;
+  color: #e4e1ee;
+  overflow-x: hidden;
+}
+
+/* ===== PARALLELOGRAM ===== */
+.parallelogram {
+  transform: skewX(-10deg);
+}
+.parallelogram > *,
+.parallelogram-content {
+  transform: skewX(10deg);
+}
+.parallelogram-sm {
+  clip-path: polygon(5% 0, 100% 0, 95% 100%, 0 100%);
+}
+
+/* ===== HUD / GRID EFFECTS ===== */
+.hud-grid {
+  background-image:
+    linear-gradient(rgba(0, 240, 255, 0.05) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0, 240, 255, 0.05) 1px, transparent 1px);
+  background-size: 20px 20px;
+}
+
+.carbon-texture {
+  background-image: radial-gradient(circle at 2px 2px, rgba(255,255,255,0.05) 1px, transparent 0);
+  background-size: 4px 4px;
+}
+
+.carbon-pattern {
+  background-image:
+    linear-gradient(45deg, #15151e 25%, transparent 25%),
+    linear-gradient(-45deg, #15151e 25%, transparent 25%),
+    linear-gradient(45deg, transparent 75%, #15151e 75%),
+    linear-gradient(-45deg, transparent 75%, #15151e 75%);
+  background-size: 4px 4px;
+  background-color: #1a1a24;
+}
+
+/* ===== GLOW ===== */
+.glow-red {
+  box-shadow: 0 0 20px rgba(255, 180, 167, 0.2);
+}
+.glow-hover:hover {
+  box-shadow: 0 0 20px rgba(0, 240, 255, 0.3);
+  border-color: #ffb4a7;
+}
+.neon-glow {
+  box-shadow: 0 0 15px rgba(255, 85, 61, 0.3);
+}
+
+/* ===== HUD BORDER ===== */
+.hud-border {
+  border: 0.5px solid rgba(0, 240, 255, 0.3);
+}
+
+/* ===== HUD OVERLAY (teams) ===== */
+.hud-overlay {
+  position: relative;
+  overflow: hidden;
+}
+.hud-overlay::after {
+  content: "";
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  background: linear-gradient(rgba(0, 240, 255, 0.05) 50%, transparent 50%);
+  background-size: 100% 4px;
+  pointer-events: none;
+  opacity: 0.2;
+}
+
+/* ===== NEWS TICKER ===== */
+.ticker-wrap { overflow: hidden; white-space: nowrap; }
+.ticker { display: inline-block; animation: ticker 30s linear infinite; }
+@keyframes ticker {
+  0%   { transform: translateX(100%); }
+  100% { transform: translateX(-100%); }
+}
+
+/* ===== SKEW HOVER ===== */
+.skew-hover:hover { transform: skewX(-6deg); }
+
+/* ===== SCROLLBAR ===== */
+::-webkit-scrollbar { width: 4px; }
+::-webkit-scrollbar-track { background: #0d0d16; }
+::-webkit-scrollbar-thumb { background: #ffb4a7; border-radius: 2px; }
+::-webkit-scrollbar-thumb:hover { background: #ff8b75; }
+
+/* ===== TRANSITIONS ===== */
+a, button { transition: all 0.3s ease; }
+
+/* ===== ANIMATIONS ===== */
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+.animate-spin {
+  animation: spin 1s linear infinite;
+}

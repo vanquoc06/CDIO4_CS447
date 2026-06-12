@@ -1,25 +1,21 @@
-<!DOCTYPE html>
-<html lang="en">
+<!doctype html>
+<html lang="en" class="dark">
   <head>
     <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>ILLIT F1 Dev Server</title>
-    <style>
-      body { font-family: system-ui, sans-serif; background: #090b12; color: #f5f2ee; min-height: 100vh; margin: 0; display: grid; place-items: center; padding: 2rem; }
-      a { color: #ffb4a7; text-decoration: none; font-weight: 700; }
-      .card { max-width: 36rem; width: 100%; border: 1px solid rgba(255,180,167,0.25); padding: 2rem; border-radius: 1rem; background: rgba(20,21,30,0.92); }
-      .list { margin: 1.5rem 0 0; padding-left: 1.25rem; }
-    </style>
+    <title>ILLIT F1 | Racing Excellence</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Anybody:ital,wght@0,400;0,700;0,900;1,900&family=Hanken+Grotesk:wght@400;600&family=JetBrains+Mono:wght@500;700&family=Noto+Sans:wght@400;500;600;700;800;900&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap"
+      rel="stylesheet"
+    />
   </head>
   <body>
-    <div class="card">
-      <h1>ILLIT F1 Dev Server</h1>
-      <p>Use the links below to open your pages while the dev server is running.</p>
-      <ul class="list">
-        <li><a href="html/homepage.html">Homepage</a></li>
-        <li><a href="html/schedule.html">Schedule</a></li>
-        <li><a href="html/news.html">News</a></li>
-      </ul>
-    </div>
+    <div id="root"></div>
+    <script type="module" src="/src/main.jsx"></script>
   </body>
 </html>
