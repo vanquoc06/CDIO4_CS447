@@ -1,16 +1,99 @@
-# React + Vite
+# ILLIT F1 Racing Platform
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Full-stack F1 racing website with React frontend and Node.js backend.
 
-Currently, two official plugins are available:
+## Project Structure
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+```
+f2/
+├── illit-f1-frontend/     # React Frontend (JavaScript)
+│   ├── src/
+│   ├── public/
+│   ├── package.json
+│   └── README.md
+├── illit-f1-backend/      # Node.js Backend (TypeScript)  
+│   ├── src/
+│   ├── prisma/
+│   ├── package.json
+│   └── .env
+├── .gitignore
+└── README.md
+```
 
-## React Compiler
+## Tech Stack
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+### Frontend
+- **React 19** + **Vite** + **Tailwind CSS v4**
+- **React Router v7** for navigation
+- **JavaScript** with JSX
 
-## Expanding the ESLint configuration
+### Backend  
+- **Node.js** + **Express** + **TypeScript**
+- **Prisma ORM** + **SQL Server**
+- **JWT Authentication** + **Bcrypt**
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+## Quick Start
+
+### 1. Start Backend Server
+```bash
+cd illit-f1-backend
+npm install
+npm run dev
+```
+Backend: `http://localhost:8080`
+
+### 2. Start Frontend App
+```bash  
+cd illit-f1-frontend
+npm install  
+npm run dev
+```
+Frontend: `http://localhost:5173`
+
+## Features
+
+✅ **Modern F1-themed UI** with racing animations  
+✅ **Full authentication system** (register/login)  
+✅ **JWT token management** and session persistence  
+✅ **Protected routes** for authenticated users  
+✅ **Real-time server status** monitoring  
+✅ **SQL Server database** with Prisma ORM  
+✅ **Responsive design** for all devices  
+
+## API Endpoints
+
+- `POST /api/users` - User registration
+- `POST /api/users/login` - User login  
+- `GET /api/users` - Get users (requires JWT)
+- `GET /api/health` - Server health check
+
+## Development
+
+Each directory has its own package.json and can be developed independently:
+
+- **Frontend**: Pure React development with Vite hot reload
+- **Backend**: TypeScript + Express with nodemon auto-restart  
+
+## Database
+
+Backend uses SQL Server with Prisma ORM for:
+- User management and authentication
+- Race data and results
+- Reviews and ratings
+
+## Authentication Flow
+
+1. Frontend forms → Backend API
+2. JWT tokens issued and stored
+3. Protected routes verify authentication
+4. Session persistence via localStorage
+
+See individual README files in each directory for detailed setup instructions.
+
+## Git Repository Structure
+
+Now organized for easy deployment and development:
+- `illit-f1-frontend/` - Complete React app
+- `illit-f1-backend/` - Complete Node.js API  
+- Separate dependencies and build processes
+- Clear separation of concerns

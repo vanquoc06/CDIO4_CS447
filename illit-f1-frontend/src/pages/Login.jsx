@@ -1,38 +1,38 @@
-import { useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { useState, useEffect } from 'react';
+import { Link, useNavigate, useLocation } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
+import { checkServerHealth } from '../api/auth';
 
-export default function Register() {
-  const [fullName, setFullName] = useState('');
+export default function Login() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [confirmPassword, setConfirmPassword] = useState('');
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
+  const [serverStatus, setServerStatus] = useState(null);
   
-  const { register } = useAuth();
+  const { login } = useAuth();
   const navigate = useNavigate();
+  const location = useLocation();
+
+  const from = location.state?.from?.pathname || '/';
+
+  // Check server health on component mount
+  useEffect(() => {
+    const checkServer = async () => {
+      const isHealthy = await checkServerHealth();
+      setServerStatus(isHealthy);
+    };
+    checkServer();
+  }, []);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     setError('');
-
-    // Validation
-    if (password !== confirmPassword) {
-      setError('Passwords do not match');
-      return;
-    }
-
-    if (password.length < 6) {
-      setError('Password must be at least 6 characters');
-      return;
-    }
-
     setLoading(true);
 
     try {
-      await register(email, password, fullName);
-      navigate('/', { replace: true });
+      await login(email, password);
+      navigate(from, { replace: true });
     } catch (err) {
       setError(err.message);
     } finally {
@@ -62,11 +62,26 @@ export default function Register() {
               </h1>
             </Link>
             <div className="h-1 w-24 bg-[#ffb4a7] mx-auto mb-4" />
-            <p className="font-mono text-xs text-[#eabcb4] uppercase tracking-widest">New Driver Registration</p>
+            <p className="font-mono text-xs text-[#eabcb4] uppercase tracking-widest">Access Control System</p>
             <h2 className="text-2xl font-bold italic uppercase mt-4 text-[#e4e1ee]"
               style={{ fontFamily: 'Anybody, sans-serif' }}>
-              REGISTER
+              LOGIN
             </h2>
+          </div>
+
+          {/* Server Status */}
+          <div className="mb-6">
+            <div className="flex items-center gap-2">
+              <span className="font-mono text-[10px] text-[#eabcb4] uppercase tracking-widest">
+                Server Status:
+              </span>
+              <div className="flex items-center gap-2">
+                <div className={`w-2 h-2 rounded-full ${serverStatus === true ? 'bg-[#4caf50]' : serverStatus === false ? 'bg-[#f44336]' : 'bg-[#ff9800] animate-pulse'}`} />
+                <span className="font-mono text-[10px] text-[#eabcb4]">
+                  {serverStatus === true ? 'Connected' : serverStatus === false ? 'Disconnected' : 'Checking...'}
+                </span>
+              </div>
+            </div>
           </div>
 
           {/* Error Message */}
@@ -81,21 +96,6 @@ export default function Register() {
 
           {/* Form */}
           <form onSubmit={handleSubmit} className="space-y-6">
-            {/* Full Name */}
-            <div>
-              <label className="block font-mono text-xs text-[#eabcb4] uppercase tracking-widest mb-2">
-                Full Name
-              </label>
-              <input
-                type="text"
-                value={fullName}
-                onChange={(e) => setFullName(e.target.value)}
-                required
-                className="w-full bg-[#13131b] border-2 border-[#5f3e39] focus:border-[#ffb4a7] text-[#e4e1ee] px-4 py-3 font-mono text-sm outline-none transition-colors"
-                placeholder="Max Velocity"
-              />
-            </div>
-
             {/* Email */}
             <div>
               <label className="block font-mono text-xs text-[#eabcb4] uppercase tracking-widest mb-2">
@@ -121,25 +121,6 @@ export default function Register() {
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
                 required
-                minLength={6}
-                className="w-full bg-[#13131b] border-2 border-[#5f3e39] focus:border-[#ffb4a7] text-[#e4e1ee] px-4 py-3 font-mono text-sm outline-none transition-colors"
-                placeholder="••••••••"
-              />
-              <p className="mt-1 font-mono text-[10px] text-[#eabcb4] opacity-50">
-                Minimum 6 characters
-              </p>
-            </div>
-
-            {/* Confirm Password */}
-            <div>
-              <label className="block font-mono text-xs text-[#eabcb4] uppercase tracking-widest mb-2">
-                Confirm Password
-              </label>
-              <input
-                type="password"
-                value={confirmPassword}
-                onChange={(e) => setConfirmPassword(e.target.value)}
-                required
                 className="w-full bg-[#13131b] border-2 border-[#5f3e39] focus:border-[#ffb4a7] text-[#e4e1ee] px-4 py-3 font-mono text-sm outline-none transition-colors"
                 placeholder="••••••••"
               />
@@ -155,10 +136,10 @@ export default function Register() {
                 {loading ? (
                   <span className="flex items-center justify-center gap-2">
                     <span className="material-symbols-outlined animate-spin text-base">progress_activity</span>
-                    Creating Account...
+                    Authenticating...
                   </span>
                 ) : (
-                  'Register Account'
+                  'Access System'
                 )}
               </span>
             </button>
@@ -171,16 +152,16 @@ export default function Register() {
             <div className="flex-1 h-px bg-[#5f3e39]" />
           </div>
 
-          {/* Login Link */}
+          {/* Register Link */}
           <div className="text-center">
             <p className="font-mono text-xs text-[#eabcb4] mb-3">
-              Already have an account?
+              New to ILLIT F1 Racing?
             </p>
             <Link
-              to="/login"
+              to="/register"
               className="inline-block border-2 border-[#5f3e39] text-[#e4e1ee] py-3 px-8 font-mono text-sm uppercase tracking-widest parallelogram hover:bg-[#e4e1ee] hover:text-[#13131b] transition-all"
             >
-              <span className="parallelogram-content">Login to Account</span>
+              <span className="parallelogram-content">Register New Account</span>
             </Link>
           </div>
 

@@ -1,27 +1,50 @@
-import { useState } from 'react';
-import { Link, useNavigate, useLocation } from 'react-router-dom';
+import { useState, useEffect } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
+import { checkServerHealth } from '../api/auth';
 
-export default function Login() {
+export default function Register() {
+  const [fullName, setFullName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [confirmPassword, setConfirmPassword] = useState('');
+  const [phoneNumber, setPhoneNumber] = useState('');
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
+  const [serverStatus, setServerStatus] = useState(null);
   
-  const { login } = useAuth();
+  const { register } = useAuth();
   const navigate = useNavigate();
-  const location = useLocation();
 
-  const from = location.state?.from?.pathname || '/';
+  // Check server health on component mount
+  useEffect(() => {
+    const checkServer = async () => {
+      const isHealthy = await checkServerHealth();
+      setServerStatus(isHealthy);
+    };
+    checkServer();
+  }, []);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     setError('');
+
+    // Validation
+    if (password !== confirmPassword) {
+      setError('Passwords do not match');
+      return;
+    }
+
+    if (password.length < 6) {
+      setError('Password must be at least 6 characters');
+      return;
+    }
+
     setLoading(true);
 
     try {
-      await login(email, password);
-      navigate(from, { replace: true });
+      await register(email, password, fullName, phoneNumber);
+      navigate('/', { replace: true });
     } catch (err) {
       setError(err.message);
     } finally {
@@ -51,11 +74,26 @@ export default function Login() {
               </h1>
             </Link>
             <div className="h-1 w-24 bg-[#ffb4a7] mx-auto mb-4" />
-            <p className="font-mono text-xs text-[#eabcb4] uppercase tracking-widest">Access Control System</p>
+            <p className="font-mono text-xs text-[#eabcb4] uppercase tracking-widest">New Driver Registration</p>
             <h2 className="text-2xl font-bold italic uppercase mt-4 text-[#e4e1ee]"
               style={{ fontFamily: 'Anybody, sans-serif' }}>
-              LOGIN
+              REGISTER
             </h2>
+          </div>
+
+          {/* Server Status */}
+          <div className="mb-6">
+            <div className="flex items-center gap-2">
+              <span className="font-mono text-[10px] text-[#eabcb4] uppercase tracking-widest">
+                Server Status:
+              </span>
+              <div className="flex items-center gap-2">
+                <div className={`w-2 h-2 rounded-full ${serverStatus === true ? 'bg-[#4caf50]' : serverStatus === false ? 'bg-[#f44336]' : 'bg-[#ff9800] animate-pulse'}`} />
+                <span className="font-mono text-[10px] text-[#eabcb4]">
+                  {serverStatus === true ? 'Connected' : serverStatus === false ? 'Disconnected' : 'Checking...'}
+                </span>
+              </div>
+            </div>
           </div>
 
           {/* Error Message */}
@@ -70,6 +108,21 @@ export default function Login() {
 
           {/* Form */}
           <form onSubmit={handleSubmit} className="space-y-6">
+            {/* Full Name */}
+            <div>
+              <label className="block font-mono text-xs text-[#eabcb4] uppercase tracking-widest mb-2">
+                Full Name
+              </label>
+              <input
+                type="text"
+                value={fullName}
+                onChange={(e) => setFullName(e.target.value)}
+                required
+                className="w-full bg-[#13131b] border-2 border-[#5f3e39] focus:border-[#ffb4a7] text-[#e4e1ee] px-4 py-3 font-mono text-sm outline-none transition-colors"
+                placeholder="Max Velocity"
+              />
+            </div>
+
             {/* Email */}
             <div>
               <label className="block font-mono text-xs text-[#eabcb4] uppercase tracking-widest mb-2">
@@ -85,6 +138,20 @@ export default function Login() {
               />
             </div>
 
+            {/* Phone Number (Optional) */}
+            <div>
+              <label className="block font-mono text-xs text-[#eabcb4] uppercase tracking-widest mb-2">
+                Phone Number <span className="text-[10px] opacity-50">(Optional)</span>
+              </label>
+              <input
+                type="tel"
+                value={phoneNumber}
+                onChange={(e) => setPhoneNumber(e.target.value)}
+                className="w-full bg-[#13131b] border-2 border-[#5f3e39] focus:border-[#ffb4a7] text-[#e4e1ee] px-4 py-3 font-mono text-sm outline-none transition-colors"
+                placeholder="+84 901 234 567"
+              />
+            </div>
+
             {/* Password */}
             <div>
               <label className="block font-mono text-xs text-[#eabcb4] uppercase tracking-widest mb-2">
@@ -94,6 +161,25 @@ export default function Login() {
                 type="password"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
+                required
+                minLength={6}
+                className="w-full bg-[#13131b] border-2 border-[#5f3e39] focus:border-[#ffb4a7] text-[#e4e1ee] px-4 py-3 font-mono text-sm outline-none transition-colors"
+                placeholder="••••••••"
+              />
+              <p className="mt-1 font-mono text-[10px] text-[#eabcb4] opacity-50">
+                Minimum 6 characters
+              </p>
+            </div>
+
+            {/* Confirm Password */}
+            <div>
+              <label className="block font-mono text-xs text-[#eabcb4] uppercase tracking-widest mb-2">
+                Confirm Password
+              </label>
+              <input
+                type="password"
+                value={confirmPassword}
+                onChange={(e) => setConfirmPassword(e.target.value)}
                 required
                 className="w-full bg-[#13131b] border-2 border-[#5f3e39] focus:border-[#ffb4a7] text-[#e4e1ee] px-4 py-3 font-mono text-sm outline-none transition-colors"
                 placeholder="••••••••"
@@ -110,10 +196,10 @@ export default function Login() {
                 {loading ? (
                   <span className="flex items-center justify-center gap-2">
                     <span className="material-symbols-outlined animate-spin text-base">progress_activity</span>
-                    Authenticating...
+                    Creating Account...
                   </span>
                 ) : (
-                  'Access System'
+                  'Register Account'
                 )}
               </span>
             </button>
@@ -126,16 +212,16 @@ export default function Login() {
             <div className="flex-1 h-px bg-[#5f3e39]" />
           </div>
 
-          {/* Register Link */}
+          {/* Login Link */}
           <div className="text-center">
             <p className="font-mono text-xs text-[#eabcb4] mb-3">
-              New to ILLIT F1 Racing?
+              Already have an account?
             </p>
             <Link
-              to="/register"
+              to="/login"
               className="inline-block border-2 border-[#5f3e39] text-[#e4e1ee] py-3 px-8 font-mono text-sm uppercase tracking-widest parallelogram hover:bg-[#e4e1ee] hover:text-[#13131b] transition-all"
             >
-              <span className="parallelogram-content">Register New Account</span>
+              <span className="parallelogram-content">Login to Account</span>
             </Link>
           </div>
 
