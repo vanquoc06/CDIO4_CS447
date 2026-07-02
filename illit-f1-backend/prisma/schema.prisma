@@ -8,12 +8,12 @@ datasource db {
 }
 
 // ==========================================
-// 1. PHÂN HỆ QUẢN LÝ NGƯỜI DÙNG & PHÂN QUYỀN (Hệ thống quản lý)
+// 1. PHÂN HỆ QUẢN LÝ NGƯỜI DÙNG & PHÂN QUYỀN (Manage Accounts)
 // ==========================================
 
 model Roles {
   role_id    Int          @id @default(autoincrement())
-  role_name  String       @unique(map: "UQ__Roles__783254B148647BB3") @db.VarChar(50) // ADMIN, STAFF, USER
+  role_name  String       @unique(map: "UQ__Roles__783254B148647BB3") @db.VarChar(50) // admin, moderator, user
   User_Roles User_Roles[]
 }
 
@@ -39,35 +39,114 @@ model Users {
   updated_at       DateTime?          @default(now()) @db.DateTime
   Chatbot_Sessions Chatbot_Sessions[]
   User_Roles       User_Roles[]
+  Feedbacks        Feedbacks[]        
+  Comments         Comments[]         
 }
 
 // ==========================================
-// 2. PHÂN HỆ QUẢN LÝ DỮ LIỆU F1 (Đối tượng quản trị chính)
+// 2. PHÂN HỆ QUẢN LÝ DỮ LIỆU F1, LỊCH TRÌNH & KẾT QUẢ (Manage Driver, Team, Results, Schedules)
 // ==========================================
 
 model Teams {
-  team_id    String    @id(map: "PK__Teams__F82DEDBCFE0BD6C5") @default(dbgenerated("newid()")) @db.UniqueIdentifier
-  name       String    @db.NVarChar(100)
-  principal  String?   @db.NVarChar(100) // Trưởng đội đua
-  chassis    String?   @db.NVarChar(50) // Khung gầm xe
-  power_unit String?   @db.NVarChar(50) // Động cơ sử dụng
-  is_deleted Boolean?  @default(false)
-  Drivers    Drivers[] // Một đội đua có nhiều tay đua tại thời điểm quản lý
+  team_id      String         @id(map: "PK__Teams__F82DEDBCFE0BD6C5") @default(dbgenerated("newid()")) @db.UniqueIdentifier
+  name         String         @db.NVarChar(100)
+  principal    String?        @db.NVarChar(100)
+  chassis      String?        @db.NVarChar(50) 
+  power_unit   String?        @db.NVarChar(50) 
+  is_deleted   Boolean?       @default(false)
+  Drivers      Drivers[]      
+  Race_Results Race_Results[] 
+  Awards       Awards[]       
 }
 
 model Drivers {
-  driver_id   String    @id(map: "PK__Drivers__A411C5BDE596E766") @default(dbgenerated("newid()")) @db.UniqueIdentifier
-  team_id     String?   @db.UniqueIdentifier // Thuộc đội đua nào
-  first_name  String    @db.NVarChar(50)
-  last_name   String    @db.NVarChar(50)
-  nationality String?   @db.NVarChar(50)
-  dob         DateTime? @db.Date
-  is_deleted  Boolean?  @default(false)
-  Teams       Teams?    @relation(fields: [team_id], references: [team_id], onDelete: NoAction, onUpdate: NoAction)
+  driver_id    String         @id(map: "PK__Drivers__A411C5BDEE596E766") @default(dbgenerated("newid()")) @db.UniqueIdentifier
+  team_id      String?        @db.UniqueIdentifier 
+  first_name   String         @db.NVarChar(50)
+  last_name    String         @db.NVarChar(50)
+  nationality  String?        @db.NVarChar(50)
+  dob          DateTime?      @db.Date
+  is_deleted   Boolean?       @default(false)
+  Teams        Teams?         @relation(fields: [team_id], references: [team_id], onDelete: NoAction, onUpdate: NoAction)
+  Race_Results Race_Results[] 
+  Awards       Awards[]       
+}
+
+model Race_Schedules {
+  race_id           String         @id @default(dbgenerated("newid()")) @db.UniqueIdentifier
+  race_name         String         @db.NVarChar(150)
+  circuit_name      String         @db.NVarChar(150)
+  country           String         @db.NVarChar(100)
+  race_date         DateTime       @db.DateTime
+  total_laps        Int
+  circuit_length_km Float          @db.Float
+  created_at        DateTime?      @default(now()) @db.DateTime
+  Race_Results      Race_Results[] 
+}
+
+model Race_Results {
+  result_id      String         @id @default(dbgenerated("newid()")) @db.UniqueIdentifier
+  race_id        String         @db.UniqueIdentifier
+  driver_id      String         @db.UniqueIdentifier
+  team_id        String         @db.UniqueIdentifier
+  position       Int            
+  points         Decimal        @db.Decimal(5, 2) 
+  time_or_status String         @db.VarChar(50)  
+  is_fastest_lap Boolean?       @default(false)
+  Race_Schedules Race_Schedules @relation(fields: [race_id], references: [race_id], onDelete: NoAction, onUpdate: NoAction)
+  Drivers        Drivers        @relation(fields: [driver_id], references: [driver_id], onDelete: NoAction, onUpdate: NoAction)
+  Teams          Teams          @relation(fields: [team_id], references: [team_id], onDelete: NoAction, onUpdate: NoAction)
 }
 
 // ==========================================
-// 3. PHÂN HỆ LỊCH SỬ CHATBOT AI & CƠ SỞ TRI THỨC (RAG DATA)
+// 3. PHÂN HỆ ĐÁP ỨNG USE CASE TƯƠNG TÁC (Tin tức, Giải thưởng, Feedback hệ thống)
+// ==========================================
+
+model News {
+  news_id    String     @id @default(dbgenerated("newid()")) @db.UniqueIdentifier
+  title      String     @db.NVarChar(255)
+  content    String     @db.NVarChar(Max)
+  summary    String?    @db.NVarChar(500)
+  image_url  String?    @db.VarChar(500)
+  created_at DateTime?  @default(now()) @db.DateTime
+  updated_at DateTime?  @default(now()) @db.DateTime
+  Comments   Comments[] 
+}
+
+model Comments {
+  comment_id String    @id @default(dbgenerated("newid()")) @db.UniqueIdentifier
+  news_id    String    @db.UniqueIdentifier
+  user_id    String    @db.UniqueIdentifier
+  content    String    @db.NVarChar(Max)
+  created_at DateTime? @default(now()) @db.DateTime
+  News       News      @relation(fields: [news_id], references: [news_id], onDelete: Cascade, onUpdate: NoAction)
+  Users      Users     @relation(fields: [user_id], references: [user_id], onDelete: Cascade, onUpdate: NoAction)
+}
+
+model Awards {
+  award_id    String    @id @default(dbgenerated("newid()")) @db.UniqueIdentifier
+  award_name  String    @db.NVarChar(150) 
+  year        Int
+  driver_id   String?   @db.UniqueIdentifier
+  team_id     String?   @db.UniqueIdentifier
+  description String?   @db.NVarChar(Max)
+  created_at  DateTime? @default(now()) @db.DateTime
+  Drivers     Drivers?  @relation(fields: [driver_id], references: [driver_id], onDelete: NoAction, onUpdate: NoAction)
+  Teams       Teams?    @relation(fields: [team_id], references: [team_id], onDelete: NoAction, onUpdate: NoAction)
+}
+
+model Feedbacks {
+  feedback_id String    @id @default(dbgenerated("newid()")) @db.UniqueIdentifier
+  user_id     String    @db.UniqueIdentifier
+  title       String    @db.NVarChar(150)
+  message     String    @db.NVarChar(Max)
+  status      String?   @default("pending") @db.VarChar(20) 
+  created_at  DateTime? @default(now()) @db.DateTime
+  Users       Users     @relation(fields: [user_id], references: [user_id], onDelete: Cascade, onUpdate: NoAction)
+}
+
+// ==========================================
+// 4. PHÂN HỆ LỊCH SỬ CHATBOT AI & CƠ SỞ TRI THỨC (Manage Documents)
 // ==========================================
 
 model Chatbot_Sessions {
@@ -82,7 +161,7 @@ model Chatbot_Sessions {
 model Chatbot_Messages {
   message_id       String            @id(map: "PK__Chatbot___0BBF6EE630B9E44D") @default(dbgenerated("newid()")) @db.UniqueIdentifier
   session_id       String?           @db.UniqueIdentifier
-  sender           String?           @db.VarChar(10) // 'user' hoặc 'bot'
+  sender           String?           @db.VarChar(10) 
   message_text     String            @db.NVarChar(Max)
   sent_at          DateTime?         @default(now()) @db.DateTime
   Chatbot_Sessions Chatbot_Sessions? @relation(fields: [session_id], references: [session_id], onDelete: NoAction, onUpdate: NoAction, map: "FK__Chatbot_M__sessi__160F4887")
@@ -90,10 +169,10 @@ model Chatbot_Messages {
 
 model F1_Knowledge_Base {
   doc_id           String    @id(map: "PK__F1_Knowl__8AD029249FF352B2") @default(dbgenerated("newid()")) @db.UniqueIdentifier
-  title            String    @db.NVarChar(255) // Tiêu đề tài liệu quản lý (Ví dụ: Luật F1 2026, Thông tin chặng Monaco)
-  content_chunk    String    @db.NVarChar(Max) // Nội dung văn bản chia nhỏ để AI học/tra cứu
-  vector_embedding String?   @db.NVarChar(Max) // Lưu mảng dữ liệu Vector để làm tìm kiếm thông minh RAG
-  metadata         String?   @db.NVarChar(Max) // Các thông tin bổ sung đi kèm văn bản
+  title            String    @db.NVarChar(255) 
+  content_chunk    String    @db.NVarChar(Max) 
+  vector_embedding String?   @db.NVarChar(Max) 
+  metadata         String?   @db.NVarChar(Max) 
   created_at       DateTime? @default(now()) @db.DateTime
 
   @@index([title], map: "IX_F1Knowledge_Title")
