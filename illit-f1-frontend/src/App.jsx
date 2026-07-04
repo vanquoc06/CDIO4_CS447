@@ -31,13 +31,9 @@ export default function App() {
                 <Route path="/teams" element={<Teams />} />
                 <Route path="/schedule" element={<Schedule />} />
                 <Route path="/news" element={<News />} />
+                <Route path="/results" element={<Results />} />
                 
                 {/* Protected routes - requires login */}
-                <Route path="/results" element={
-                  <ProtectedRoute>
-                    <Results />
-                  </ProtectedRoute>
-                } />
                 <Route path="/profile" element={
                   <ProtectedRoute>
                     <Profile />

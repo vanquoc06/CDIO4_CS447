@@ -42,3 +42,6 @@ Desktop.ini
 
 # Prisma
 illit-f1-backend/prisma/migrations/
+
+.cursor/hooks.json
+.cursor/hooks/after-agent-response.js

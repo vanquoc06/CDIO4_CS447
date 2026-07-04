@@ -17,7 +17,7 @@ export default function Homepage() {
   return (
     <div className="bg-[#13131b] text-[#e4e1ee]">
       {/* Hero Section */}
-      <section className="relative h-screen min-h-[700px] flex items-center overflow-hidden">
+      <section className="relative min-h-[620px] flex items-center overflow-hidden py-12">
         <div className="absolute inset-0 z-0">
           <img
             className="hero-parallax w-full h-full object-cover brightness-50"
@@ -27,17 +27,17 @@ export default function Homepage() {
           <div className="absolute inset-0 bg-gradient-to-t from-[#13131b] via-transparent to-transparent" />
           <div className="hud-grid absolute inset-0 opacity-20" />
         </div>
-        <div className="relative z-10 px-16 w-full max-w-[1440px] mx-auto">
-          <div className="max-w-4xl space-y-4">
-            <div className="inline-flex items-center gap-2 bg-[#ffb4a7]/10 border border-[#ffb4a7]/20 px-4 py-1.5 mb-4">
-              <span className="material-symbols-outlined text-[#ffb4a7] text-sm" style={{ fontVariationSettings: "'FILL' 1" }}>bolt</span>
-              <span className="font-mono text-xs text-[#ffb4a7] uppercase">Engine status: Maximum performance</span>
+        <div className="relative z-10 px-6 md:px-12 w-full max-w-[1000px] mx-auto">
+          <div className="max-w-2xl space-y-4">
+            <div className="inline-flex items-center gap-2 bg-[#ffb4a7]/10 border border-[#ffb4a7]/20 px-3 py-1 mb-3">
+              <span className="material-symbols-outlined text-[#ffb4a7] text-xs" style={{ fontVariationSettings: "'FILL' 1" }}>bolt</span>
+              <span className="font-mono text-[0.65rem] text-[#ffb4a7] uppercase">Engine status: Maximum performance</span>
             </div>
-            <h1 className="text-[64px] md:text-[84px] font-black italic uppercase leading-none text-[#e4e1ee]"
+            <h1 className="text-3xl md:text-[44px] font-black italic uppercase leading-tight text-[#e4e1ee]"
               style={{ fontFamily: 'Anybody, sans-serif', letterSpacing: '-0.04em' }}>
               DESIGNED<br /><span className="text-[#ffb4a7]">FOR SPEED</span>
             </h1>
-            <p className="text-lg text-[#eabcb4] max-w-xl opacity-80">
+            <p className="text-sm md:text-base text-[#eabcb4] max-w-lg opacity-80">
               Welcome to the digital heart of Formula 1. Experience the intersection of pure mechanical power and elite engineering.
             </p>
             <div className="flex flex-wrap gap-4 pt-8">
@@ -57,13 +57,13 @@ export default function Homepage() {
       </section>
 
       {/* The Pinnacle of Motorsport */}
-      <section className="py-24 bg-[#0d0d16] carbon-texture">
-        <div className="px-16 max-w-[1440px] mx-auto">
+      <section className="py-12 bg-[#0d0d16] carbon-texture">
+        <div className="px-6 md:px-12 max-w-[1000px] mx-auto">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
             <div className="space-y-8">
               <div className="space-y-2">
                 <span className="font-mono text-[#ffb4a7] text-xs uppercase tracking-widest">TECHNICAL PRESTIGE</span>
-                <h2 className="text-5xl font-black italic uppercase leading-tight text-[#e4e1ee]" style={{ fontFamily: 'Anybody, sans-serif' }}>
+                <h2 className="text-4xl md:text-5xl font-black italic uppercase leading-tight text-[#e4e1ee]" style={{ fontFamily: 'Anybody, sans-serif' }}>
                   The Pinnacle of Motorsport
                 </h2>
                 <div className="h-1 w-24 bg-[#ffb4a7]" />
@@ -104,11 +104,11 @@ export default function Homepage() {
       </section>
 
       {/* 2024 Season Coverage */}
-      <section className="py-24 bg-[#13131b]">
-        <div className="px-16 max-w-[1440px] mx-auto">
+      <section className="py-12 bg-[#13131b]">
+        <div className="px-6 md:px-12 max-w-[1000px] mx-auto">
           <div className="flex flex-col md:flex-row justify-between items-end mb-16 gap-4">
             <div className="space-y-2">
-              <h2 className="text-5xl font-black italic uppercase text-[#e4e1ee]" style={{ fontFamily: 'Anybody, sans-serif' }}>
+              <h2 className="text-3xl md:text-4xl font-black italic uppercase text-[#e4e1ee]" style={{ fontFamily: 'Anybody, sans-serif' }}>
                 Track the 2024 Season
               </h2>
               <p className="font-mono text-xs text-[#eabcb4] tracking-[0.2em]">LIVE FROM PIT WALL</p>

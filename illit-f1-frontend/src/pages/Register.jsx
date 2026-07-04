@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 import { checkServerHealth } from '../api/auth';
+import heroImg from '../assets/hero.png';
 
 export default function Register() {
   const [fullName, setFullName] = useState('');
@@ -53,52 +54,47 @@ export default function Register() {
   };
 
   return (
-    <div className="min-h-screen bg-[#13131b] text-[#e4e1ee] flex items-center justify-center px-4 py-12 relative overflow-hidden">
+    <div className="h-screen bg-[#13131b] text-[#e4e1ee] flex items-center justify-center px-4 relative overflow-hidden">
       {/* Background effects */}
       <div className="hud-grid absolute inset-0 opacity-10" />
       <div className="carbon-texture absolute inset-0 opacity-20" />
+      <img src={heroImg} alt="Racing hero" className="absolute top-4 right-4 w-32 opacity-30 pointer-events-none" />
 
       {/* Form Container */}
       <div className="relative z-10 w-full max-w-md">
-        <div className="bg-[#1f1f28] border-2 border-[#5f3e39] p-8 relative overflow-hidden">
+        <div className="bg-[#1f1f28] border-2 border-[#5f3e39] p-6 relative overflow-hidden">
           {/* Top corner accents */}
-          <div className="absolute -top-2 -left-2 w-16 h-16 border-t-4 border-l-4 border-[#ffb4a7] opacity-30" />
-          <div className="absolute -bottom-2 -right-2 w-16 h-16 border-b-4 border-r-4 border-[#ffb4a7] opacity-30" />
+          <div className="absolute -top-2 -left-2 w-12 h-12 border-t-4 border-l-4 border-[#ffb4a7] opacity-30" />
+          <div className="absolute -bottom-2 -right-2 w-12 h-12 border-b-4 border-r-4 border-[#ffb4a7] opacity-30" />
 
           {/* Logo/Title */}
-          <div className="text-center mb-8">
-            <Link to="/" className="inline-block mb-4">
-              <h1 className="text-4xl font-black italic uppercase text-[#e4e1ee] tracking-tighter"
+          <div className="text-center mb-4">
+            <Link to="/" className="inline-block mb-1">
+              <h1 className="text-3xl font-black italic uppercase text-[#e4e1ee] tracking-tighter"
                 style={{ fontFamily: 'Anybody, sans-serif' }}>
                 ILLIT F1
               </h1>
             </Link>
-            <div className="h-1 w-24 bg-[#ffb4a7] mx-auto mb-4" />
-            <p className="font-mono text-xs text-[#eabcb4] uppercase tracking-widest">New Driver Registration</p>
-            <h2 className="text-2xl font-bold italic uppercase mt-4 text-[#e4e1ee]"
+            <div className="h-1 w-20 bg-[#ffb4a7] mx-auto mb-1" />
+            <p className="font-mono text-[10px] text-[#eabcb4] uppercase tracking-widest">New Driver Registration</p>
+            <h2 className="text-xl font-bold italic uppercase mt-1 text-[#e4e1ee]"
               style={{ fontFamily: 'Anybody, sans-serif' }}>
               REGISTER
             </h2>
           </div>
 
           {/* Server Status */}
-          <div className="mb-6">
-            <div className="flex items-center gap-2">
-              <span className="font-mono text-[10px] text-[#eabcb4] uppercase tracking-widest">
-                Server Status:
-              </span>
-              <div className="flex items-center gap-2">
-                <div className={`w-2 h-2 rounded-full ${serverStatus === true ? 'bg-[#4caf50]' : serverStatus === false ? 'bg-[#f44336]' : 'bg-[#ff9800] animate-pulse'}`} />
-                <span className="font-mono text-[10px] text-[#eabcb4]">
-                  {serverStatus === true ? 'Connected' : serverStatus === false ? 'Disconnected' : 'Checking...'}
-                </span>
-              </div>
-            </div>
+          <div className="mb-3 flex items-center gap-2">
+            <span className="font-mono text-[10px] text-[#eabcb4] uppercase tracking-widest">Server:</span>
+            <div className={`w-2 h-2 rounded-full ${serverStatus === true ? 'bg-[#4caf50]' : serverStatus === false ? 'bg-[#f44336]' : 'bg-[#ff9800] animate-pulse'}`} />
+            <span className="font-mono text-[10px] text-[#eabcb4]">
+              {serverStatus === true ? 'Connected' : serverStatus === false ? 'Disconnected' : 'Checking...'}
+            </span>
           </div>
 
           {/* Error Message */}
           {error && (
-            <div className="mb-6 p-4 bg-[#93000a] border border-[#ffb4ab] text-[#ffb4ab]">
+            <div className="mb-3 p-3 bg-[#93000a] border border-[#ffb4ab] text-[#ffb4ab]">
               <div className="flex items-center gap-2">
                 <span className="material-symbols-outlined text-sm">error</span>
                 <span className="font-mono text-xs">{error}</span>
@@ -107,10 +103,10 @@ export default function Register() {
           )}
 
           {/* Form */}
-          <form onSubmit={handleSubmit} className="space-y-6">
+          <form onSubmit={handleSubmit} className="space-y-3">
             {/* Full Name */}
             <div>
-              <label className="block font-mono text-xs text-[#eabcb4] uppercase tracking-widest mb-2">
+              <label className="block font-mono text-[10px] text-[#eabcb4] uppercase tracking-widest mb-1">
                 Full Name
               </label>
               <input
@@ -118,14 +114,14 @@ export default function Register() {
                 value={fullName}
                 onChange={(e) => setFullName(e.target.value)}
                 required
-                className="w-full bg-[#13131b] border-2 border-[#5f3e39] focus:border-[#ffb4a7] text-[#e4e1ee] px-4 py-3 font-mono text-sm outline-none transition-colors"
+                className="w-full bg-[#13131b] border-2 border-[#5f3e39] focus:border-[#ffb4a7] text-[#e4e1ee] px-4 py-2 font-mono text-sm outline-none transition-colors"
                 placeholder="Max Velocity"
               />
             </div>
 
             {/* Email */}
             <div>
-              <label className="block font-mono text-xs text-[#eabcb4] uppercase tracking-widest mb-2">
+              <label className="block font-mono text-[10px] text-[#eabcb4] uppercase tracking-widest mb-1">
                 Email Address
               </label>
               <input
@@ -133,28 +129,28 @@ export default function Register() {
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 required
-                className="w-full bg-[#13131b] border-2 border-[#5f3e39] focus:border-[#ffb4a7] text-[#e4e1ee] px-4 py-3 font-mono text-sm outline-none transition-colors"
+                className="w-full bg-[#13131b] border-2 border-[#5f3e39] focus:border-[#ffb4a7] text-[#e4e1ee] px-4 py-2 font-mono text-sm outline-none transition-colors"
                 placeholder="driver@illitf1.racing"
               />
             </div>
 
             {/* Phone Number (Optional) */}
             <div>
-              <label className="block font-mono text-xs text-[#eabcb4] uppercase tracking-widest mb-2">
-                Phone Number <span className="text-[10px] opacity-50">(Optional)</span>
+              <label className="block font-mono text-[10px] text-[#eabcb4] uppercase tracking-widest mb-1">
+                Phone <span className="opacity-50">(Optional)</span>
               </label>
               <input
                 type="tel"
                 value={phoneNumber}
                 onChange={(e) => setPhoneNumber(e.target.value)}
-                className="w-full bg-[#13131b] border-2 border-[#5f3e39] focus:border-[#ffb4a7] text-[#e4e1ee] px-4 py-3 font-mono text-sm outline-none transition-colors"
+                className="w-full bg-[#13131b] border-2 border-[#5f3e39] focus:border-[#ffb4a7] text-[#e4e1ee] px-4 py-2 font-mono text-sm outline-none transition-colors"
                 placeholder="+84 901 234 567"
               />
             </div>
 
             {/* Password */}
             <div>
-              <label className="block font-mono text-xs text-[#eabcb4] uppercase tracking-widest mb-2">
+              <label className="block font-mono text-[10px] text-[#eabcb4] uppercase tracking-widest mb-1">
                 Password
               </label>
               <input
@@ -163,17 +159,14 @@ export default function Register() {
                 onChange={(e) => setPassword(e.target.value)}
                 required
                 minLength={6}
-                className="w-full bg-[#13131b] border-2 border-[#5f3e39] focus:border-[#ffb4a7] text-[#e4e1ee] px-4 py-3 font-mono text-sm outline-none transition-colors"
+                className="w-full bg-[#13131b] border-2 border-[#5f3e39] focus:border-[#ffb4a7] text-[#e4e1ee] px-4 py-2 font-mono text-sm outline-none transition-colors"
                 placeholder="••••••••"
               />
-              <p className="mt-1 font-mono text-[10px] text-[#eabcb4] opacity-50">
-                Minimum 6 characters
-              </p>
             </div>
 
             {/* Confirm Password */}
             <div>
-              <label className="block font-mono text-xs text-[#eabcb4] uppercase tracking-widest mb-2">
+              <label className="block font-mono text-[10px] text-[#eabcb4] uppercase tracking-widest mb-1">
                 Confirm Password
               </label>
               <input
@@ -181,7 +174,7 @@ export default function Register() {
                 value={confirmPassword}
                 onChange={(e) => setConfirmPassword(e.target.value)}
                 required
-                className="w-full bg-[#13131b] border-2 border-[#5f3e39] focus:border-[#ffb4a7] text-[#e4e1ee] px-4 py-3 font-mono text-sm outline-none transition-colors"
+                className="w-full bg-[#13131b] border-2 border-[#5f3e39] focus:border-[#ffb4a7] text-[#e4e1ee] px-4 py-2 font-mono text-sm outline-none transition-colors"
                 placeholder="••••••••"
               />
             </div>
@@ -190,7 +183,7 @@ export default function Register() {
             <button
               type="submit"
               disabled={loading}
-              className="w-full bg-[#ffb4a7] text-[#670400] py-4 font-mono text-sm font-bold uppercase tracking-widest parallelogram hover:brightness-110 transition-all disabled:opacity-50 disabled:cursor-not-allowed relative overflow-hidden"
+              className="w-full bg-[#ffb4a7] text-[#670400] py-3 font-mono text-sm font-bold uppercase tracking-widest parallelogram hover:brightness-110 transition-all disabled:opacity-50 disabled:cursor-not-allowed relative overflow-hidden"
             >
               <span className="parallelogram-content">
                 {loading ? (
@@ -206,7 +199,7 @@ export default function Register() {
           </form>
 
           {/* Divider */}
-          <div className="flex items-center gap-4 my-8">
+          <div className="flex items-center gap-4 my-3">
             <div className="flex-1 h-px bg-[#5f3e39]" />
             <span className="font-mono text-[10px] text-[#eabcb4] uppercase">Or</span>
             <div className="flex-1 h-px bg-[#5f3e39]" />
@@ -214,31 +207,17 @@ export default function Register() {
 
           {/* Login Link */}
           <div className="text-center">
-            <p className="font-mono text-xs text-[#eabcb4] mb-3">
-              Already have an account?
-            </p>
             <Link
               to="/login"
-              className="inline-block border-2 border-[#5f3e39] text-[#e4e1ee] py-3 px-8 font-mono text-sm uppercase tracking-widest parallelogram hover:bg-[#e4e1ee] hover:text-[#13131b] transition-all"
+              className="inline-block border-2 border-[#5f3e39] text-[#e4e1ee] py-2 px-5 font-mono text-xs uppercase tracking-widest parallelogram hover:bg-[#e4e1ee] hover:text-[#13131b] transition-all"
             >
-              <span className="parallelogram-content">Login to Account</span>
+              <span className="parallelogram-content">Login</span>
             </Link>
           </div>
-
-          {/* Back to Home */}
-          <Link
-            to="/"
-            className="block text-center mt-8 font-mono text-[10px] text-[#eabcb4] hover:text-[#ffb4a7] uppercase tracking-widest transition-colors"
-          >
-            <span className="flex items-center justify-center gap-2">
-              <span className="material-symbols-outlined text-sm">arrow_back</span>
-              Return to Homepage
-            </span>
-          </Link>
         </div>
 
         {/* Bottom info */}
-        <div className="mt-8 text-center">
+        <div className="mt-2 text-center">
           <p className="font-mono text-[10px] text-[#eabcb4] opacity-50 uppercase tracking-widest">
             © 2024 ILLIT F1 ENGINEERING. STATUS: SECURE
           </p>

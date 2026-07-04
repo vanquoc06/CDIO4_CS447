@@ -37,8 +37,8 @@ export default function Teams() {
     <div className="bg-[#13131b] text-[#e4e1ee]">
       <main className="min-h-screen px-5 md:px-16 py-12">
         {/* Hero */}
-        <header className="mb-16 border-l-8 border-[#ff553d] pl-8 py-4">
-          <h1 className="text-5xl md:text-[84px] font-black italic uppercase leading-none mb-4 text-[#e4e1ee]"
+        <header className="mb-10 border-l-8 border-[#ff553d] pl-6 py-4">
+          <h1 className="text-3xl md:text-[44px] font-black italic uppercase leading-tight mb-4 text-[#e4e1ee]"
             style={{ fontFamily: 'Anybody, sans-serif', letterSpacing: '-0.04em' }}>
             CONSTRUCTORS
           </h1>
@@ -62,7 +62,7 @@ export default function Teams() {
                 <img className="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-700"
                   src={team.img} alt={team.name} />
                 <div className="absolute bottom-0 right-0 p-4">
-                  <span className="font-black italic text-[64px] opacity-10 group-hover:opacity-30 transition-opacity"
+                  <span className="font-black italic text-[40px] opacity-10 group-hover:opacity-30 transition-opacity"
                     style={{ fontFamily: 'Anybody, sans-serif' }}>{team.pts}</span>
                 </div>
               </div>

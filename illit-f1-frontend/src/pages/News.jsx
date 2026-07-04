@@ -51,8 +51,8 @@ export default function News() {
               <span className="bg-[#ff553d] text-[#5b0300] font-mono text-xs px-4 py-1 uppercase parallelogram inline-block mb-4">
                 <span className="parallelogram-content">TECH EXCLUSIVE</span>
               </span>
-              <h1 className="font-black italic uppercase leading-none mb-6 text-[#e4e1ee]"
-                style={{ fontFamily: 'Anybody, sans-serif', fontSize: 'clamp(2rem, 6vw, 84px)', letterSpacing: '-0.04em' }}>
+              <h1 className="font-black italic uppercase leading-tight mb-6 text-[#e4e1ee]"
+                style={{ fontFamily: 'Anybody, sans-serif', fontSize: 'clamp(1.75rem, 4.2vw, 56px)', letterSpacing: '-0.04em' }}>
                 THE CARBON EVOLUTION
               </h1>
               <p className="text-lg text-[#eabcb4] max-w-xl mb-8">

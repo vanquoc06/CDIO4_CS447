@@ -1,6 +1,7 @@
 import { useAuth } from '../context/AuthContext';
 import { Link, useNavigate } from 'react-router-dom';
 import Footer from '../components/Footer';
+import heroImg from '../assets/hero.png';
 
 export default function Profile() {
   const { user, logout } = useAuth();
@@ -17,10 +18,11 @@ export default function Profile() {
 
   return (
     <div className="bg-[#13131b] text-[#e4e1ee] min-h-screen">
-      <main className="max-w-[1440px] mx-auto px-5 md:px-16 py-12">
+      <main className="max-w-[1200px] mx-auto px-5 md:px-12 py-10">
         {/* Header */}
-        <div className="mb-12 border-l-8 border-[#ffb4a7] pl-8 py-4">
-          <h1 className="text-5xl md:text-[84px] font-black italic uppercase leading-none mb-4 text-[#e4e1ee]"
+        <div className="relative mb-12 border-l-8 border-[#ffb4a7] pl-8 py-4">
+          <img src={heroImg} alt="Driver profile" className="absolute top-0 right-0 w-40 opacity-10 pointer-events-none" />
+          <h1 className="text-4xl md:text-[56px] font-black italic uppercase leading-tight mb-4 text-[#e4e1ee]"
             style={{ fontFamily: 'Anybody, sans-serif', letterSpacing: '-0.04em' }}>
             DRIVER <span className="text-[#ffb4a7]">PROFILE</span>
           </h1>
@@ -51,7 +53,7 @@ export default function Profile() {
 
                   {/* Info */}
                   <div className="flex-1">
-                    <h2 className="text-3xl font-black italic uppercase mb-2 text-[#e4e1ee]"
+                    <h2 className="text-2xl font-black italic uppercase mb-2 text-[#e4e1ee]"
                       style={{ fontFamily: 'Anybody, sans-serif' }}>
                       {user.fullName || 'Driver'}
                     </h2>

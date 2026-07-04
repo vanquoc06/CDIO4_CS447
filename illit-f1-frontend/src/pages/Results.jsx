@@ -52,8 +52,8 @@ export default function Results() {
             <div className="h-1 w-12 bg-[#ffb4a7]" />
             <span className="font-mono text-xs text-[#ffb4a7] uppercase tracking-[0.3em]">TELEMETRY SESSION 042</span>
           </div>
-          <h1 className="font-black italic uppercase leading-none text-[#e4e1ee]"
-            style={{ fontFamily: 'Anybody, sans-serif', fontSize: 'clamp(2rem, 8vw, 84px)', letterSpacing: '-0.04em' }}>
+          <h1 className="font-black italic uppercase leading-tight text-[#e4e1ee]"
+            style={{ fontFamily: 'Anybody, sans-serif', fontSize: 'clamp(1.75rem, 5vw, 48px)', letterSpacing: '-0.04em' }}>
             FORMULA 1 MONACO<br /><span className="text-[#ff553d]">GRAND PRIX</span>
           </h1>
           <div className="flex gap-8 mt-4">
@@ -70,7 +70,7 @@ export default function Results() {
         <section className="px-5 md:px-16 py-8 grid grid-cols-1 md:grid-cols-3 gap-4 items-end">
           {/* P2 */}
           <div className="relative group bg-[#1b1b24] p-2 border-l-4 border-[#5f3e39] carbon-texture">
-            <div className="absolute -top-6 left-4 font-black italic text-[120px] opacity-10 pointer-events-none text-[#e4e1ee]"
+            <div className="absolute -top-6 left-4 font-black italic text-[72px] opacity-10 pointer-events-none text-[#e4e1ee]"
               style={{ fontFamily: 'Anybody, sans-serif' }}>02</div>
             <div className="aspect-[4/5] overflow-hidden grayscale group-hover:grayscale-0 transition-all duration-700">
               <img className="w-full h-full object-cover"
@@ -86,7 +86,7 @@ export default function Results() {
 
           {/* P1 */}
           <div className="relative group bg-[#34343e] p-4 border-t-8 border-[#ffb4a7] carbon-texture scale-105 z-10">
-            <div className="absolute -top-12 left-1/2 -translate-x-1/2 font-black italic text-[160px] text-[#ffb4a7] opacity-20 pointer-events-none"
+            <div className="absolute -top-8 left-1/2 -translate-x-1/2 font-black italic text-[96px] text-[#ffb4a7] opacity-20 pointer-events-none"
               style={{ fontFamily: 'Anybody, sans-serif' }}>01</div>
             <div className="aspect-[4/5] overflow-hidden">
               <img className="w-full h-full object-cover"
@@ -96,7 +96,7 @@ export default function Results() {
             <div className="mt-4 flex justify-between items-end">
               <div>
                 <p className="font-mono text-xs text-[#ffb4a7]">RED BULL RACING</p>
-                <h3 className="text-4xl font-black italic uppercase leading-none text-[#e4e1ee]" style={{ fontFamily: 'Anybody, sans-serif' }}>MAX VERSTAPPEN</h3>
+                <h3 className="text-3xl font-black italic uppercase leading-none text-[#e4e1ee]" style={{ fontFamily: 'Anybody, sans-serif' }}>MAX VERSTAPPEN</h3>
               </div>
               <div className="bg-[#ffb4a7] px-4 py-2 parallelogram">
                 <span className="font-mono font-bold text-[#670400]">WINNER</span>
@@ -167,7 +167,7 @@ export default function Results() {
               </div>
               <p className="font-mono text-xs uppercase tracking-widest mb-2 parallelogram-content">FASTEST LAP</p>
               <h3 className="text-2xl font-bold italic uppercase leading-none parallelogram-content" style={{ fontFamily: 'Anybody, sans-serif' }}>L. HAMILTON</h3>
-              <p className="text-5xl font-black italic mt-2 parallelogram-content" style={{ fontFamily: 'Anybody, sans-serif' }}>1:12.909</p>
+              <p className="text-4xl font-black italic mt-2 parallelogram-content" style={{ fontFamily: 'Anybody, sans-serif' }}>1:12.909</p>
               <p className="font-mono text-xs mt-2 parallelogram-content">LAP 72 / MERCEDES F1</p>
             </div>
 
@@ -209,7 +209,7 @@ export default function Results() {
         </section>
 
         {/* Newsletter */}
-        <section className="px-5 md:px-16 py-20">
+        <section className="px-5 md:px-12 py-16">
           <div className="relative w-full aspect-[21/9] flex items-center justify-center overflow-hidden">
             <img className="absolute inset-0 w-full h-full object-cover opacity-40 grayscale"
               src="https://lh3.googleusercontent.com/aida-public/AB6AXuBlPlHNzGximRBI6Ismp6i_7_sTIOB6wo88RcU8sHXYyxwHgxtZB-zQ98SsciS_g8nUF8mYUoP2pSKJpmDNVasp34jd9hcmReIcrzA5CpBZjgsmw-SKr3euJc0gaTG8xC2DQR-fa6O6Nv6AKlqStEW9IIRjkg08VUDOANPA5Ac1stm6wgW2V9M8rwZ_qHj5KnBv0F9X1sIrZebQ85GTZ50IXR-m7V0EfSVbMs0M2aBYV4yoW3vIqO3OjGKdsuTf1Q3pJEFo0PiL6MM"

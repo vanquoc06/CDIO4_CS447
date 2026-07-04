@@ -49,7 +49,7 @@ export default function Schedule() {
     <div className="bg-[#13131b] text-[#e4e1ee]">
       <main className="min-h-screen">
         {/* Hero */}
-        <header className="relative w-full h-[614px] flex flex-col justify-end px-16 pb-12 overflow-hidden">
+        <header className="relative w-full min-h-[480px] flex flex-col justify-end px-6 md:px-12 pb-10 overflow-hidden">
           <div className="absolute inset-0 z-0">
             <img className="w-full h-full object-cover opacity-40 grayscale"
               src="https://lh3.googleusercontent.com/aida-public/AB6AXuDqp88Q5q83oMS4bMPzaBGGUk3x0uIGejfFx7W5mYEd8k4XDG6Bppx3StaYk_wULKjlNdVttvAY83fuTk5hnrJw4TNRFhLKOb--6HNEJ7I3NrAYnTUymAlR9pb_R22j2ZEJS4xwBgqo-_B_3PhTscd8OOb8Ju70D0VoJSX128nx8lwIIWta91lzPD0_jqHWiat4jUHdzcyZnWoCOMn4O9yuQv__q4MrnuN7J_l7D40yc25pkZ5C5TPUm2JLg1DHgb4-l1FCxgggbOY"
@@ -61,7 +61,7 @@ export default function Schedule() {
               <span className="px-3 py-1 bg-[#ffb4a7] text-[#670400] font-mono text-xs parallelogram-sm">LIVE TELEMETRY ACTIVE</span>
               <span className="font-mono text-xs text-[#d3fbff]">SEASON 2024 // STAGE 08</span>
             </div>
-            <h1 className="text-[84px] font-black italic uppercase leading-none text-[#e4e1ee]"
+            <h1 className="text-3xl md:text-[44px] font-black italic uppercase leading-tight text-[#e4e1ee]"
               style={{ fontFamily: 'Anybody, sans-serif', letterSpacing: '-0.04em' }}>
               Race <br />Schedule
             </h1>
@@ -74,7 +74,7 @@ export default function Schedule() {
         </header>
 
         {/* Race Grid */}
-        <section className="px-16 py-12 grid grid-cols-1 md:grid-cols-12 gap-4">
+        <section className="px-6 md:px-16 py-10 grid grid-cols-1 md:grid-cols-12 gap-4">
           {/* Featured Race */}
           <div className="md:col-span-12 lg:col-span-8 group">
             <div className="bg-[#1f1f28] h-full carbon-texture relative overflow-hidden border border-[#5f3e39] hover:border-[#ffb4a7]/50 transition-all duration-500">

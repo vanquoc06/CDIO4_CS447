@@ -35,7 +35,7 @@ export default function Drivers() {
   return (
     <div className="bg-[#13131b] text-[#e4e1ee]">
       {/* Hero */}
-      <header className="relative w-full h-[614px] flex items-end px-16 pb-16 overflow-hidden">
+      <header className="relative w-full min-h-[460px] flex items-end px-6 md:px-12 pb-10 overflow-hidden">
         <div className="absolute inset-0 z-0">
           <img className="w-full h-full object-cover opacity-40 grayscale hover:grayscale-0 transition-all duration-700"
             src="https://lh3.googleusercontent.com/aida-public/AB6AXuAfahAutrwOMT52zzb3GhcenAy-bpJnSKPPun2nnyumdLt6K_AKcXWpg7FOCoYyxqOhKE9qtqhsuztawkkdbkK5vx-QKEmJX0w3PGyqMguxI0imh6tdpgx74bJYknlh5Ksw5IEpOjsZ51pJGgtKC0bqCzoNmjNYbuVftD80rkmAMOTxL9vDj-OuUL0UZdJxYJk_JgSiBo06lkK6WlEwzQiGAtIjYy2OPMNid_iSmO1Jn8zzYx9w-EwM-gDQqeWx3AwmUvNq7F3rSwM"
@@ -43,7 +43,7 @@ export default function Drivers() {
           <div className="absolute inset-0 bg-gradient-to-t from-[#13131b] via-transparent to-transparent" />
         </div>
         <div className="relative z-10 max-w-4xl">
-          <h1 className="text-[84px] font-black italic uppercase leading-none mb-4 text-[#e4e1ee]"
+          <h1 className="text-3xl md:text-[48px] font-black italic uppercase leading-tight mb-4 text-[#e4e1ee]"
             style={{ fontFamily: 'Anybody, sans-serif', letterSpacing: '-0.04em' }}>
             GRID <span className="text-[#ff553d]">2024</span>
           </h1>
@@ -54,7 +54,7 @@ export default function Drivers() {
       </header>
 
       {/* Driver Bento Grid */}
-      <main className="px-16 py-20 bg-[#13131b]">
+      <main className="px-6 md:px-12 py-16 bg-[#13131b]">
         <div className="grid grid-cols-1 md:grid-cols-12 gap-4">
           {/* Featured Driver Card */}
           <div className="md:col-span-8 group relative overflow-hidden bg-[#292933] border border-[#5f3e39] hover:border-[#ffb4a7] transition-all duration-500">
@@ -71,8 +71,8 @@ export default function Drivers() {
                 <div className="absolute inset-0 bg-gradient-to-r from-transparent via-transparent to-[#292933] hidden md:block" />
               </div>
               <div className="w-full md:w-1/2 p-8 flex flex-col justify-center relative">
-                <div className="font-black italic text-[120px] absolute -right-4 -top-8 opacity-5 text-[#e4e1ee] pointer-events-none">44</div>
-                <h2 className="text-5xl font-black italic uppercase leading-none mb-2 text-[#e4e1ee]" style={{ fontFamily: 'Anybody, sans-serif' }}>
+                <div className="font-black italic text-[48px] absolute -right-4 -top-8 opacity-5 text-[#e4e1ee] pointer-events-none">44</div>
+                <h2 className="text-3xl font-black italic uppercase leading-none mb-2 text-[#e4e1ee]" style={{ fontFamily: 'Anybody, sans-serif' }}>
                   MAX <br /><span className="text-[#ffb4a7]">VELOCITY</span>
                 </h2>
                 <div className="flex items-center gap-4 mb-8">
@@ -155,11 +155,11 @@ export default function Drivers() {
       </main>
 
       {/* AI Terminal Section */}
-      <section className="px-16 py-20 bg-[#13131b] relative overflow-hidden">
+      <section className="px-6 md:px-12 py-16 bg-[#13131b] relative overflow-hidden">
         <div className="carbon-pattern absolute inset-0 opacity-10" />
         <div className="relative z-10 flex flex-col md:flex-row items-center gap-16">
           <div className="w-full md:w-1/2">
-            <h2 className="text-5xl font-black italic uppercase mb-8 text-[#e4e1ee]" style={{ fontFamily: 'Anybody, sans-serif' }}>
+            <h2 className="text-3xl md:text-4xl font-black italic uppercase mb-8 text-[#e4e1ee]" style={{ fontFamily: 'Anybody, sans-serif' }}>
               AI STRATEGY <span className="text-[#ffb4a7]">GARA</span>
             </h2>
             <div className="bg-[#292933] border border-[#d3fbff]/30 p-6 font-mono text-[#d3fbff] overflow-hidden">
