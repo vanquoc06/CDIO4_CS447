@@ -31,7 +31,8 @@ export const createUser = async (userData: any) => {
     select: {
       user_id: true,
       email: true,
-      full_name: true
+      full_name: true,
+      created_at: true
     }
   });
 
@@ -67,7 +68,8 @@ export const loginUser = async (loginData: any) => {
     user: {
       user_id: user.user_id,
       email: user.email,
-      full_name: user.full_name
+      full_name: user.full_name,
+      created_at: user.created_at
     },
     token: token
   };

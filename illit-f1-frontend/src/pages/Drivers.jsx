@@ -179,7 +179,6 @@ export default function Drivers() {
           </div>
         </div>
       </section>
-
       <Footer />
     </div>
   );

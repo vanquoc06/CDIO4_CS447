@@ -1,0 +1,13 @@
+{
+  "name": "illit-f1-racing",
+  "version": "1.0.0",
+  "description": "ILLIT F1 Racing Platform - Full Stack",
+  "scripts": {
+    "dev": "npm run dev --prefix illit-f1-frontend",
+    "dev:frontend": "npm run dev --prefix illit-f1-frontend",
+    "dev:backend": "npm run dev --prefix illit-f1-backend",
+    "build": "npm run build --prefix illit-f1-frontend",
+    "install:all": "npm install --prefix illit-f1-frontend && npm install --prefix illit-f1-backend"
+  },
+  "private": true
+}

@@ -15,7 +15,7 @@ export default function Homepage() {
   }, []);
 
   return (
-    <div className="bg-[#13131b] text-[#e4e1ee]">
+    <div className="font-body bg-[#13131b] text-[#e4e1ee]">
       {/* Hero Section */}
       <section className="relative min-h-[620px] flex items-center overflow-hidden py-12">
         <div className="absolute inset-0 z-0">
@@ -33,11 +33,10 @@ export default function Homepage() {
               <span className="material-symbols-outlined text-[#ffb4a7] text-xs" style={{ fontVariationSettings: "'FILL' 1" }}>bolt</span>
               <span className="font-mono text-[0.65rem] text-[#ffb4a7] uppercase">Engine status: Maximum performance</span>
             </div>
-            <h1 className="text-3xl md:text-[44px] font-black italic uppercase leading-tight text-[#e4e1ee]"
-              style={{ fontFamily: 'Anybody, sans-serif', letterSpacing: '-0.04em' }}>
+            <h1 className="font-display text-3xl md:text-[44px] font-black italic uppercase leading-tight text-[#e4e1ee] tracking-[-0.04em]">
               DESIGNED<br /><span className="text-[#ffb4a7]">FOR SPEED</span>
             </h1>
-            <p className="text-sm md:text-base text-[#eabcb4] max-w-lg opacity-80">
+            <p className="font-body text-sm md:text-base text-[#eabcb4] max-w-lg opacity-80">
               Welcome to the digital heart of Formula 1. Experience the intersection of pure mechanical power and elite engineering.
             </p>
             <div className="flex flex-wrap gap-4 pt-8">
@@ -63,12 +62,12 @@ export default function Homepage() {
             <div className="space-y-8">
               <div className="space-y-2">
                 <span className="font-mono text-[#ffb4a7] text-xs uppercase tracking-widest">TECHNICAL PRESTIGE</span>
-                <h2 className="text-4xl md:text-5xl font-black italic uppercase leading-tight text-[#e4e1ee]" style={{ fontFamily: 'Anybody, sans-serif' }}>
+                <h2 className="font-display text-4xl md:text-5xl font-black italic uppercase leading-tight text-[#e4e1ee]">
                   The Pinnacle of Motorsport
                 </h2>
                 <div className="h-1 w-24 bg-[#ffb4a7]" />
               </div>
-              <div className="space-y-6 text-[#eabcb4] leading-relaxed">
+              <div className="font-body space-y-6 text-[#eabcb4] leading-relaxed">
                 <p>Formula 1 is the ultimate icon of automotive engineering. Every car is a prototype, a complex symphony of carbon fiber, hybrid powertrain, and aerodynamic surfaces engineered to control the very air it breathes.</p>
                 <p>When G-forces climb above 5G through corners and engines produce over 1,000 horsepower, the line between human and machine blurs.</p>
               </div>
@@ -108,7 +107,7 @@ export default function Homepage() {
         <div className="px-6 md:px-12 max-w-[1000px] mx-auto">
           <div className="flex flex-col md:flex-row justify-between items-end mb-16 gap-4">
             <div className="space-y-2">
-              <h2 className="text-3xl md:text-4xl font-black italic uppercase text-[#e4e1ee]" style={{ fontFamily: 'Anybody, sans-serif' }}>
+              <h2 className="font-display text-3xl md:text-4xl font-black italic uppercase text-[#e4e1ee]">
                 Track the 2024 Season
               </h2>
               <p className="font-mono text-xs text-[#eabcb4] tracking-[0.2em]">LIVE FROM PIT WALL</p>
@@ -127,8 +126,8 @@ export default function Homepage() {
                 <div className="absolute top-4 left-4 bg-[#ffb4a7] text-[#670400] px-3 py-1 font-mono text-[10px]">LATEST NEWS</div>
               </div>
               <div className="p-8 space-y-4">
-                <h3 className="text-2xl font-bold italic uppercase text-[#e4e1ee]" style={{ fontFamily: 'Anybody, sans-serif' }}>The Physics of a Perfect Pit Stop</h3>
-                <p className="text-[#eabcb4] opacity-70">How 1.8 seconds determine the outcome of a 300km race. Inside the pit wall telemetry.</p>
+                <h3 className="font-display text-2xl font-bold italic uppercase text-[#e4e1ee]">The Physics of a Perfect Pit Stop</h3>
+                <p className="font-body text-[#eabcb4] opacity-70">How 1.8 seconds determine the outcome of a 300km race. Inside the pit wall telemetry.</p>
                 <Link to="/news" className="inline-flex items-center gap-2 text-[#ffb4a7] font-mono text-xs uppercase tracking-widest group-hover:translate-x-2 transition-transform">
                   READ REPORT <span className="material-symbols-outlined text-sm">chevron_right</span>
                 </Link>
@@ -144,7 +143,7 @@ export default function Homepage() {
                   <span className="material-symbols-outlined text-[#eabcb4]">timer</span>
                 </div>
                 <div>
-                  <h3 className="text-2xl font-bold italic uppercase text-[#e4e1ee]" style={{ fontFamily: 'Anybody, sans-serif' }}>Silverstone</h3>
+                  <h3 className="font-display text-2xl font-bold italic uppercase text-[#e4e1ee]">Silverstone</h3>
                   <p className="font-mono text-xs text-[#eabcb4]">United Kingdom | July 05-07</p>
                 </div>
                 <div className="space-y-4 pt-4 border-t border-[#5f3e39]">
@@ -180,7 +179,7 @@ export default function Homepage() {
                   <div key={pos} className="flex items-center gap-4">
                     <span className={`font-mono text-xl italic font-black ${active ? 'text-[#ffb4a7]' : 'opacity-30'}`}>{pos}</span>
                     <div className="flex-1">
-                      <div className="text-sm font-bold uppercase" style={{ fontFamily: 'Anybody, sans-serif' }}>{name}</div>
+                      <div className="font-display text-sm font-bold uppercase">{name}</div>
                       <div className="font-mono text-[10px] text-[#eabcb4]">{team}</div>
                     </div>
                     <span className="font-mono text-sm">{pts} PTS</span>
@@ -200,10 +199,10 @@ export default function Homepage() {
         <div className="px-16 max-w-[1440px] mx-auto">
           <div className="max-w-3xl space-y-12">
             <div className="space-y-4">
-              <h2 className="text-5xl font-black italic uppercase leading-none text-[#e4e1ee]" style={{ fontFamily: 'Anybody, sans-serif' }}>
+              <h2 className="font-display text-5xl font-black italic uppercase leading-none text-[#e4e1ee]">
                 Global Impact &amp; History
               </h2>
-              <p className="text-lg text-[#eabcb4] leading-relaxed">
+              <p className="font-body text-lg text-[#eabcb4] leading-relaxed">
                 From the first race at Silverstone in 1950 to the modern high-tech spectacles in Las Vegas and Singapore, Formula 1 has evolved into a global phenomenon reaching over 1.5 billion fans annually.
               </p>
             </div>
@@ -213,14 +212,14 @@ export default function Homepage() {
                   <span className="material-symbols-outlined text-[#ffb4a7]" style={{ fontVariationSettings: "'FILL' 1" }}>language</span>
                   <h4 className="font-mono text-sm uppercase font-bold">24 races across 5 continents</h4>
                 </div>
-                <p className="text-[#eabcb4] text-sm opacity-80">A grueling calendar that tests the limits of logistics and human endurance, spanning the entire globe from March to December.</p>
+                <p className="font-body text-[#eabcb4] text-sm opacity-80">A grueling calendar that tests the limits of logistics and human endurance, spanning the entire globe from March to December.</p>
               </div>
               <div className="space-y-4">
                 <div className="flex items-center gap-4">
                   <span className="material-symbols-outlined text-[#ffb4a7]" style={{ fontVariationSettings: "'FILL' 1" }}>eco</span>
                   <h4 className="font-mono text-sm uppercase font-bold">Net zero emissions by 2030</h4>
                 </div>
-                <p className="text-[#eabcb4] text-sm opacity-80">Bringing the future of sustainable fuels and hybrid technology to the forefront, ensuring top-tier racing remains relevant for generations to come.</p>
+                <p className="font-body text-[#eabcb4] text-sm opacity-80">Bringing the future of sustainable fuels and hybrid technology to the forefront, ensuring top-tier racing remains relevant for generations to come.</p>
               </div>
             </div>
           </div>

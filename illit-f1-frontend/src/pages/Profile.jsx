@@ -12,6 +12,10 @@ export default function Profile() {
     navigate('/');
   };
 
+  const memberSince = user?.createdAt
+    ? new Date(user.createdAt).toLocaleDateString('en-US', { month: 'short', year: 'numeric' })
+    : 'Unknown';
+
   if (!user) {
     return null;
   }
@@ -70,7 +74,7 @@ export default function Profile() {
                   <div className="border-l-2 border-[#ffb4a7] pl-4">
                     <p className="font-mono text-[10px] text-[#eabcb4] uppercase mb-1">Member Since</p>
                     <p className="font-mono text-lg font-bold text-[#e4e1ee]">
-                      {new Date(user.createdAt || Date.now()).toLocaleDateString('en-US', { month: 'short', year: 'numeric' })}
+                      {memberSince}
                     </p>
                   </div>
                   <div className="border-l-2 border-[#ffb4a7] pl-4">

@@ -1,24 +1,24 @@
-// src/services/ai.service.ts
 import { GoogleGenerativeAI } from '@google/generative-ai';
 import dotenv from 'dotenv';
 
 dotenv.config();
 
-// Khởi tạo Gemini AI với API Key
-const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY as string);
-
 export const chatWithAI = async (prompt: string) => {
-  try {
-    // Chọn model tối ưu cho chat (gemini-1.5-flash là bản mới và rất nhanh)
-    const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
+  const apiKey = process.env.GEMINI_API_KEY;
 
-    // Gửi câu hỏi tới AI
+  if (!apiKey) {
+    throw new Error('GEMINI_API_KEY is not configured. Please add it to .env before using AI chat.');
+  }
+
+  try {
+    const genAI = new GoogleGenerativeAI(apiKey);
+    const model = genAI.getGenerativeModel({ model: 'gemini-1.5-flash' });
     const result = await model.generateContent(prompt);
     const response = await result.response;
-    
+
     return response.text();
   } catch (error) {
-    console.error("Lỗi AI:", error);
-    throw new Error("Trí tuệ nhân tạo đang gặp sự cố kết nối!");
+    console.error('AI error:', error);
+    throw new Error('AI service is currently unavailable.');
   }
 };

@@ -17,11 +17,36 @@ const constructors = [
   { name: 'MERCEDES', pts: 160, pct: '45%', dim: true },
 ];
 
-function escapeHtml(text) {
-  const div = document.createElement('div');
-  div.textContent = text;
-  return div.innerHTML;
-}
+const resultTabs = ['Races', 'Drivers', 'Teams', 'Awards'];
+const filterOptions = ['All', 'Completed'];
+
+const raceCalendarResults = [
+  { gp: 'Australia', flag: '🇦🇺', date: '16 Mar', winner: 'Lando Norris', team: 'McLaren', laps: 57, time: '1:42:06.304', status: 'Completed' },
+  { gp: 'China', flag: '🇨🇳', date: '23 Mar', winner: 'Oscar Piastri', team: 'McLaren', laps: 56, time: '1:30:55.026', status: 'Completed' },
+  { gp: 'Japan', flag: '🇯🇵', date: '06 Apr', winner: 'Max Verstappen', team: 'Red Bull Racing', laps: 53, time: '1:22:06.983', status: 'Completed' },
+  { gp: 'Bahrain', flag: '🇧🇭', date: '13 Apr', winner: 'Oscar Piastri', team: 'McLaren', laps: 57, time: '1:35:39.435', status: 'Completed' },
+];
+
+const driverStandings = [
+  { rank: '01', flag: '🇳🇱', name: 'Max Verstappen', team: 'Red Bull Racing', wins: 4, podiums: 7, points: 166 },
+  { rank: '02', flag: '🇬🇧', name: 'Lando Norris', team: 'McLaren', wins: 2, podiums: 6, points: 150 },
+  { rank: '03', flag: '🇦🇺', name: 'Oscar Piastri', team: 'McLaren', wins: 2, podiums: 5, points: 138 },
+  { rank: '04', flag: '🇲🇦', name: 'Charles Leclerc', team: 'Ferrari', wins: 0, podiums: 4, points: 112 },
+];
+
+const teamStandings = [
+  { rank: '01', flag: '🧡', name: 'McLaren', wins: 4, podiums: 11, points: 288 },
+  { rank: '02', flag: '🔵', name: 'Red Bull Racing', wins: 4, podiums: 8, points: 242 },
+  { rank: '03', flag: '🔴', name: 'Ferrari', wins: 0, podiums: 6, points: 210 },
+  { rank: '04', flag: '⚪', name: 'Mercedes', wins: 0, podiums: 3, points: 160 },
+];
+
+const awardResults = [
+  { title: 'Driver of the Day', winner: 'Lando Norris', detail: 'Australia GP' },
+  { title: 'Fastest Lap', winner: 'Lewis Hamilton', detail: '1:12.909 - Monaco' },
+  { title: 'Best Pit Stop', winner: 'Red Bull Racing', detail: '2.15s stop time' },
+  { title: 'Strategy Award', winner: 'McLaren', detail: 'Two-stop undercut execution' },
+];
 
 export default function Results() {
   const [messages, setMessages] = useState([
@@ -31,6 +56,12 @@ export default function Results() {
   ]);
   const [input, setInput] = useState('');
   const [chatVisible, setChatVisible] = useState(true);
+  const [activeTab, setActiveTab] = useState('Races');
+  const [activeFilter, setActiveFilter] = useState('All');
+
+  const filteredRaces = activeFilter === 'All'
+    ? raceCalendarResults
+    : raceCalendarResults.filter(race => race.status === activeFilter);
 
   const sendMessage = () => {
     const msg = input.trim();
@@ -46,227 +77,140 @@ export default function Results() {
   return (
     <div className="bg-[#13131b] text-[#e4e1ee]">
       <main className="max-w-[1440px] mx-auto">
-        {/* Hero */}
-        <section className="px-5 md:px-16 py-12 flex flex-col items-start gap-4">
-          <div className="flex items-center gap-2">
-            <div className="h-1 w-12 bg-[#ffb4a7]" />
-            <span className="font-mono text-xs text-[#ffb4a7] uppercase tracking-[0.3em]">TELEMETRY SESSION 042</span>
-          </div>
-          <h1 className="font-black italic uppercase leading-tight text-[#e4e1ee]"
-            style={{ fontFamily: 'Anybody, sans-serif', fontSize: 'clamp(1.75rem, 5vw, 48px)', letterSpacing: '-0.04em' }}>
-            FORMULA 1 MONACO<br /><span className="text-[#ff553d]">GRAND PRIX</span>
-          </h1>
-          <div className="flex gap-8 mt-4">
-            {[['STATUS', 'COMPLETED'], ['LAPS', '78/78'], ['TRACK TEMP', '48.2°C']].map(([label, val]) => (
-              <div key={label}>
-                <p className="font-mono text-xs opacity-50 uppercase">{label}</p>
-                <p className="text-2xl font-bold" style={{ fontFamily: 'Anybody, sans-serif' }}>{val}</p>
-              </div>
-            ))}
-          </div>
-        </section>
-
-        {/* Podium */}
-        <section className="px-5 md:px-16 py-8 grid grid-cols-1 md:grid-cols-3 gap-4 items-end">
-          {/* P2 */}
-          <div className="relative group bg-[#1b1b24] p-2 border-l-4 border-[#5f3e39] carbon-texture">
-            <div className="absolute -top-6 left-4 font-black italic text-[72px] opacity-10 pointer-events-none text-[#e4e1ee]"
-              style={{ fontFamily: 'Anybody, sans-serif' }}>02</div>
-            <div className="aspect-[4/5] overflow-hidden grayscale group-hover:grayscale-0 transition-all duration-700">
-              <img className="w-full h-full object-cover"
-                src="https://lh3.googleusercontent.com/aida-public/AB6AXuCS6o_unOL33OEw2vK5sv1Wr7xszw3Dx1i3pOHsQ75T8o4VSRvW9umLf54iKLZ6UuwzvrW3EtedCs3UeiNcdoykgeZOoVOIDATkivF4I_oriQB2-bnv1U2qmP2rROg51h1IBrIHHPmXtZ2hlA5hQDH95H2AVIU85PeawlG4PY7sEkCuCvDzGaWqKC7pCak4YAUU7_nuwu0XV99pz_1b8kEbFOCgjgcKaM_4OpuXhoh0j7NEqh_I73Z7Z-csOej-beOoLBCqFvf3YE0"
-                alt="P2" />
-            </div>
-            <div className="mt-4">
-              <p className="font-mono text-xs text-[#ffb4a7]">SCUDERIA FERRARI</p>
-              <h3 className="text-2xl font-bold italic uppercase text-[#e4e1ee]" style={{ fontFamily: 'Anybody, sans-serif' }}>CHARLES LECLERC</h3>
-              <p className="font-mono text-xs opacity-70 mt-2">+0.00.742</p>
-            </div>
-          </div>
-
-          {/* P1 */}
-          <div className="relative group bg-[#34343e] p-4 border-t-8 border-[#ffb4a7] carbon-texture scale-105 z-10">
-            <div className="absolute -top-8 left-1/2 -translate-x-1/2 font-black italic text-[96px] text-[#ffb4a7] opacity-20 pointer-events-none"
-              style={{ fontFamily: 'Anybody, sans-serif' }}>01</div>
-            <div className="aspect-[4/5] overflow-hidden">
-              <img className="w-full h-full object-cover"
-                src="https://lh3.googleusercontent.com/aida-public/AB6AXuBWaAIpOJKi3hnpAnUczz6qw2-n2CRF0ftbzNundd3-OJTiN70e1L7PZISw5dJyz8dpw8kmGeVzACkesFdcYvsXm4RFhqkblK3tWY77D8t6anwUcxUliUb8yiVdzxXqsEQYCexLW5apyD_Y3ZgmlTn6aydMcd5p4E-pM6o-wMjzPM93GZEJIXBsDSSSbYS87qUgYTJgrypJCBDTYVjZ9vicWgrLAHB0-8AL36qd1vqpiSMCHbTW0odM-8LbCBBFzYuPcNUk3ZqaZu0"
-                alt="P1" />
-            </div>
-            <div className="mt-4 flex justify-between items-end">
-              <div>
-                <p className="font-mono text-xs text-[#ffb4a7]">RED BULL RACING</p>
-                <h3 className="text-3xl font-black italic uppercase leading-none text-[#e4e1ee]" style={{ fontFamily: 'Anybody, sans-serif' }}>MAX VERSTAPPEN</h3>
-              </div>
-              <div className="bg-[#ffb4a7] px-4 py-2 parallelogram">
-                <span className="font-mono font-bold text-[#670400]">WINNER</span>
-              </div>
-            </div>
-          </div>
-
-          {/* P3 */}
-          <div className="relative group bg-[#1b1b24] p-2 border-r-4 border-[#5f3e39] carbon-texture">
-            <div className="absolute -top-6 right-4 font-black italic text-[120px] opacity-10 pointer-events-none text-[#e4e1ee]"
-              style={{ fontFamily: 'Anybody, sans-serif' }}>03</div>
-            <div className="aspect-[4/5] overflow-hidden grayscale group-hover:grayscale-0 transition-all duration-700">
-              <img className="w-full h-full object-cover"
-                src="https://lh3.googleusercontent.com/aida-public/AB6AXuB4EX2FxsNGsv64EJUt8w4dIlaNl1YhlAWVcb05TnzpO0-HwtrYQ5KziKBx4cy1nDYGlvLmWtjsiLS0DUfpDLTgU5xmGzxr7TpyV8EEUAA5JqVh9ghKVtCMH4Nn7Cu8HkvMzrU43jpacoWmkId2HTXUjDISBcEGojIZ40F5WsXv9qaJZ0XCrlt4fjFyeHD1YCQbNgEKzhydcIg-advGh3e7xEpOmOVxz66w19Vn0NzJHD4MzBl5qu9KQ64YhKvFphpHV-8tEOvTqBA"
-                alt="P3" />
-            </div>
-            <div className="mt-4 text-right">
-              <p className="font-mono text-xs text-[#ffb4a7]">MCLAREN F1</p>
-              <h3 className="text-2xl font-bold italic uppercase text-[#e4e1ee]" style={{ fontFamily: 'Anybody, sans-serif' }}>LANDO NORRIS</h3>
-              <p className="font-mono text-xs opacity-70 mt-2">+0.08.215</p>
-            </div>
-          </div>
-        </section>
-
-        {/* Race Data */}
-        <section className="px-5 md:px-16 py-12 grid grid-cols-1 lg:grid-cols-12 gap-4">
-          {/* Table */}
-          <div className="lg:col-span-8 bg-[#1f1f28] p-6 border border-[#5f3e39] overflow-x-auto">
-            <div className="flex items-center justify-between mb-8">
-              <h2 className="text-2xl font-bold uppercase tracking-tight" style={{ fontFamily: 'Anybody, sans-serif' }}>RACE CLASSIFICATION</h2>
-              <span className="font-mono text-xs text-[#ffb4a7]">VERIFIED TELEMETRY</span>
-            </div>
-            <table className="w-full text-left border-collapse">
-              <thead>
-                <tr className="border-b border-[#5f3e39]">
-                  {['POS', 'DRIVER', 'CAR', 'TIME/RETIRED', 'PTS'].map(h => (
-                    <th key={h} className="py-4 font-mono text-xs opacity-50 uppercase">{h}</th>
-                  ))}
-                </tr>
-              </thead>
-              <tbody className="font-mono">
-                {raceResults.map((r) => (
-                  <tr key={r.driver} className="border-b border-[#5f3e39]/30 hover:bg-[#34343e]/20 transition-colors cursor-pointer"
-                    onClick={e => { e.currentTarget.style.transform = 'scale(0.98)'; setTimeout(() => e.currentTarget.style.transform = '', 75); }}>
-                    <td className={`py-4 ${r.dnf ? 'text-[#ffb4ab]' : ''}`}>{r.pos}</td>
-                    <td className="py-4 font-bold">{r.driver}</td>
-                    <td className="py-4 opacity-70">{r.car}</td>
-                    <td className={`py-4 ${r.dnf ? 'text-[#ffb4ab]' : ''}`}>{r.time}</td>
-                    <td className="py-4 text-[#ffb4a7]">{r.pts > 0 ? `${r.pts}${r.note || ''}` : '0'}</td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-            <div className="mt-4 flex gap-4">
-              <div className="flex items-center gap-1 text-[10px] opacity-50">
-                <span className="material-symbols-outlined text-sm">timer</span>
-                <span>* INCLUDES FASTEST LAP POINT</span>
-              </div>
-            </div>
-          </div>
-
-          {/* Sidebar */}
-          <div className="lg:col-span-4 flex flex-col gap-4">
-            {/* Fastest Lap */}
-            <div className="bg-[#ffb4a7] text-[#670400] p-6 parallelogram relative overflow-hidden">
-              <div className="absolute right-0 bottom-0 opacity-10">
-                <span className="material-symbols-outlined text-[120px]">speed</span>
-              </div>
-              <p className="font-mono text-xs uppercase tracking-widest mb-2 parallelogram-content">FASTEST LAP</p>
-              <h3 className="text-2xl font-bold italic uppercase leading-none parallelogram-content" style={{ fontFamily: 'Anybody, sans-serif' }}>L. HAMILTON</h3>
-              <p className="text-4xl font-black italic mt-2 parallelogram-content" style={{ fontFamily: 'Anybody, sans-serif' }}>1:12.909</p>
-              <p className="font-mono text-xs mt-2 parallelogram-content">LAP 72 / MERCEDES F1</p>
-            </div>
-
-            {/* Constructor Standings */}
-            <div className="bg-[#292933] p-6 border border-[#5f3e39] flex flex-col gap-4">
-              <h4 className="font-mono text-xs uppercase tracking-widest text-[#ffb4a7]">CONSTRUCTOR STANDINGS</h4>
-              <div className="space-y-4">
-                {constructors.map((c) => (
-                  <div key={c.name} className={`flex items-center justify-between ${c.dim ? 'opacity-50' : ''}`}>
-                    <span className="font-mono text-xs">{c.name}</span>
-                    <div className="flex items-center gap-3">
-                      <div className="w-32 h-2 bg-[#34343e] rounded-full overflow-hidden">
-                        <div className="h-full bg-[#ffb4a7]" style={{ width: c.pct }} />
-                      </div>
-                      <span className="font-mono font-bold text-xs">{c.pts}</span>
-                    </div>
-                  </div>
-                ))}
-              </div>
-              <button className="mt-4 border border-[#b08780] py-2 uppercase font-mono text-xs hover:bg-[#ffb4a7] hover:text-[#670400] transition-colors italic">
-                VIEW FULL SEASON DATA
+        {/* Results controls */}
+        <section className="border-b border-[#2a2a34] bg-[#09090d]">
+          <div className="px-5 md:px-16 py-3 flex flex-col gap-3 lg:flex-row lg:items-center lg:justify-between">
+            <div className="flex items-center gap-4 font-mono text-xs uppercase">
+              <button className="inline-flex items-center gap-1 text-[#e4e1ee] hover:text-[#ffb4a7]">
+                <span>2025</span>
+                <span className="material-symbols-outlined text-sm">expand_more</span>
               </button>
-            </div>
-
-            {/* AI HUD */}
-            <div className="hud-border bg-[#1b1b24] p-4 carbon-texture">
-              <div className="flex items-center gap-2 mb-2">
-                <span className="material-symbols-outlined text-[#d3fbff] text-lg">emergency_home</span>
-                <span className="font-mono text-[10px] text-[#d3fbff]">AI ANALYTICS ENGINE</span>
+              <div className="flex items-center gap-1 overflow-x-auto">
+                {resultTabs.map((tab) => (
+                  <button
+                    key={tab}
+                    onClick={() => setActiveTab(tab)}
+                    className={`relative px-5 py-3 font-bold ${activeTab === tab ? 'text-[#e4e1ee]' : 'text-[#a5a0b3] hover:text-[#e4e1ee]'}`}
+                  >
+                    {tab}
+                    {activeTab === tab && <span className="absolute left-3 right-3 -bottom-[1px] h-[2px] bg-[#ff553d]" />}
+                  </button>
+                ))}
               </div>
-              <p className="font-mono text-xs leading-relaxed opacity-80">
-                <span className="text-[#ffb4a7]">&gt;</span> DEGRADATION RATE: NOMINAL<br />
-                <span className="text-[#ffb4a7]">&gt;</span> OVERTAKE EFFICIENCY: 12%<br />
-                <span className="text-[#ffb4a7]">&gt;</span> PIT STOP AVG: 2.15s<br />
-                <span className="text-[#ffb4a7]">&gt;</span> STRATEGY DEVIATION: -4.2s
-              </p>
+            </div>
+            <div className="flex items-center gap-3">
+              <label className="font-mono text-[10px] uppercase text-[#a5a0b3]" htmlFor="result-filter">Filter</label>
+              <select
+                id="result-filter"
+                value={activeFilter}
+                onChange={(event) => setActiveFilter(event.target.value)}
+                className="bg-[#15151e] border border-[#e4e1ee] rounded-full px-5 py-2 font-mono text-xs font-bold text-[#e4e1ee] outline-none"
+              >
+                {filterOptions.map((option) => <option key={option} value={option}>{option}</option>)}
+              </select>
             </div>
           </div>
         </section>
 
-        {/* Newsletter */}
-        <section className="px-5 md:px-12 py-16">
-          <div className="relative w-full aspect-[21/9] flex items-center justify-center overflow-hidden">
-            <img className="absolute inset-0 w-full h-full object-cover opacity-40 grayscale"
-              src="https://lh3.googleusercontent.com/aida-public/AB6AXuBlPlHNzGximRBI6Ismp6i_7_sTIOB6wo88RcU8sHXYyxwHgxtZB-zQ98SsciS_g8nUF8mYUoP2pSKJpmDNVasp34jd9hcmReIcrzA5CpBZjgsmw-SKr3euJc0gaTG8xC2DQR-fa6O6Nv6AKlqStEW9IIRjkg08VUDOANPA5Ac1stm6wgW2V9M8rwZ_qHj5KnBv0F9X1sIrZebQ85GTZ50IXR-m7V0EfSVbMs0M2aBYV4yoW3vIqO3OjGKdsuTf1Q3pJEFo0PiL6MM"
-              alt="F1 motion" />
-            <div className="relative z-10 text-center flex flex-col items-center gap-6">
-              <h2 className="font-black italic uppercase text-[#e4e1ee]"
-                style={{ fontFamily: 'Anybody, sans-serif', fontSize: 'clamp(2rem, 6vw, 84px)', letterSpacing: '-0.04em' }}>
-                UNPARALLELED ACCESS
-              </h2>
-              <p className="text-lg max-w-xl">Join the inner circle of ILLIT F1 for exclusive technical breakdowns.</p>
-              <div className="flex w-full max-w-md">
-                <input className="bg-[#1b1b24] border-0 border-b-2 border-[#5f3e39] focus:border-[#ffb4a7] focus:ring-0 w-full font-mono text-xs text-[#e4e1ee] px-3 py-3"
-                  placeholder="ENTER TELEMETRY ID (EMAIL)" type="email" />
-                <button className="bg-[#ffb4a7] text-[#670400] parallelogram px-8 py-3 font-mono font-bold text-xs uppercase hover:scale-105 transition-transform">
-                  <span className="parallelogram-content">JOIN</span>
-                </button>
-              </div>
-            </div>
-          </div>
-        </section>
-      </main>
+        {/* Results quick view */}
+        <section className="px-5 md:px-16 py-10 bg-[#13131b]">
+          <h2 className="text-3xl md:text-[40px] font-black italic uppercase mb-8" style={{ fontFamily: 'Anybody, sans-serif' }}>
+            2025 {activeTab} Results
+          </h2>
 
-      {/* HUD Chat Widget */}
-      {chatVisible && (
-        <div className="fixed bottom-8 right-8 z-[100] hidden md:block">
-          <div className="hud-border bg-[#0d0d16]/80 backdrop-blur-md w-72 p-6 carbon-texture shadow-2xl">
-            <div className="flex justify-between items-center mb-4">
-              <div className="flex items-center gap-2">
-                <span className="w-2 h-2 bg-[#d3fbff] animate-pulse rounded-full" />
-                <span className="font-mono text-[10px] text-[#d3fbff]">PIT_COMMUNICATION_LINK</span>
-              </div>
-              <button onClick={() => setChatVisible(false)} className="material-symbols-outlined text-[#eabcb4] text-sm cursor-pointer">close</button>
+          {activeTab === 'Races' && (
+            <div className="bg-[#050507] rounded-lg overflow-hidden border border-[#2a2a34]">
+              <table className="w-full text-left border-collapse">
+                <thead>
+                  <tr className="border-b border-[#777782] font-mono text-xs uppercase text-[#a5a0b3] bg-[#13131b]">
+                    {['Grand Prix', 'Date', 'Winner', 'Team', 'Laps', 'Time'].map((head) => <th key={head} className="py-4 px-6">{head}</th>)}
+                  </tr>
+                </thead>
+                <tbody className="font-mono text-sm">
+                  {filteredRaces.map((race) => (
+                    <tr key={race.gp} className="border-b border-[#24242d] hover:bg-[#1b1b24] transition-colors cursor-pointer">
+                      <td className="py-5 px-6 font-bold flex items-center gap-3">
+                        <span className="text-xl">{race.flag}</span>
+                        {race.gp}
+                      </td>
+                      <td className="py-5 px-6 text-[#a5a0b3]">{race.date}</td>
+                      <td className="py-5 px-6 font-bold text-[#ffb4a7]">{race.winner}</td>
+                      <td className="py-5 px-6">{race.team}</td>
+                      <td className="py-5 px-6 font-bold">{race.laps}</td>
+                      <td className="py-5 px-6 font-bold text-[#e4e1ee]">{race.time}</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
             </div>
-            <div className="font-mono text-xs text-[#e4e1ee] space-y-4 mb-4 h-48 overflow-y-auto pr-2">
-              {messages.map((m, i) => (
-                <p key={i}>
-                  {m.type === 'system' && <span className="opacity-50">{m.text}</span>}
-                  {m.type === 'engineer' && <><span className="text-[#ffb4a7]">[ENGINEER]:</span> {m.text}</>}
-                  {m.type === 'system2' && <><span className="text-[#ffb4a7]">[SYSTEM]:</span> {m.text}</>}
-                  {m.type === 'user' && <><span className="text-[#d3fbff]">[USER]:</span> {m.text}</>}
-                  {m.type === 'response' && <><span className="text-[#ffb4a7]">[SYSTEM]:</span> {m.text}</>}
-                </p>
+          )}
+
+          {activeTab === 'Drivers' && (
+            <div className="bg-[#050507] rounded-lg overflow-hidden border border-[#2a2a34]">
+              <table className="w-full text-left border-collapse">
+                <thead>
+                  <tr className="border-b border-[#777782] font-mono text-xs uppercase text-[#a5a0b3] bg-[#13131b]">
+                    {['Pos.', 'Driver', 'Nationality', 'Team', 'Pts.'].map((head) => <th key={head} className="py-4 px-6">{head}</th>)}
+                  </tr>
+                </thead>
+                <tbody className="font-mono text-sm">
+                  {driverStandings.map((driver) => (
+                    <tr key={driver.name} className="border-b border-[#24242d] hover:bg-[#1b1b24] transition-colors cursor-pointer">
+                      <td className="py-5 px-6 font-bold">{driver.rank}</td>
+                      <td className="py-5 px-6 font-bold flex items-center gap-3">
+                        <span className="text-xl">{driver.flag}</span>
+                        {driver.name}
+                      </td>
+                      <td className="py-5 px-6 text-[#a5a0b3]">GBR</td>
+                      <td className="py-5 px-6">{driver.team}</td>
+                      <td className="py-5 px-6 font-bold text-[#e4e1ee]">{driver.points}</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          )}
+
+          {activeTab === 'Teams' && (
+            <div className="bg-[#050507] rounded-lg overflow-hidden border border-[#2a2a34]">
+              <table className="w-full text-left border-collapse">
+                <thead>
+                  <tr className="border-b border-[#777782] font-mono text-xs uppercase text-[#a5a0b3] bg-[#13131b]">
+                    {['Pos.', 'Team', 'Wins', 'Podiums', 'Pts.'].map((head) => <th key={head} className="py-4 px-6">{head}</th>)}
+                  </tr>
+                </thead>
+                <tbody className="font-mono text-sm">
+                  {teamStandings.map((team) => (
+                    <tr key={team.name} className="border-b border-[#24242d] hover:bg-[#1b1b24] transition-colors cursor-pointer">
+                      <td className="py-5 px-6 font-bold">{team.rank}</td>
+                      <td className="py-5 px-6 font-bold flex items-center gap-3">
+                        <span className="text-xl">{team.flag}</span>
+                        {team.name}
+                      </td>
+                      <td className="py-5 px-6">{team.wins}</td>
+                      <td className="py-5 px-6">{team.podiums}</td>
+                      <td className="py-5 px-6 font-bold text-[#e4e1ee]">{team.points}</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          )}
+
+          {activeTab === 'Awards' && (
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+              {awardResults.map((award) => (
+                <div key={award.title} className="bg-[#050507] border border-[#2a2a34] p-5">
+                  <p className="font-mono text-xs uppercase text-[#a5a0b3]">{award.title}</p>
+                  <h3 className="text-xl font-black italic uppercase mt-3 text-[#ffb4a7]" style={{ fontFamily: 'Anybody, sans-serif' }}>{award.winner}</h3>
+                  <p className="font-mono text-xs mt-4 text-[#e4e1ee]">{award.detail}</p>
+                </div>
               ))}
             </div>
-            <div className="relative flex gap-2">
-              <input
-                className="flex-1 bg-[#1f1f28] border-0 border-b-2 border-[#d3fbff] focus:ring-0 font-mono text-[10px] uppercase text-[#e4e1ee] px-2 py-1"
-                placeholder="ASK_PIT_WALL..."
-                value={input}
-                onChange={e => setInput(e.target.value)}
-                onKeyDown={e => e.key === 'Enter' && sendMessage()}
-              />
-              <button onClick={sendMessage} className="text-[#ffb4a7] material-symbols-outlined">send</button>
-            </div>
-          </div>
-        </div>
-      )}
+          )}
+        </section>
+
+      </main>
 
       <Footer />
     </div>

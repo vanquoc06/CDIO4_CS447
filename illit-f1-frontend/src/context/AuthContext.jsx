@@ -1,77 +1,78 @@
-import { createContext, useContext, useState, useEffect } from 'react';
-import { registerAPI, loginAPI, getAuthToken, clearAuthToken } from '../api/auth';
+import { createContext, useContext, useEffect, useState } from 'react';
+import { loginAPI, registerAPI, getAuthToken, clearAuthToken } from '../api/auth';
 
 const AuthContext = createContext(null);
 
-export const useAuth = () => {
-  const context = useContext(AuthContext);
-  if (!context) {
-    throw new Error('useAuth must be used within AuthProvider');
-  }
-  return context;
-};
-
 export function AuthProvider({ children }) {
   const [user, setUser] = useState(null);
-  const [loading, setLoading] = useState(true);
+  const [busy, setBusy] = useState(true);
 
-  // Load user from localStorage on mount
   useEffect(() => {
-    const storedUser = localStorage.getItem('illitf1_user');
+    const stored = window.localStorage.getItem('illitf1_user');
     const token = getAuthToken();
-    
-    if (storedUser && token) {
+
+    if (stored && token) {
       try {
-        setUser(JSON.parse(storedUser));
-      } catch (e) {
-        localStorage.removeItem('illitf1_user');
+        setUser(JSON.parse(stored));
+      } catch {
+        window.localStorage.removeItem('illitf1_user');
         clearAuthToken();
       }
     }
-    setLoading(false);
+
+    setBusy(false);
   }, []);
 
   const register = async (email, password, fullName, phoneNumber = '') => {
+    setBusy(true);
     try {
-      const userData = await registerAPI(email, password, fullName, phoneNumber);
-      
-      // Auto login after successful registration
-      setUser(userData);
-      localStorage.setItem('illitf1_user', JSON.stringify(userData));
-      
-      return userData;
-    } catch (error) {
-      throw error;
+      const created = await registerAPI(email, password, fullName, phoneNumber);
+      setUser(created);
+      window.localStorage.setItem('illitf1_user', JSON.stringify(created));
+      return created;
+    } finally {
+      setBusy(false);
     }
   };
 
   const login = async (email, password) => {
+    setBusy(true);
     try {
-      const userData = await loginAPI(email, password);
-      
-      setUser(userData);
-      localStorage.setItem('illitf1_user', JSON.stringify(userData));
-      
-      return userData;
-    } catch (error) {
-      throw error;
+      const loggedIn = await loginAPI(email, password);
+      setUser(loggedIn);
+      window.localStorage.setItem('illitf1_user', JSON.stringify(loggedIn));
+      return loggedIn;
+    } finally {
+      setBusy(false);
     }
   };
 
   const logout = () => {
     setUser(null);
-    localStorage.removeItem('illitf1_user');
+    window.localStorage.removeItem('illitf1_user');
     clearAuthToken();
   };
 
-  const value = {
-    user,
-    loading,
-    register,
-    login,
-    logout,
-    isAuthenticated: !!user,
-  };
+  return (
+    <AuthContext.Provider
+      value={{
+        user,
+        busy,
+        register,
+        login,
+        logout,
+        isAuthenticated: Boolean(user),
+      }}
+    >
+      {children}
+    </AuthContext.Provider>
+  );
+}
 
-  return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
+export function useAuth() {
+  const context = useContext(AuthContext);
+  if (!context) {
+    throw new Error('useAuth must be used inside AuthProvider');
+  }
+  return context;
 }
