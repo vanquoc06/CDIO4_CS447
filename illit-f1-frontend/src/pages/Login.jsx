@@ -64,19 +64,19 @@ export default function Login() {
               </h1>
             </Link>
             <div className="h-1 w-20 bg-[#ffb4a7] mx-auto mb-2" />
-            <p className="font-mono text-[10px] text-[#eabcb4] uppercase tracking-widest">Access Control System</p>
+            <p className="font-mono text-[10px] text-[#eabcb4] uppercase tracking-widest">Hệ thống kiểm soát truy cập</p>
             <h2 className="text-xl font-bold italic uppercase mt-2 text-[#e4e1ee]"
               style={{ fontFamily: 'Anybody, sans-serif' }}>
-              LOGIN
+              ĐĂNG NHẬP
             </h2>
           </div>
 
           {/* Server Status */}
           <div className="mb-4 flex items-center gap-2">
-            <span className="font-mono text-[10px] text-[#eabcb4] uppercase tracking-widest">Server:</span>
+            <span className="font-mono text-[10px] text-[#eabcb4] uppercase tracking-widest">Máy chủ:</span>
             <div className={`w-2 h-2 rounded-full ${serverStatus === true ? 'bg-[#4caf50]' : serverStatus === false ? 'bg-[#f44336]' : 'bg-[#ff9800] animate-pulse'}`} />
             <span className="font-mono text-[10px] text-[#eabcb4]">
-              {serverStatus === true ? 'Connected' : serverStatus === false ? 'Disconnected' : 'Checking...'}
+              {serverStatus === true ? 'Đã kết nối' : serverStatus === false ? 'Mất kết nối' : 'Đang kiểm tra...'}
             </span>
           </div>
 
@@ -95,7 +95,7 @@ export default function Login() {
             {/* Email */}
             <div>
               <label className="block font-mono text-[10px] text-[#eabcb4] uppercase tracking-widest mb-1">
-                Email Address
+                Địa chỉ email
               </label>
               <input
                 type="email"
@@ -110,7 +110,7 @@ export default function Login() {
             {/* Password */}
             <div>
               <label className="block font-mono text-[10px] text-[#eabcb4] uppercase tracking-widest mb-1">
-                Password
+                Mật khẩu
               </label>
               <input
                 type="password"
@@ -132,10 +132,10 @@ export default function Login() {
                 {loading ? (
                   <span className="flex items-center justify-center gap-2">
                     <span className="material-symbols-outlined animate-spin text-base">progress_activity</span>
-                    Authenticating...
+                    Đang xác thực...
                   </span>
                 ) : (
-                  'Access System'
+                  'Truy cập hệ thống'
                 )}
               </span>
             </button>
@@ -145,7 +145,7 @@ export default function Login() {
           <div className="mt-6 border-t border-[#5f3e39] pt-5">
             <div className="text-center">
               <p className="font-mono text-[10px] text-[#eabcb4] uppercase tracking-widest">
-                Please sign in to continue.
+                Vui lòng đăng nhập để tiếp tục.
               </p>
             </div>
           </div>
@@ -154,7 +154,7 @@ export default function Login() {
         {/* Bottom info */}
         <div className="mt-3 text-center">
           <p className="font-mono text-[10px] text-[#eabcb4] opacity-50 uppercase tracking-widest">
-            © 2024 ILLIT F1 ENGINEERING. STATUS: SECURE
+            © 2024 ILLIT F1 ENGINEERING. TRẠNG THÁI: AN TOÀN
           </p>
         </div>
       </div>

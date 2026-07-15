@@ -1,12 +1,6 @@
-import { useEffect, useMemo, useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import Footer from '../components/Footer';
 import DetailModal from '../components/DetailModal';
-
-const drivers = [
-  { id: 2, name: 'LUCA', surname: 'BIANCHI', team: 'CYBERDRIVE GP', number: 11, pts: 189, pos: '04', podiums: '06', color: 'secondary-fixed-dim', img: 'https://lh3.googleusercontent.com/aida-public/AB6AXuDYbYhlA-L6FTDbl0ij4Ivh5cQFVWM-kCogKgCb24GKPqqqlbCEuxNwh2zthaDZAoPSWDeMzvMRG2Mifbsgf7lCpLSuQYnQ4EGCoCb-_Z_XJoJ9BqzjJCqhCQS9Ex7UtohYiuFnSJJZWz1doyWvFEIygfbY_IPuzPgy0A2Ko7V1YeJ4vu1ylDgYI5MdhB4vfu4ecAoOpzMPRuQjU60iZ8aloruFDEnYXvO8oAJ5zhepN91UDkDHIuHfl2oMTvntHdFeXxsJuco9II8' },
-  { id: 3, name: 'SOFIA', surname: 'RHODES', team: 'APEX DYNAMICS', number: 7, pts: 154, pos: '06', podiums: '03', color: 'primary', img: 'https://lh3.googleusercontent.com/aida-public/AB6AXuAHUCWdG4D93Zh-ul5bm6YUI5lUP2y0nd5cabQF3b_YiA9wBl6peWxAT5adhORlHRHZE5V1a4UCcjLKrt5gJUzT-bQPnCtGgAkOFcp7EaXGKkUtPnJd3Jl5m8Koma9LKJXOUdGcj8l4rbv609K9tNVOQZbCEUjfeSKtx4oCrHcqesD1JVwtTvhpCzVOqVi6e59kks2pEg59FZ5f9cttxGQK42Ul2mTp1w4ykP_cIv6XJHdVLSRlk2C5gA6HGzXN7kymgbJMogIdkUE' },
-  { id: 4, name: 'JAXON', surname: 'REED', team: 'NOVA TECH F1', number: 22, pts: 112, pos: '09', podiums: '01', color: 'secondary-fixed-dim', img: 'https://lh3.googleusercontent.com/aida-public/AB6AXuDIalQ4JW9v4s15h2yzGm8B2Pp0dQRVJgOTTiAcA_M95FGDZ2lcvuqa4IhiJw9SCBv3oj1X-CGFDvhAHhJLSI432O0r_uLsY9GS_Lfx925ZqLvWl1ufPPbd1L8gnoYBOtjDyZ3zeIAsEVcO4f4ZcLk3TnxFp8wWq0PBs_eL6jLeF3BEFYl1qV6g_IJXA0Wyij0YSXFSbM-ZN06lK_tRkw2Ef_R5oN9rYpon5BcVgdqdsgeCi2PLkks9lNc_rQIAJXBTCsCXvI5SDk4' },
-];
 
 const AI_LOGS = [
   '> TRACK TEMP: 48.2°C', '> DOWNFORCE ADJUSTMENT: +1.2%', '> FUEL MIX: STRATEGY 3 ACTIVE',
@@ -14,11 +8,32 @@ const AI_LOGS = [
   '> DRS ENABLED: SECTOR 2', '> CALCULATING DELTA TO P2...', '> GAP: -1.242s (GAINING)',
 ];
 
+const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || 'http://localhost:8080/api';
+
 export default function Drivers() {
   const terminalRef = useRef(null);
   const logIndex = useRef(0);
   const [selectedDriver, setSelectedDriver] = useState(null);
-  const driverList = useMemo(() => drivers, []);
+  const [drivers, setDrivers] = useState([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const fetchDrivers = async () => {
+      try {
+        const response = await fetch(`${API_BASE_URL}/f1/drivers`);
+        const data = await response.json();
+        if (data?.data) {
+          setDrivers(data.data);
+        }
+      } catch (error) {
+        console.error('Failed to load drivers', error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchDrivers();
+  }, []);
 
   useEffect(() => {
     const terminal = terminalRef.current;
@@ -51,7 +66,7 @@ export default function Drivers() {
             GRID <span className="text-[#ff553d]">2024</span>
           </h1>
           <p className="text-lg text-[#eabcb4] max-w-xl">
-            Precision engineering combined with raw human talent. Discover the elite roster pushing the boundaries of physics and performance.
+            {loading ? 'Đang tải danh sách tài xế từ cơ sở dữ liệu...' : 'Khám phá đội hình tài xế được lấy từ dữ liệu SQL của hệ thống.'}
           </p>
         </div>
       </header>
@@ -116,20 +131,20 @@ export default function Drivers() {
           </div>
 
           {/* Standard Driver Cards */}
-          {driverList.map((d) => (
-            <button key={d.id} type="button" onClick={() => setSelectedDriver(d)} className="md:col-span-4 group bg-[#1f1f28] border border-[#5f3e39] hover:border-[#ffb4a7] transition-all text-left">
+          {drivers.length > 0 ? drivers.map((d) => (
+            <button key={d.driver_id} type="button" onClick={() => setSelectedDriver(d)} className="md:col-span-4 group bg-[#1f1f28] border border-[#5f3e39] hover:border-[#ffb4a7] transition-all text-left">
               <div className="relative h-64 overflow-hidden">
-                <img className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" src={d.img} alt={d.name} />
+                <img className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" src="https://images.unsplash.com/photo-1541746972996-4e0b0f43e02a?w=800" alt={`${d.first_name} ${d.last_name}`} />
                 <div className="absolute bottom-0 right-0 font-black italic text-6xl text-white opacity-20 p-4"
-                  style={{ fontFamily: 'Anybody, sans-serif' }}>{d.number}</div>
+                  style={{ fontFamily: 'Anybody, sans-serif' }}>{d.Race_Results?.length || 0}</div>
               </div>
               <div className="p-6">
                 <h3 className="text-2xl font-bold italic uppercase mb-1 text-[#e4e1ee]" style={{ fontFamily: 'Anybody, sans-serif' }}>
-                  {d.name} <span className="text-[#ffb4a7]">{d.surname}</span>
+                  {d.first_name.toUpperCase()} <span className="text-[#ffb4a7]">{d.last_name.toUpperCase()}</span>
                 </h3>
-                <p className="font-mono text-xs text-[#eabcb4] mb-6 uppercase">{d.team}</p>
+                <p className="font-mono text-xs text-[#eabcb4] mb-6 uppercase">{d.Teams?.name || '—'}</p>
                 <div className="flex justify-between border-t border-[#5f3e39] pt-4">
-                  {[['POINTS', d.pts], ['POSITION', d.pos], ['PODIUMS', d.podiums]].map(([label, val]) => (
+                  {[['QUỐC TỊCH', d.nationality || '—'], ['ĐỘI', d.Teams?.name || '—'], ['RACE', d.Race_Results?.length || 0]].map(([label, val]) => (
                     <div key={label} className="text-center">
                       <span className="block font-mono text-[10px] opacity-50 uppercase">{label}</span>
                       <span className="text-2xl font-bold" style={{ fontFamily: 'Anybody, sans-serif' }}>{val}</span>
@@ -138,7 +153,7 @@ export default function Drivers() {
                 </div>
               </div>
             </button>
-          ))}
+          )) : <div className="md:col-span-4 text-[#a5a0b3]">Chưa có dữ liệu tài xế</div>}
 
           {/* CTA Card */}
           <div className="md:col-span-4 bg-[#ff553d] p-8 flex flex-col justify-between parallelogram">

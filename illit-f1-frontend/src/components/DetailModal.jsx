@@ -14,6 +14,23 @@ export default function DetailModal({ isOpen, onClose, item, type }) {
 
   if (!isOpen || !item) return null;
 
+  const driverName = item?.first_name || item?.name || '';
+  const driverSurname = item?.last_name || item?.surname || '';
+  const driverTeam = item?.Teams?.name || item?.team || '—';
+  const driverNationality = item?.nationality || '—';
+  const driverPoints = item?.Race_Results?.reduce((sum, result) => sum + (typeof result.points?.toNumber === 'function' ? result.points.toNumber() : Number(result.points || 0)), 0) || item?.pts || '—';
+  const driverPosition = item?.Race_Results?.[0]?.position || item?.pos || '—';
+  const driverPodiums = item?.Race_Results?.filter((result) => Number(result.position) <= 3).length || item?.podiums || '—';
+  const driverNumber = item?.number || item?.driver_id?.slice(0, 4).toUpperCase() || '—';
+  const teamLead = item?.Drivers?.[0] ? `${item.Drivers[0].first_name} ${item.Drivers[0].last_name}` : item?.lead || '—';
+  const teamWing = item?.Drivers?.[1] ? `${item.Drivers[1].first_name} ${item.Drivers[1].last_name}` : item?.wing || '—';
+  const raceName = item?.race_name || item?.name || item?.gp || 'Chi tiết';
+  const raceLocation = item?.circuit_name || item?.location || item?.country || '—';
+  const raceDate = item?.race_date ? new Date(item.race_date).toLocaleDateString('vi-VN') : item?.date || '—';
+  const raceRound = item?.round || item?.race_id?.slice(0, 6) || '—';
+  const raceLaps = item?.total_laps || item?.laps || '—';
+  const raceTime = item?.time_or_status || item?.time || '—';
+
   const renderContent = () => {
     switch (type) {
       case 'driver':
@@ -21,11 +38,11 @@ export default function DetailModal({ isOpen, onClose, item, type }) {
           <>
             <div className="flex items-start justify-between gap-4">
               <div>
-                <p className="font-mono text-[10px] uppercase tracking-[0.3em] text-[#ffb4a7]">Driver Profile</p>
+                <p className="font-mono text-[10px] uppercase tracking-[0.3em] text-[#ffb4a7]">Hồ sơ tài xế</p>
                 <h3 className="text-2xl font-black italic uppercase mt-2 text-[#e4e1ee]" style={{ fontFamily: 'Anybody, sans-serif' }}>
-                  {item.name} {item.surname}
+                  {driverName} {driverSurname}
                 </h3>
-                <p className="text-[#eabcb4] mt-2">{item.team}</p>
+                <p className="text-[#eabcb4] mt-2">{driverTeam}</p>
               </div>
               <button onClick={onClose} className="rounded-full border border-[#5f3e39] px-3 py-2 text-xs font-mono uppercase text-[#e4e1ee] hover:bg-[#ff553d] hover:text-[#5b0300] transition-all">
                 Đóng
@@ -38,10 +55,10 @@ export default function DetailModal({ isOpen, onClose, item, type }) {
 
             <div className="mt-6 grid grid-cols-2 gap-4 md:grid-cols-4">
               {[
-                ['Điểm', item.pts],
-                ['Hạng', item.pos],
-                ['Podium', item.podiums],
-                ['Số xe', item.number],
+                ['Điểm', driverPoints],
+                ['Hạng', driverPosition],
+                ['Podium', driverPodiums],
+                ['Quốc tịch', driverNationality],
               ].map(([label, value]) => (
                 <div key={label} className="rounded-xl border border-[#2a2a34] bg-[#15151e] p-3">
                   <p className="font-mono text-[10px] uppercase text-[#a5a0b3]">{label}</p>
@@ -66,11 +83,11 @@ export default function DetailModal({ isOpen, onClose, item, type }) {
           <>
             <div className="flex items-start justify-between gap-4">
               <div>
-                <p className="font-mono text-[10px] uppercase tracking-[0.3em] text-[#00eefc]">Team Detail</p>
+                <p className="font-mono text-[10px] uppercase tracking-[0.3em] text-[#00eefc]">Chi tiết đội đua</p>
                 <h3 className="text-2xl font-black italic uppercase mt-2 text-[#e4e1ee]" style={{ fontFamily: 'Anybody, sans-serif' }}>
                   {item.name}
                 </h3>
-                <p className="text-[#eabcb4] mt-2">Động cơ {item.engine}</p>
+                <p className="text-[#eabcb4] mt-2">{item.chassis || item.engine || 'Thông tin đội đua'}</p>
               </div>
               <button onClick={onClose} className="rounded-full border border-[#5f3e39] px-3 py-2 text-xs font-mono uppercase text-[#e4e1ee] hover:bg-[#00eefc] hover:text-[#00363a] transition-all">
                 Đóng
@@ -78,17 +95,17 @@ export default function DetailModal({ isOpen, onClose, item, type }) {
             </div>
 
             <div className="mt-6 overflow-hidden rounded-2xl border border-[#5f3e39]">
-              <img src={item.img} alt={item.name} className="h-56 w-full object-cover" />
+              <img src={item.img || 'https://images.unsplash.com/photo-1503376780353-7e6692767b70?w=800'} alt={item.name} className="h-56 w-full object-cover" />
             </div>
 
             <div className="mt-6 grid gap-4 md:grid-cols-2">
               <div className="rounded-2xl bg-[#1f1f28] p-5">
-                <p className="font-mono text-[10px] uppercase text-[#a5a0b3]">Lead Driver</p>
-                <p className="mt-2 text-xl font-bold text-[#e4e1ee]">{item.lead}</p>
+                <p className="font-mono text-[10px] uppercase text-[#a5a0b3]">Tài xế dẫn đầu</p>
+                <p className="mt-2 text-xl font-bold text-[#e4e1ee]">{teamLead}</p>
               </div>
               <div className="rounded-2xl bg-[#1f1f28] p-5">
-                <p className="font-mono text-[10px] uppercase text-[#a5a0b3]">Wingman</p>
-                <p className="mt-2 text-xl font-bold text-[#e4e1ee]">{item.wing}</p>
+                <p className="font-mono text-[10px] uppercase text-[#a5a0b3]">Tài xế phụ</p>
+                <p className="mt-2 text-xl font-bold text-[#e4e1ee]">{teamWing}</p>
               </div>
             </div>
 
@@ -106,11 +123,11 @@ export default function DetailModal({ isOpen, onClose, item, type }) {
           <>
             <div className="flex items-start justify-between gap-4">
               <div>
-                <p className="font-mono text-[10px] uppercase tracking-[0.3em] text-[#ffb4a7]">Race Detail</p>
+                <p className="font-mono text-[10px] uppercase tracking-[0.3em] text-[#ffb4a7]">Chi tiết chặng đua</p>
                 <h3 className="text-2xl font-black italic uppercase mt-2 text-[#e4e1ee]" style={{ fontFamily: 'Anybody, sans-serif' }}>
-                  {item.name}
+                  {raceName}
                 </h3>
-                <p className="text-[#eabcb4] mt-2">{item.location}</p>
+                <p className="text-[#eabcb4] mt-2">{raceLocation}</p>
               </div>
               <button onClick={onClose} className="rounded-full border border-[#5f3e39] px-3 py-2 text-xs font-mono uppercase text-[#e4e1ee] hover:bg-[#ff553d] hover:text-[#5b0300] transition-all">
                 Đóng
@@ -119,12 +136,12 @@ export default function DetailModal({ isOpen, onClose, item, type }) {
 
             <div className="mt-6 grid gap-4 md:grid-cols-2">
               <div className="rounded-2xl bg-[#1f1f28] p-5">
-                <p className="font-mono text-[10px] uppercase text-[#a5a0b3]">Round</p>
-                <p className="mt-2 text-xl font-bold text-[#e4e1ee]">{item.round}</p>
+                <p className="font-mono text-[10px] uppercase text-[#a5a0b3]">Vòng</p>
+                <p className="mt-2 text-xl font-bold text-[#e4e1ee]">{raceRound}</p>
               </div>
               <div className="rounded-2xl bg-[#1f1f28] p-5">
                 <p className="font-mono text-[10px] uppercase text-[#a5a0b3]">Địa điểm</p>
-                <p className="mt-2 text-xl font-bold text-[#e4e1ee]">{item.location}</p>
+                <p className="mt-2 text-xl font-bold text-[#e4e1ee]">{raceLocation}</p>
               </div>
             </div>
 
@@ -140,7 +157,6 @@ export default function DetailModal({ isOpen, onClose, item, type }) {
         );
 
       case 'result':
-        // Results can be many shapes: race (gp), driver standing, team standing, or award
         const isRace = item && (item.gp || item.round || (item.name && item.location));
         const isDriver = item && (item.driver || (item.name && item.surname) || item.rank);
         const isTeam = item && (item.name && item.lead && item.wing);
@@ -150,11 +166,11 @@ export default function DetailModal({ isOpen, onClose, item, type }) {
           <>
             <div className="flex items-start justify-between gap-4">
               <div>
-                <p className="font-mono text-[10px] uppercase tracking-[0.3em] text-[#ffb4a7]">Result Detail</p>
+                <p className="font-mono text-[10px] uppercase tracking-[0.3em] text-[#ffb4a7]">Chi tiết kết quả</p>
                 <h3 className="text-2xl font-black italic uppercase mt-2 text-[#e4e1ee]" style={{ fontFamily: 'Anybody, sans-serif' }}>
-                  {isRace ? (item.gp || item.name) : isDriver ? (item.driver || item.name) : isTeam ? item.name : (item.title || 'Chi tiết')}
+                  {isRace ? (item.gp || raceName) : isDriver ? (item.driver || `${driverName} ${driverSurname}`.trim()) : isTeam ? item.name : (item.title || 'Chi tiết')}
                 </h3>
-                <p className="text-[#eabcb4] mt-2">{isRace ? (item.team || item.location) : isDriver ? (item.team || '') : isTeam ? `Lead: ${item.lead}` : (item.detail || '')}</p>
+                <p className="text-[#eabcb4] mt-2">{isRace ? (item.team || raceLocation) : isDriver ? (item.team || driverTeam) : isTeam ? `Tài xế dẫn đầu: ${teamLead}` : (item.detail || '')}</p>
               </div>
               <button onClick={onClose} className="rounded-full border border-[#5f3e39] px-3 py-2 text-xs font-mono uppercase text-[#e4e1ee] hover:bg-[#ff553d] hover:text-[#5b0300] transition-all">
                 Đóng
@@ -165,12 +181,12 @@ export default function DetailModal({ isOpen, onClose, item, type }) {
               {isRace && (
                 <>
                   <div className="rounded-2xl bg-[#1f1f28] p-5">
-                    <p className="font-mono text-[10px] uppercase text-[#a5a0b3]">Round</p>
-                    <p className="mt-2 text-xl font-bold text-[#e4e1ee]">{item.round || item.gp}</p>
+                    <p className="font-mono text-[10px] uppercase text-[#a5a0b3]">Vòng</p>
+                    <p className="mt-2 text-xl font-bold text-[#e4e1ee]">{item.round || item.gp || raceRound}</p>
                   </div>
                   <div className="rounded-2xl bg-[#1f1f28] p-5">
-                    <p className="font-mono text-[10px] uppercase text-[#a5a0b3]">Winner / Time</p>
-                    <p className="mt-2 text-xl font-bold text-[#e4e1ee]">{item.winner || item.driver || '-'} • {item.time || item.duration || '-'}</p>
+                    <p className="font-mono text-[10px] uppercase text-[#a5a0b3]">Người chiến thắng / Thời gian</p>
+                    <p className="mt-2 text-xl font-bold text-[#e4e1ee]">{item.winner || item.driver || '-'} • {item.time || item.duration || raceTime || '-'}</p>
                   </div>
                 </>
               )}
@@ -179,7 +195,7 @@ export default function DetailModal({ isOpen, onClose, item, type }) {
                 <>
                   <div className="rounded-2xl bg-[#1f1f28] p-5">
                     <p className="font-mono text-[10px] uppercase text-[#a5a0b3]">Hạng</p>
-                    <p className="mt-2 text-xl font-bold text-[#e4e1ee]">{item.pos || item.rank || '-'}</p>
+                    <p className="mt-2 text-xl font-bold text-[#e4e1ee]">{item.pos || item.rank || driverPosition || '-'}</p>
                   </div>
                   <div className="rounded-2xl bg-[#1f1f28] p-5">
                     <p className="font-mono text-[10px] uppercase text-[#a5a0b3]">Điểm</p>
@@ -191,12 +207,12 @@ export default function DetailModal({ isOpen, onClose, item, type }) {
               {isTeam && (
                 <>
                   <div className="rounded-2xl bg-[#1f1f28] p-5">
-                    <p className="font-mono text-[10px] uppercase text-[#a5a0b3]">Points</p>
+                    <p className="font-mono text-[10px] uppercase text-[#a5a0b3]">Điểm</p>
                     <p className="mt-2 text-xl font-bold text-[#e4e1ee]">{item.pts || item.points || '-'}</p>
                   </div>
                   <div className="rounded-2xl bg-[#1f1f28] p-5">
-                    <p className="font-mono text-[10px] uppercase text-[#a5a0b3]">Lead / Wing</p>
-                    <p className="mt-2 text-xl font-bold text-[#e4e1ee]">{item.lead} / {item.wing}</p>
+                    <p className="font-mono text-[10px] uppercase text-[#a5a0b3]">Đầu / Phụ</p>
+                    <p className="mt-2 text-xl font-bold text-[#e4e1ee]">{teamLead} / {teamWing}</p>
                   </div>
                 </>
               )}
@@ -204,11 +220,11 @@ export default function DetailModal({ isOpen, onClose, item, type }) {
               {isAward && (
                 <>
                   <div className="rounded-2xl bg-[#1f1f28] p-5">
-                    <p className="font-mono text-[10px] uppercase text-[#a5a0b3]">Winner</p>
+                    <p className="font-mono text-[10px] uppercase text-[#a5a0b3]">Người thắng</p>
                     <p className="mt-2 text-xl font-bold text-[#e4e1ee]">{item.winner}</p>
                   </div>
                   <div className="rounded-2xl bg-[#1f1f28] p-5">
-                    <p className="font-mono text-[10px] uppercase text-[#a5a0b3]">Detail</p>
+                    <p className="font-mono text-[10px] uppercase text-[#a5a0b3]">Chi tiết</p>
                     <p className="mt-2 text-xl font-bold text-[#e4e1ee]">{item.detail || '-'}</p>
                   </div>
                 </>
@@ -218,7 +234,7 @@ export default function DetailModal({ isOpen, onClose, item, type }) {
             <div className="mt-6 rounded-2xl bg-[#15151e] p-5">
               <h4 className="font-mono text-xs uppercase tracking-[0.3em] text-[#ffb4a7]">Phân tích</h4>
               <p className="mt-3 text-sm text-[#e4e1ee]">
-                Thông tin này được hiển thị trên frontend để bạn xem nhanh nội dung chi tiết mà không cần gọi API hay backend.
+                Thông tin này được lấy từ dữ liệu API và phản ánh nội dung từ backend/SQL hiện tại.
               </p>
             </div>
           </>

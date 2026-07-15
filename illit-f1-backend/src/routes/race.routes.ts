@@ -7,7 +7,10 @@ import {
   getDriverById,
   getTeams,
   getTeamById,
-  getStandings
+  getStandings,
+  getNews,
+  getNewsById,
+  getAwards
 } from '../controllers/race.controller';
 
 const router = Router();
@@ -26,5 +29,12 @@ router.get('/teams/:teamId', getTeamById);
 
 // GET bảng xếp hạng
 router.get('/standings', getStandings);
+
+// GET tin tức
+router.get('/news', getNews);
+router.get('/news/:newsId', getNewsById);
+
+// GET giải thưởng
+router.get('/awards', getAwards);
 
 export default router;

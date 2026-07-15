@@ -1,22 +1,35 @@
 import { useState, useEffect } from 'react';
 import Footer from '../components/Footer';
 
-const newsCategories = ['All', 'Analysis', 'Technical', 'Lifestyle & Culture', 'F1 Unlocked', 'F2', 'F3', 'F1 Academy'];
-const sortOptions = ['All', 'Latest', 'Most Read', 'Trending'];
+const newsCategories = ['Tất cả', 'Phân tích', 'Kỹ thuật', 'Đời sống & Văn hóa', 'F1 Unlocked', 'F2', 'F3', 'F1 Academy'];
+const sortOptions = ['Tất cả', 'Mới nhất', 'Đọc nhiều', 'Xu hướng'];
 
-const newsArticles = [
-  { id: 1, category: 'F1 FANTASY', title: "What's the best F1 Fantasy line-up in Abu Dhabi?", timestamp: '9 minutes ago', image: 'https://images.unsplash.com/photo-1552820728-8ac41f1ce891?w=800&h=450&fit=crop' },
-  { id: 2, category: 'WEEKEND WARM-UP', title: 'Watch Weekend Warm-Up ahead of the Abu Dhabi GP', timestamp: '31 minutes ago', image: 'https://images.unsplash.com/photo-1580274455191-1c62238fa333?w=800&h=450&fit=crop', isVideo: true },
-  { id: 3, category: 'TECHNICAL', title: "Hamilton suggests personnel changes needed for 2026 at Ferrari", timestamp: '32 minutes ago', image: 'https://images.unsplash.com/photo-1489824904134-891ab64532f1?w=800&h=450&fit=crop' },
-  { id: 4, category: 'PADDOCK INSIDER', title: 'Norris, Verstappen or Piastri – the title showdown is here', timestamp: '42 minutes ago', image: 'https://images.unsplash.com/photo-1516789592301-37e2d194bd1f?w=800&h=450&fit=crop' },
-  { id: 5, category: 'ANALYSIS', title: "Russell assesses Mercedes' chances of sealing P2 in Abu Dhabi", timestamp: '2 hours ago', image: 'https://images.unsplash.com/photo-1562618142-210ffdce33e3?w=800&h=450&fit=crop' },
-  { id: 6, category: 'LIFESTYLE', title: "'F1 is my life' – Tsunoda reacts to Red Bull's driver decision", timestamp: '2 hours ago', image: 'https://images.unsplash.com/photo-1471879832106-c7ab9019e8de?w=800&h=450&fit=crop' },
-];
+const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || 'http://localhost:8080/api';
 
 export default function News() {
-  const [activeCategory, setActiveCategory] = useState('All');
-  const [sortBy, setSortBy] = useState('All');
+  const [activeCategory, setActiveCategory] = useState('Tất cả');
+  const [sortBy, setSortBy] = useState('Tất cả');
   const [selectedArticle, setSelectedArticle] = useState(null);
+  const [newsArticles, setNewsArticles] = useState([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const fetchNews = async () => {
+      try {
+        const response = await fetch(`${API_BASE_URL}/f1/news`);
+        const data = await response.json();
+        if (data?.data) {
+          setNewsArticles(data.data);
+        }
+      } catch (error) {
+        console.error('Failed to load news', error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchNews();
+  }, []);
 
   const handleCategoryClick = (cat) => {
     setActiveCategory(cat);
@@ -56,7 +69,7 @@ export default function News() {
         {/* News Header Section */}
         <section className="px-5 md:px-16 py-10 border-b border-[#2a2a34] bg-[#13131b]">
           <h1 className="text-4xl md:text-5xl font-black italic uppercase mb-8 text-[#e4e1ee]" style={{ fontFamily: 'Anybody, sans-serif' }}>
-            Latest F1 News
+            Tin tức F1 mới nhất
           </h1>
 
           {/* Category Filters */}
@@ -91,35 +104,28 @@ export default function News() {
         {/* News Grid */}
         <section className="px-5 md:px-16 py-10">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            {newsArticles.map((article) => (
-              <article key={article.id} className="group cursor-pointer overflow-hidden" onClick={() => handleArticleClick(article)}>
+            {newsArticles.length > 0 ? newsArticles.map((article) => (
+              <article key={article.news_id} className="group cursor-pointer overflow-hidden" onClick={() => handleArticleClick(article)}>
                 <div className="relative aspect-video bg-[#1f1f28] overflow-hidden mb-4">
                   <img
                     className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
-                    src={article.image}
+                    src={article.image_url || 'https://images.unsplash.com/photo-1503376780353-7e6692767b70?w=800'}
                     alt={article.title}
                   />
-                  {article.isVideo && (
-                    <div className="absolute inset-0 flex items-center justify-center bg-black/30 group-hover:bg-black/40 transition-all">
-                      <div className="w-16 h-16 bg-white/20 rounded-full flex items-center justify-center backdrop-blur-sm">
-                        <span className="material-symbols-outlined text-white text-2xl ml-1">play_arrow</span>
-                      </div>
-                    </div>
-                  )}
                 </div>
                 <div className="space-y-3">
                   <span className="inline-block bg-[#ff553d] text-[#5b0300] px-3 py-1 font-mono text-[10px] font-bold">
-                    {article.category}
+                    {article.summary ? article.summary.slice(0, 25) : 'TIN TỨC'}
                   </span>
                   <h3 className="text-lg font-bold leading-tight group-hover:text-[#ffb4a7] transition-colors">
                     {article.title}
                   </h3>
                   <p className="font-mono text-xs text-[#a5a0b3]">
-                    {article.timestamp}
+                    {new Date(article.created_at).toLocaleString('vi-VN')}
                   </p>
                 </div>
               </article>
-            ))}
+            )) : <div className="md:col-span-2 text-[#a5a0b3]">Chưa có dữ liệu tin tức</div>}
           </div>
         </section>
       </main>
@@ -130,7 +136,7 @@ export default function News() {
           <div className="bg-[#ff553d] text-[#5b0300] px-6 py-3 flex items-center justify-between">
             <div className="flex items-center gap-2">
               <span className="material-symbols-outlined text-sm">info</span>
-              <span className="font-mono text-xs font-bold">ARTICLE SELECTED</span>
+              <span className="font-mono text-xs font-bold">ĐÃ CHỌN BÀI VIẾT</span>
             </div>
             <button
               onClick={() => setSelectedArticle(null)}
@@ -143,7 +149,7 @@ export default function News() {
           <div className="p-4 space-y-3">
             <div className="relative aspect-video overflow-hidden rounded">
               <img
-                src={selectedArticle.image}
+                src={selectedArticle.image_url || 'https://images.unsplash.com/photo-1503376780353-7e6692767b70?w=800'}
                 alt={selectedArticle.title}
                 className="w-full h-full object-cover"
               />
@@ -151,18 +157,18 @@ export default function News() {
             
             <div>
               <span className="inline-block bg-[#ff553d] text-[#5b0300] px-3 py-1 font-mono text-[10px] font-bold mb-2">
-                {selectedArticle.category}
+                {selectedArticle.summary ? selectedArticle.summary.slice(0, 25) : 'TIN TỨC'}
               </span>
               <h3 className="text-sm font-bold text-[#e4e1ee] leading-tight mb-2">
                 {selectedArticle.title}
               </h3>
               <p className="font-mono text-xs text-[#a5a0b3]">
-                {selectedArticle.timestamp}
+                {new Date(selectedArticle.created_at).toLocaleString('vi-VN')}
               </p>
             </div>
 
             <button className="w-full bg-[#ff553d] text-[#5b0300] py-2 font-mono text-xs font-bold rounded hover:brightness-110 transition-all">
-              READ FULL ARTICLE
+              ĐỌC TOÀN BỘ BÀI VIẾT
             </button>
           </div>
         </div>

@@ -6,11 +6,11 @@ export default function Footer() {
           ILLIT F1
         </span>
         <span className="font-mono text-[10px] text-[#eabcb4] opacity-50 uppercase tracking-widest">
-          © 2024 ILLIT F1 ENGINEERING. STATUS: OPTIMAL
+          © 2024 ILLIT F1 ENGINEERING. TRẠNG THÁI: TỐI ƯU
         </span>
       </div>
       <div className="flex gap-8">
-        {['Telemetry', 'Pit Wall', 'Privacy', 'Terms', 'API'].map(item => (
+        {['Đo đạc', 'Tường pit', 'Riêng tư', 'Điều khoản', 'API'].map(item => (
           <a key={item} href="#" className="font-mono text-[10px] text-[#eabcb4] hover:text-[#ffb4a7] transition-colors uppercase tracking-widest">
             {item}
           </a>

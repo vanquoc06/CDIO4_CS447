@@ -76,19 +76,19 @@ export default function Register() {
               </h1>
             </Link>
             <div className="h-1 w-20 bg-[#ffb4a7] mx-auto mb-1" />
-            <p className="font-mono text-[10px] text-[#eabcb4] uppercase tracking-widest">New Driver Registration</p>
+            <p className="font-mono text-[10px] text-[#eabcb4] uppercase tracking-widest">Đăng ký tài xế mới</p>
             <h2 className="text-xl font-bold italic uppercase mt-1 text-[#e4e1ee]"
               style={{ fontFamily: 'Anybody, sans-serif' }}>
-              REGISTER
+              ĐĂNG KÝ
             </h2>
           </div>
 
           {/* Server Status */}
           <div className="mb-3 flex items-center gap-2">
-            <span className="font-mono text-[10px] text-[#eabcb4] uppercase tracking-widest">Server:</span>
+            <span className="font-mono text-[10px] text-[#eabcb4] uppercase tracking-widest">Máy chủ:</span>
             <div className={`w-2 h-2 rounded-full ${serverStatus === true ? 'bg-[#4caf50]' : serverStatus === false ? 'bg-[#f44336]' : 'bg-[#ff9800] animate-pulse'}`} />
             <span className="font-mono text-[10px] text-[#eabcb4]">
-              {serverStatus === true ? 'Connected' : serverStatus === false ? 'Disconnected' : 'Checking...'}
+              {serverStatus === true ? 'Đã kết nối' : serverStatus === false ? 'Mất kết nối' : 'Đang kiểm tra...'}
             </span>
           </div>
 
@@ -107,7 +107,7 @@ export default function Register() {
             {/* Full Name */}
             <div>
               <label className="block font-mono text-[10px] text-[#eabcb4] uppercase tracking-widest mb-1">
-                Full Name
+                Họ và tên
               </label>
               <input
                 type="text"
@@ -122,7 +122,7 @@ export default function Register() {
             {/* Email */}
             <div>
               <label className="block font-mono text-[10px] text-[#eabcb4] uppercase tracking-widest mb-1">
-                Email Address
+                Địa chỉ email
               </label>
               <input
                 type="email"
@@ -137,7 +137,7 @@ export default function Register() {
             {/* Phone Number (Optional) */}
             <div>
               <label className="block font-mono text-[10px] text-[#eabcb4] uppercase tracking-widest mb-1">
-                Phone <span className="opacity-50">(Optional)</span>
+                Số điện thoại <span className="opacity-50">(Tùy chọn)</span>
               </label>
               <input
                 type="tel"
@@ -151,7 +151,7 @@ export default function Register() {
             {/* Password */}
             <div>
               <label className="block font-mono text-[10px] text-[#eabcb4] uppercase tracking-widest mb-1">
-                Password
+                Mật khẩu
               </label>
               <input
                 type="password"
@@ -167,7 +167,7 @@ export default function Register() {
             {/* Confirm Password */}
             <div>
               <label className="block font-mono text-[10px] text-[#eabcb4] uppercase tracking-widest mb-1">
-                Confirm Password
+                Xác nhận mật khẩu
               </label>
               <input
                 type="password"
@@ -189,10 +189,10 @@ export default function Register() {
                 {loading ? (
                   <span className="flex items-center justify-center gap-2">
                     <span className="material-symbols-outlined animate-spin text-base">progress_activity</span>
-                    Creating Account...
+                    Đang tạo tài khoản...
                   </span>
                 ) : (
-                  'Register Account'
+                  'Đăng ký tài khoản'
                 )}
               </span>
             </button>
@@ -201,7 +201,7 @@ export default function Register() {
           {/* Divider */}
           <div className="flex items-center gap-4 my-3">
             <div className="flex-1 h-px bg-[#5f3e39]" />
-            <span className="font-mono text-[10px] text-[#eabcb4] uppercase">Or</span>
+            <span className="font-mono text-[10px] text-[#eabcb4] uppercase">Hoặc</span>
             <div className="flex-1 h-px bg-[#5f3e39]" />
           </div>
 
@@ -211,7 +211,7 @@ export default function Register() {
               to="/login"
               className="inline-block border-2 border-[#5f3e39] text-[#e4e1ee] py-2 px-5 font-mono text-xs uppercase tracking-widest parallelogram hover:bg-[#e4e1ee] hover:text-[#13131b] transition-all"
             >
-              <span className="parallelogram-content">Login</span>
+              <span className="parallelogram-content">Đăng nhập</span>
             </Link>
           </div>
         </div>
@@ -219,7 +219,7 @@ export default function Register() {
         {/* Bottom info */}
         <div className="mt-2 text-center">
           <p className="font-mono text-[10px] text-[#eabcb4] opacity-50 uppercase tracking-widest">
-            © 2024 ILLIT F1 ENGINEERING. STATUS: SECURE
+            © 2024 ILLIT F1 ENGINEERING. TRẠNG THÁI: AN TOÀN
           </p>
         </div>
       </div>

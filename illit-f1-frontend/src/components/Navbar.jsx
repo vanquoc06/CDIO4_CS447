@@ -3,11 +3,11 @@ import { useState } from 'react';
 import { useAuth } from '../context/AuthContext';
 
 const links = [
-  { to: '/schedule', label: 'Schedule' },
-  { to: '/drivers', label: 'Drivers' },
-  { to: '/news', label: 'News' },
-  { to: '/results', label: 'Results' },
-  { to: '/teams', label: 'Teams' },
+  { to: '/schedule', label: 'Lịch trình' },
+  { to: '/drivers', label: 'Tài xế' },
+  { to: '/news', label: 'Tin tức' },
+  { to: '/results', label: 'Kết quả' },
+  { to: '/teams', label: 'Đội đua' },
 ];
 
 export default function Navbar() {
@@ -64,7 +64,7 @@ export default function Navbar() {
                 <div className="fixed inset-0 z-40" onClick={() => setShowUserMenu(false)} />
                 <div className="absolute right-0 top-full mt-2 w-64 bg-[#1f1f28] border-2 border-[#5f3e39] z-50 shadow-xl">
                   <div className="p-4 border-b border-[#5f3e39]">
-                    <p className="font-mono text-xs text-[#ffb4a7] uppercase tracking-widest mb-1">Logged in as</p>
+                    <p className="font-mono text-xs text-[#ffb4a7] uppercase tracking-widest mb-1">Đã đăng nhập với</p>
                     <p className="font-mono text-sm text-[#e4e1ee] truncate">{user.email}</p>
                     {user.fullName && <p className="font-mono text-xs text-[#eabcb4] mt-1">{user.fullName}</p>}
                   </div>
@@ -75,14 +75,14 @@ export default function Navbar() {
                       className="block w-full text-left px-4 py-3 font-mono text-xs uppercase tracking-widest text-[#e4e1ee] hover:bg-[#292933] transition-colors flex items-center gap-2"
                     >
                       <span className="material-symbols-outlined text-sm">person</span>
-                      Profile
+                      Hồ sơ
                     </Link>
                     <button
                       onClick={handleLogout}
                       className="w-full text-left px-4 py-3 font-mono text-xs uppercase tracking-widest text-[#e4e1ee] hover:bg-[#ffb4a7] hover:text-[#670400] transition-colors flex items-center gap-2"
                     >
                       <span className="material-symbols-outlined text-sm">logout</span>
-                      Logout
+                      Đăng xuất
                     </button>
                   </div>
                 </div>
@@ -95,13 +95,13 @@ export default function Navbar() {
               to="/register"
               className="hidden md:block border-2 border-[#5f3e39] text-[#e4e1ee] px-6 py-2 font-mono text-xs uppercase tracking-widest hover:border-[#ffb4a7] hover:text-[#ffb4a7] transition-all"
             >
-              Sign Up
+              Đăng ký
             </Link>
             <Link
               to="/login"
               className="bg-[#ffb4a7] text-[#670400] px-6 py-2 font-mono text-xs font-bold uppercase tracking-widest hover:brightness-110 transition-all"
             >
-              Login
+              Đăng nhập
             </Link>
           </>
         )}

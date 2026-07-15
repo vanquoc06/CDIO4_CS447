@@ -31,26 +31,26 @@ export default function Homepage() {
           <div className="max-w-2xl space-y-4">
             <div className="inline-flex items-center gap-2 bg-[#ffb4a7]/10 border border-[#ffb4a7]/20 px-3 py-1 mb-3">
               <span className="material-symbols-outlined text-[#ffb4a7] text-xs" style={{ fontVariationSettings: "'FILL' 1" }}>bolt</span>
-              <span className="font-mono text-[0.65rem] text-[#ffb4a7] uppercase">Engine status: Maximum performance</span>
+              <span className="font-mono text-[0.65rem] text-[#ffb4a7] uppercase">Trạng thái động cơ: Hiệu suất tối đa</span>
             </div>
             <h1 className="font-display text-3xl md:text-[44px] font-black italic uppercase leading-tight text-[#e4e1ee] tracking-[-0.04em]">
-              DESIGNED<br /><span className="text-[#ffb4a7]">FOR SPEED</span>
+              THIẾT KẾ<br /><span className="text-[#ffb4a7]">CHO TỐC ĐỘ</span>
             </h1>
             <p className="font-body text-sm md:text-base text-[#eabcb4] max-w-lg opacity-80">
-              Welcome to the digital heart of Formula 1. Experience the intersection of pure mechanical power and elite engineering.
+              Chào mừng bạn đến với trái tim số của Formula 1. Trải nghiệm sự giao thoa giữa sức mạnh cơ học thuần khiết và kỹ thuật đỉnh cao.
             </p>
             <div className="flex flex-wrap gap-4 pt-8">
               <Link to="/schedule" className="bg-[#ffb4a7] text-[#670400] parallelogram px-10 py-4 font-mono text-xs uppercase tracking-widest hover:scale-105 transition-transform inline-flex items-center justify-center">
-                <span className="parallelogram-content">Explore the track</span>
+                <span className="parallelogram-content">Khám phá đường đua</span>
               </Link>
               <Link to="/schedule" className="border-2 border-[#e4e1ee] text-[#e4e1ee] parallelogram px-10 py-4 font-mono text-xs uppercase tracking-widest hover:bg-[#e4e1ee] hover:text-[#13131b] transition-all inline-flex items-center justify-center">
-                <span className="parallelogram-content">View the schedule</span>
+                <span className="parallelogram-content">Xem lịch trình</span>
               </Link>
             </div>
           </div>
         </div>
         <div className="absolute bottom-10 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2">
-          <span className="font-mono text-[10px] uppercase opacity-40">Scroll to Explore</span>
+          <span className="font-mono text-[10px] uppercase opacity-40">Cuộn để khám phá</span>
           <div className="w-px h-16 bg-gradient-to-b from-[#ffb4a7] to-transparent" />
         </div>
       </section>
@@ -61,24 +61,24 @@ export default function Homepage() {
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
             <div className="space-y-8">
               <div className="space-y-2">
-                <span className="font-mono text-[#ffb4a7] text-xs uppercase tracking-widest">TECHNICAL PRESTIGE</span>
+                <span className="font-mono text-[#ffb4a7] text-xs uppercase tracking-widest">UY TÍN KỸ THUẬT</span>
                 <h2 className="font-display text-4xl md:text-5xl font-black italic uppercase leading-tight text-[#e4e1ee]">
-                  The Pinnacle of Motorsport
+                  Đỉnh cao của Motorsport
                 </h2>
                 <div className="h-1 w-24 bg-[#ffb4a7]" />
               </div>
               <div className="font-body space-y-6 text-[#eabcb4] leading-relaxed">
-                <p>Formula 1 is the ultimate icon of automotive engineering. Every car is a prototype, a complex symphony of carbon fiber, hybrid powertrain, and aerodynamic surfaces engineered to control the very air it breathes.</p>
-                <p>When G-forces climb above 5G through corners and engines produce over 1,000 horsepower, the line between human and machine blurs.</p>
+                <p>Formula 1 là biểu tượng cuối cùng của kỹ thuật ô tô. Mỗi chiếc xe đều là một nguyên mẫu, một bản giao hưởng phức tạp của sợi carbon, động cơ hybrid và các bề mặt khí động học được thiết kế để kiểm soát chính không khí mà nó hít thở.</p>
+                <p>Khi lực G tăng trên 5G qua các khúc cua và động cơ tạo ra hơn 1.000 mã lực, ranh giới giữa con người và máy móc trở nên mờ nhạt.</p>
               </div>
               <div className="grid grid-cols-2 gap-6 pt-4">
                 <div className="border-l-2 border-[#ffb4a7] pl-4">
                   <div className="font-mono text-2xl text-[#e4e1ee]">370+ KPH</div>
-                  <div className="font-mono text-[10px] uppercase opacity-50">Top speed capability</div>
+                  <div className="font-mono text-[10px] uppercase opacity-50">Tốc độ tối đa</div>
                 </div>
                 <div className="border-l-2 border-[#ffb4a7] pl-4">
                   <div className="font-mono text-2xl text-[#e4e1ee]">1.8 SEC</div>
-                  <div className="font-mono text-[10px] uppercase opacity-50">World record pit stop</div>
+                  <div className="font-mono text-[10px] uppercase opacity-50">Kỷ lục pit stop thế giới</div>
                 </div>
               </div>
             </div>
@@ -91,8 +91,8 @@ export default function Homepage() {
                 />
                 <div className="hud-grid absolute inset-0 opacity-10" />
                 <div className="absolute bottom-6 left-6 right-6 p-4 bg-[#13131b]/80 backdrop-blur-sm border border-[#ffb4a7]/20">
-                  <div className="font-mono text-[10px] text-[#ffb4a7] uppercase mb-1">DATA ANALYSIS</div>
-                  <div className="font-mono text-xs">AERO_EFFICIENCY_MAP_V2.04</div>
+                  <div className="font-mono text-[10px] text-[#ffb4a7] uppercase mb-1">PHÂN TÍCH DỮ LIỆU</div>
+                  <div className="font-mono text-xs">BẢN ĐỒ HIỆU QUẢ KHÍ ĐỘNG_V2.04</div>
                 </div>
               </div>
               <div className="absolute -top-4 -right-4 w-24 h-24 border-t-2 border-r-2 border-[#ffb4a7] opacity-30" />
@@ -123,13 +123,13 @@ export default function Homepage() {
                 <img className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
                   src="https://lh3.googleusercontent.com/aida-public/AB6AXuBsp55UM8txec0otU9upO7PagQqsnAoSsXEUzwF7gl3Zhdw9M7rLe7NtKqIk3hAgXpmxyIFZSfqLHxQrx3Di0zSoqx_4AxFH-DpzduADYTKI5sh70RKADiOd7zSTP9O5hU7S5eJfokTEeO7XyYY7SxlpoXcSpVCT2UgcutU466QnCIOy5tM-eTsUo_C4w3Q_N99lxAI5oRca4jL2ZPtF3xLnlmEPujWo3VtYLGTOvpY46F5hr8nNIYu6CXDvc8agnZrOnjpRpDp7kg"
                   alt="F1 race" />
-                <div className="absolute top-4 left-4 bg-[#ffb4a7] text-[#670400] px-3 py-1 font-mono text-[10px]">LATEST NEWS</div>
+                <div className="absolute top-4 left-4 bg-[#ffb4a7] text-[#670400] px-3 py-1 font-mono text-[10px]">TIN MỚI NHẤT</div>
               </div>
               <div className="p-8 space-y-4">
-                <h3 className="font-display text-2xl font-bold italic uppercase text-[#e4e1ee]">The Physics of a Perfect Pit Stop</h3>
-                <p className="font-body text-[#eabcb4] opacity-70">How 1.8 seconds determine the outcome of a 300km race. Inside the pit wall telemetry.</p>
+                <h3 className="font-display text-2xl font-bold italic uppercase text-[#e4e1ee]">Vật lý của một pit stop hoàn hảo</h3>
+                <p className="font-body text-[#eabcb4] opacity-70">1,8 giây quyết định kết quả của một cuộc đua 300km. Bên trong dữ liệu telemetry pit wall.</p>
                 <Link to="/news" className="inline-flex items-center gap-2 text-[#ffb4a7] font-mono text-xs uppercase tracking-widest group-hover:translate-x-2 transition-transform">
-                  READ REPORT <span className="material-symbols-outlined text-sm">chevron_right</span>
+                  ĐỌC BÁO CÁO <span className="material-symbols-outlined text-sm">chevron_right</span>
                 </Link>
               </div>
             </div>
@@ -139,7 +139,7 @@ export default function Homepage() {
               <div className="hud-grid absolute inset-0 opacity-5" />
               <div className="relative space-y-6">
                 <div className="flex justify-between items-center">
-                  <span className="font-mono text-[10px] text-[#ffb4a7] uppercase">Next Grand Prix</span>
+                  <span className="font-mono text-[10px] text-[#ffb4a7] uppercase">Grand Prix tiếp theo</span>
                   <span className="material-symbols-outlined text-[#eabcb4]">timer</span>
                 </div>
                 <div>
@@ -147,20 +147,20 @@ export default function Homepage() {
                   <p className="font-mono text-xs text-[#eabcb4]">United Kingdom | July 05-07</p>
                 </div>
                 <div className="space-y-4 pt-4 border-t border-[#5f3e39]">
-                  {[['Practice 1', 'THU 12:30'], ['Qualifying', 'SAT 15:00']].map(([label, time]) => (
+                  {[['Buổi thực hành 1', 'THU 12:30'], ['Vòng phân hạng', 'SAT 15:00']].map(([label, time]) => (
                     <div key={label} className="flex justify-between items-center opacity-50">
                       <span className="font-mono text-[10px] uppercase">{label}</span>
                       <span className="font-mono text-xs">{time}</span>
                     </div>
                   ))}
                   <div className="flex justify-between items-center text-[#ffb4a7]">
-                    <span className="font-mono text-[10px] uppercase font-bold">Race Day</span>
+                    <span className="font-mono text-[10px] uppercase font-bold">Ngày đua</span>
                     <span className="font-mono text-xs font-bold">SUN 15:00</span>
                   </div>
                 </div>
               </div>
               <button className="w-full mt-8 border border-[#eabcb4]/30 py-3 font-mono text-xs uppercase hover:bg-[#e4e1ee] hover:text-[#13131b] transition-colors">
-                Set reminder
+                Đặt nhắc
               </button>
             </div>
 
@@ -168,7 +168,7 @@ export default function Homepage() {
             <div className="bg-[#1f1f28] border border-[#5f3e39] p-8">
               <div className="space-y-6">
                 <div className="flex justify-between items-center">
-                  <span className="font-mono text-[10px] text-[#ffb4a7] uppercase">Driver Standings</span>
+                  <span className="font-mono text-[10px] text-[#ffb4a7] uppercase">BXH tay đua</span>
                   <span className="material-symbols-outlined text-[#eabcb4]">leaderboard</span>
                 </div>
                 {[
@@ -186,7 +186,7 @@ export default function Homepage() {
                   </div>
                 ))}
                 <Link to="/results" className="block text-center mt-4 font-mono text-[10px] text-[#eabcb4] hover:text-[#ffb4a7] uppercase tracking-widest transition-colors">
-                  VIEW TEAM STANDINGS
+                  XEM BXH ĐỘI ĐUA
                 </Link>
               </div>
             </div>
@@ -200,26 +200,26 @@ export default function Homepage() {
           <div className="max-w-3xl space-y-12">
             <div className="space-y-4">
               <h2 className="font-display text-5xl font-black italic uppercase leading-none text-[#e4e1ee]">
-                Global Impact &amp; History
+                Tác động toàn cầu &amp; Lịch sử
               </h2>
               <p className="font-body text-lg text-[#eabcb4] leading-relaxed">
-                From the first race at Silverstone in 1950 to the modern high-tech spectacles in Las Vegas and Singapore, Formula 1 has evolved into a global phenomenon reaching over 1.5 billion fans annually.
+                Từ chặng đua đầu tiên tại Silverstone năm 1950 đến các sự kiện công nghệ cao hiện đại ở Las Vegas và Singapore, Formula 1 đã phát triển thành hiện tượng toàn cầu với hơn 1,5 tỷ người hâm mộ mỗi năm.
               </p>
             </div>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
               <div className="space-y-4">
                 <div className="flex items-center gap-4">
                   <span className="material-symbols-outlined text-[#ffb4a7]" style={{ fontVariationSettings: "'FILL' 1" }}>language</span>
-                  <h4 className="font-mono text-sm uppercase font-bold">24 races across 5 continents</h4>
+                  <h4 className="font-mono text-sm uppercase font-bold">24 chặng đua trên 5 châu lục</h4>
                 </div>
-                <p className="font-body text-[#eabcb4] text-sm opacity-80">A grueling calendar that tests the limits of logistics and human endurance, spanning the entire globe from March to December.</p>
+                <p className="font-body text-[#eabcb4] text-sm opacity-80">Lịch trình khắc nghiệt thử thách giới hạn về hậu cần và sức bền con người, trải dài toàn cầu từ tháng 3 đến tháng 12.</p>
               </div>
               <div className="space-y-4">
                 <div className="flex items-center gap-4">
                   <span className="material-symbols-outlined text-[#ffb4a7]" style={{ fontVariationSettings: "'FILL' 1" }}>eco</span>
-                  <h4 className="font-mono text-sm uppercase font-bold">Net zero emissions by 2030</h4>
+                  <h4 className="font-mono text-sm uppercase font-bold">Phát thải ròng bằng 0 vào năm 2030</h4>
                 </div>
-                <p className="font-body text-[#eabcb4] text-sm opacity-80">Bringing the future of sustainable fuels and hybrid technology to the forefront, ensuring top-tier racing remains relevant for generations to come.</p>
+                <p className="font-body text-[#eabcb4] text-sm opacity-80">Đưa tương lai của nhiên liệu bền vững và công nghệ hybrid lên hàng đầu, đảm bảo đua xe đẳng cấp vẫn còn phù hợp cho các thế hệ mai sau.</p>
               </div>
             </div>
           </div>

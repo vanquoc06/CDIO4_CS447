@@ -28,12 +28,12 @@ export default function Profile() {
           <img src={heroImg} alt="Driver profile" className="absolute top-0 right-0 w-40 opacity-10 pointer-events-none" />
           <h1 className="text-4xl md:text-[56px] font-black italic uppercase leading-tight mb-4 text-[#e4e1ee]"
             style={{ fontFamily: 'Anybody, sans-serif', letterSpacing: '-0.04em' }}>
-            DRIVER <span className="text-[#ffb4a7]">PROFILE</span>
+            HỒ SƠ <span className="text-[#ffb4a7]">TÀI XẾ</span>
           </h1>
           <div className="flex flex-wrap items-center gap-4 text-[#ffb4a7] font-mono text-xs uppercase tracking-tighter">
-            <span>Access Level: Authenticated</span>
+            <span>Cấp độ truy cập: Đã xác thực</span>
             <span className="w-1 h-1 bg-[#5f3e39] rounded-full" />
-            <span>Status: Active</span>
+            <span>Trạng thái: Hoạt động</span>
           </div>
         </div>
 
@@ -64,7 +64,7 @@ export default function Profile() {
                     <p className="font-mono text-sm text-[#eabcb4] mb-4">{user.email}</p>
                     <div className="inline-flex items-center gap-2 bg-[#ffb4a7]/10 border border-[#ffb4a7]/20 px-4 py-1.5">
                       <span className="w-2 h-2 bg-[#ffb4a7] rounded-full animate-pulse" />
-                      <span className="font-mono text-xs text-[#ffb4a7] uppercase">Active Session</span>
+                      <span className="font-mono text-xs text-[#ffb4a7] uppercase">Phiên hoạt động</span>
                     </div>
                   </div>
                 </div>
@@ -72,21 +72,21 @@ export default function Profile() {
                 {/* Stats Grid */}
                 <div className="grid grid-cols-2 md:grid-cols-4 gap-4 pt-8 border-t-2 border-[#5f3e39]">
                   <div className="border-l-2 border-[#ffb4a7] pl-4">
-                    <p className="font-mono text-[10px] text-[#eabcb4] uppercase mb-1">Member Since</p>
+                    <p className="font-mono text-[10px] text-[#eabcb4] uppercase mb-1">Thành viên từ</p>
                     <p className="font-mono text-lg font-bold text-[#e4e1ee]">
                       {memberSince}
                     </p>
                   </div>
                   <div className="border-l-2 border-[#ffb4a7] pl-4">
-                    <p className="font-mono text-[10px] text-[#eabcb4] uppercase mb-1">Access Level</p>
+                    <p className="font-mono text-[10px] text-[#eabcb4] uppercase mb-1">Cấp độ truy cập</p>
                     <p className="font-mono text-lg font-bold text-[#e4e1ee]">Driver</p>
                   </div>
                   <div className="border-l-2 border-[#ffb4a7] pl-4">
-                    <p className="font-mono text-[10px] text-[#eabcb4] uppercase mb-1">Status</p>
+                    <p className="font-mono text-[10px] text-[#eabcb4] uppercase mb-1">Trạng thái</p>
                     <p className="font-mono text-lg font-bold text-[#ffb4a7]">Active</p>
                   </div>
                   <div className="border-l-2 border-[#ffb4a7] pl-4">
-                    <p className="font-mono text-[10px] text-[#eabcb4] uppercase mb-1">ID</p>
+                    <p className="font-mono text-[10px] text-[#eabcb4] uppercase mb-1">Mã</p>
                     <p className="font-mono text-lg font-bold text-[#e4e1ee]">#{user.id?.slice(-6) || '000000'}</p>
                   </div>
                 </div>
@@ -98,7 +98,7 @@ export default function Profile() {
           <div className="lg:col-span-4 space-y-4">
             {/* Quick Actions */}
             <div className="bg-[#1f1f28] border border-[#5f3e39] p-6">
-              <h3 className="font-mono text-xs text-[#ffb4a7] uppercase tracking-widest mb-4">Quick Actions</h3>
+              <h3 className="font-mono text-xs text-[#ffb4a7] uppercase tracking-widest mb-4">Hành động nhanh</h3>
               <div className="space-y-3">
                 <Link
                   to="/results"
@@ -106,7 +106,7 @@ export default function Profile() {
                 >
                   <span className="flex items-center gap-2">
                     <span className="material-symbols-outlined text-sm">leaderboard</span>
-                    View Results
+                    Xem kết quả
                   </span>
                 </Link>
                 <Link
@@ -115,7 +115,7 @@ export default function Profile() {
                 >
                   <span className="flex items-center gap-2">
                     <span className="material-symbols-outlined text-sm">calendar_month</span>
-                    Race Calendar
+                    Lịch đua
                   </span>
                 </Link>
               </div>
@@ -123,14 +123,14 @@ export default function Profile() {
 
             {/* Account Management */}
             <div className="bg-[#ff553d] p-6">
-              <h3 className="font-mono text-xs text-[#5b0300] uppercase tracking-widest mb-4">Account</h3>
+              <h3 className="font-mono text-xs text-[#5b0300] uppercase tracking-widest mb-4">Tài khoản</h3>
               <button
                 onClick={handleLogout}
                 className="w-full bg-[#5b0300] text-white py-3 px-6 font-mono text-xs font-bold uppercase tracking-widest parallelogram hover:bg-[#670400] transition-all"
               >
                 <span className="parallelogram-content flex items-center justify-center gap-2">
                   <span className="material-symbols-outlined text-sm">logout</span>
-                  Logout
+                  Đăng xuất
                 </span>
               </button>
             </div>
@@ -139,12 +139,12 @@ export default function Profile() {
             <div className="hud-border bg-[#1b1b24] p-4 carbon-texture">
               <div className="flex items-center gap-2 mb-2">
                 <span className="material-symbols-outlined text-[#d3fbff] text-lg">shield</span>
-                <span className="font-mono text-[10px] text-[#d3fbff]">Security Status</span>
+                <span className="font-mono text-[10px] text-[#d3fbff]">Trạng thái bảo mật</span>
               </div>
               <p className="font-mono text-xs leading-relaxed opacity-80">
-                <span className="text-[#ffb4a7]">&gt;</span> Session Active<br />
-                <span className="text-[#ffb4a7]">&gt;</span> Auth Token Valid<br />
-                <span className="text-[#ffb4a7]">&gt;</span> Last Login: Today
+                <span className="text-[#ffb4a7]">&gt;</span> Phiên đang hoạt động<br />
+                <span className="text-[#ffb4a7]">&gt;</span> Token xác thực hợp lệ<br />
+                <span className="text-[#ffb4a7]">&gt;</span> Đăng nhập gần nhất: Hôm nay
               </p>
             </div>
           </div>
