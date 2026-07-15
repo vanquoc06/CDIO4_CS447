@@ -1,6 +1,7 @@
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
 import Footer from '../components/Footer';
+import DetailModal from '../components/DetailModal';
 
 const upcomingRaces = [
   { round: 'R09 // 07-09 JUN', name: 'Canada', location: 'Montreal', img: 'https://lh3.googleusercontent.com/aida-public/AB6AXuCGDUjaw9DI_uGvMgTTY44krqeRzOQ1Jv0cxLNg5N5GPIHvRrhQVDNW4CziAm-1hlCiJ-2-K4_5-DKQRh2Brrs8_R8RfALxPP3DHvWASWJ0Yf6EkYm_HKxvsUfP7Zri17lxmorBRRf2tX9KfJV6HMudK1ZRoOEgK2SQjie9lRZ8kLTbuL39YaIjpE74_VLi7AuANAhCyqVN8GRq1-bbAxkWiS01YhpokTkdxXUZRTaUtxd0zUgACua5JyiYkwj56vjS5BiryaPim78' },
@@ -15,6 +16,7 @@ export default function Schedule() {
   const dRef = useRef(null);
   const hRef = useRef(null);
   const mRef = useRef(null);
+  const [selectedRace, setSelectedRace] = useState(null);
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -121,7 +123,7 @@ export default function Schedule() {
           {/* Upcoming Races */}
           <div className="md:col-span-12 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mt-8">
             {upcomingRaces.map((race) => (
-              <div key={race.name} className="bg-[#1f1f28] border border-[#5f3e39] hover:border-[#ffb4a7] transition-all p-6 group cursor-pointer overflow-hidden">
+              <button key={race.name} type="button" onClick={() => setSelectedRace(race)} className="bg-[#1f1f28] border border-[#5f3e39] hover:border-[#ffb4a7] transition-all p-6 group cursor-pointer overflow-hidden text-left">
                 <div className="flex justify-between items-start">
                   <div>
                     <div className="font-mono text-[10px] text-[#eabcb4] uppercase">{race.round}</div>
@@ -136,15 +138,16 @@ export default function Schedule() {
                     <div className="font-mono text-[10px] opacity-40 uppercase">Location</div>
                     <div className="text-sm">{race.location}</div>
                   </div>
-                  <button className="px-4 py-2 bg-[#ffb4a7]/10 text-[#ffb4a7] border border-[#ffb4a7]/20 parallelogram-sm font-mono text-[10px] uppercase hover:bg-[#ffb4a7] hover:text-[#670400] transition-all">Details</button>
+                  <span className="px-4 py-2 bg-[#ffb4a7]/10 text-[#ffb4a7] border border-[#ffb4a7]/20 parallelogram-sm font-mono text-[10px] uppercase hover:bg-[#ffb4a7] hover:text-[#670400] transition-all">Details</span>
                 </div>
-              </div>
+              </button>
             ))}
           </div>
         </section>
       </main>
 
       <Footer />
+      <DetailModal isOpen={Boolean(selectedRace)} onClose={() => setSelectedRace(null)} item={selectedRace} type="race" />
     </div>
   );
 }

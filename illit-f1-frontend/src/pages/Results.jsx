@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import Footer from '../components/Footer';
+import DetailModal from '../components/DetailModal';
 
 const raceResults = [
   { pos: '04', driver: 'GEORGE RUSSELL', car: 'MERCEDES', time: '+13.309s', pts: 12 },
@@ -58,6 +59,7 @@ export default function Results() {
   const [chatVisible, setChatVisible] = useState(true);
   const [activeTab, setActiveTab] = useState('Races');
   const [activeFilter, setActiveFilter] = useState('All');
+  const [selectedResult, setSelectedResult] = useState(null);
 
   const filteredRaces = activeFilter === 'All'
     ? raceCalendarResults
@@ -128,7 +130,7 @@ export default function Results() {
                 </thead>
                 <tbody className="font-mono text-sm">
                   {filteredRaces.map((race) => (
-                    <tr key={race.gp} className="border-b border-[#24242d] hover:bg-[#1b1b24] transition-colors cursor-pointer">
+                    <tr key={race.gp} onClick={() => setSelectedResult(race)} className="border-b border-[#24242d] hover:bg-[#1b1b24] transition-colors cursor-pointer">
                       <td className="py-5 px-6 font-bold flex items-center gap-3">
                         <span className="text-xl">{race.flag}</span>
                         {race.gp}
@@ -155,7 +157,7 @@ export default function Results() {
                 </thead>
                 <tbody className="font-mono text-sm">
                   {driverStandings.map((driver) => (
-                    <tr key={driver.name} className="border-b border-[#24242d] hover:bg-[#1b1b24] transition-colors cursor-pointer">
+                    <tr key={driver.name} onClick={() => setSelectedResult(driver)} className="border-b border-[#24242d] hover:bg-[#1b1b24] transition-colors cursor-pointer">
                       <td className="py-5 px-6 font-bold">{driver.rank}</td>
                       <td className="py-5 px-6 font-bold flex items-center gap-3">
                         <span className="text-xl">{driver.flag}</span>
@@ -181,7 +183,7 @@ export default function Results() {
                 </thead>
                 <tbody className="font-mono text-sm">
                   {teamStandings.map((team) => (
-                    <tr key={team.name} className="border-b border-[#24242d] hover:bg-[#1b1b24] transition-colors cursor-pointer">
+                    <tr key={team.name} onClick={() => setSelectedResult(team)} className="border-b border-[#24242d] hover:bg-[#1b1b24] transition-colors cursor-pointer">
                       <td className="py-5 px-6 font-bold">{team.rank}</td>
                       <td className="py-5 px-6 font-bold flex items-center gap-3">
                         <span className="text-xl">{team.flag}</span>
@@ -200,11 +202,11 @@ export default function Results() {
           {activeTab === 'Awards' && (
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
               {awardResults.map((award) => (
-                <div key={award.title} className="bg-[#050507] border border-[#2a2a34] p-5">
+                <button key={award.title} type="button" onClick={() => setSelectedResult(award)} className="bg-[#050507] border border-[#2a2a34] p-5 text-left hover:border-[#ffb4a7] transition-colors">
                   <p className="font-mono text-xs uppercase text-[#a5a0b3]">{award.title}</p>
                   <h3 className="text-xl font-black italic uppercase mt-3 text-[#ffb4a7]" style={{ fontFamily: 'Anybody, sans-serif' }}>{award.winner}</h3>
                   <p className="font-mono text-xs mt-4 text-[#e4e1ee]">{award.detail}</p>
-                </div>
+                </button>
               ))}
             </div>
           )}
@@ -213,6 +215,7 @@ export default function Results() {
       </main>
 
       <Footer />
+      <DetailModal isOpen={Boolean(selectedResult)} onClose={() => setSelectedResult(null)} item={selectedResult} type="result" />
     </div>
   );
 }

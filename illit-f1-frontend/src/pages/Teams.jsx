@@ -1,5 +1,6 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import Footer from '../components/Footer';
+import DetailModal from '../components/DetailModal';
 
 const teams = [
   { pos: 'POS 01', name: 'RED BULL RACING', engine: 'HONDA RBPT', pts: 860, color: '#0600EF', accentClass: 'text-[#ffb4a7]', hoverBorder: 'hover:border-[#ffb4a7]', btnHover: 'group-hover:bg-[#ffb4a7] group-hover:text-[#5b0300]', lead: 'M. Verstappen', wing: 'S. Perez', img: 'https://lh3.googleusercontent.com/aida-public/AB6AXuAKEreIyF2O-Vq7DFkbEfq_-P2swEi7o-CC6Jq6yAEwoME3nysiLTqHBW6r-UcON0sZhuWHzYty4sgVajEpCr4nol2uO4OW4faNgEJEcMv-9d6__V-NxjxcsfzUWDKdWOWxmSRUybNro3UaYDnuhJG--seMmYpZi9DyGtLabtCq2zsMtXaMgEmw4SdT3roL0Vcw5unB96lLy0_74DUgxRnAtpZRkP2YE9Yrjbec1iNsuYSamd0kDeCIld_wxPZIkLIlS_Dm-7ZCT4U', badgeBg: 'bg-[#ff553d] text-[#5b0300]' },
@@ -11,6 +12,8 @@ const teams = [
 ];
 
 export default function Teams() {
+  const [selectedTeam, setSelectedTeam] = useState(null);
+
   useEffect(() => {
     // Glitch text on h2 hover
     const titles = document.querySelectorAll('.glitch-title');
@@ -54,7 +57,7 @@ export default function Teams() {
         {/* Team Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-y-12 gap-x-4">
           {teams.map((team) => (
-            <div key={team.name} className={`group relative bg-[#1b1b24] border-r border-b border-[#5f3e39] ${team.hoverBorder} transition-all duration-500`}>
+            <button key={team.name} type="button" onClick={() => setSelectedTeam(team)} className={`group relative bg-[#1b1b24] border-r border-b border-[#5f3e39] ${team.hoverBorder} transition-all duration-500 text-left`}>
               <div className={`absolute -top-4 -left-4 ${team.badgeBg} px-4 py-1 parallelogram z-10 font-mono text-xs`}>
                 <span className="font-bold">{team.pos}</span>
               </div>
@@ -85,11 +88,11 @@ export default function Teams() {
                     <span className="text-lg font-bold uppercase" style={{ fontFamily: 'Anybody, sans-serif' }}>{team.wing}</span>
                   </div>
                 </div>
-                <button className={`mt-8 w-full parallelogram bg-[#393842] py-3 ${team.btnHover} transition-all duration-300`}>
+                <span className={`mt-8 block w-full parallelogram bg-[#393842] py-3 ${team.btnHover} transition-all duration-300 text-center`}>
                   <span className="font-mono font-bold uppercase tracking-widest text-xs">View Telemetry</span>
-                </button>
+                </span>
               </div>
-            </div>
+            </button>
           ))}
         </div>
 
@@ -116,6 +119,7 @@ export default function Teams() {
       </main>
 
       <Footer />
+      <DetailModal isOpen={Boolean(selectedTeam)} onClose={() => setSelectedTeam(null)} item={selectedTeam} type="team" />
     </div>
   );
 }

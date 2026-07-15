@@ -1,5 +1,6 @@
-import { useEffect, useRef } from 'react';
+import { useEffect, useMemo, useRef, useState } from 'react';
 import Footer from '../components/Footer';
+import DetailModal from '../components/DetailModal';
 
 const drivers = [
   { id: 2, name: 'LUCA', surname: 'BIANCHI', team: 'CYBERDRIVE GP', number: 11, pts: 189, pos: '04', podiums: '06', color: 'secondary-fixed-dim', img: 'https://lh3.googleusercontent.com/aida-public/AB6AXuDYbYhlA-L6FTDbl0ij4Ivh5cQFVWM-kCogKgCb24GKPqqqlbCEuxNwh2zthaDZAoPSWDeMzvMRG2Mifbsgf7lCpLSuQYnQ4EGCoCb-_Z_XJoJ9BqzjJCqhCQS9Ex7UtohYiuFnSJJZWz1doyWvFEIygfbY_IPuzPgy0A2Ko7V1YeJ4vu1ylDgYI5MdhB4vfu4ecAoOpzMPRuQjU60iZ8aloruFDEnYXvO8oAJ5zhepN91UDkDHIuHfl2oMTvntHdFeXxsJuco9II8' },
@@ -16,6 +17,8 @@ const AI_LOGS = [
 export default function Drivers() {
   const terminalRef = useRef(null);
   const logIndex = useRef(0);
+  const [selectedDriver, setSelectedDriver] = useState(null);
+  const driverList = useMemo(() => drivers, []);
 
   useEffect(() => {
     const terminal = terminalRef.current;
@@ -113,8 +116,8 @@ export default function Drivers() {
           </div>
 
           {/* Standard Driver Cards */}
-          {drivers.map((d) => (
-            <div key={d.id} className="md:col-span-4 group bg-[#1f1f28] border border-[#5f3e39] hover:border-[#ffb4a7] transition-all">
+          {driverList.map((d) => (
+            <button key={d.id} type="button" onClick={() => setSelectedDriver(d)} className="md:col-span-4 group bg-[#1f1f28] border border-[#5f3e39] hover:border-[#ffb4a7] transition-all text-left">
               <div className="relative h-64 overflow-hidden">
                 <img className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" src={d.img} alt={d.name} />
                 <div className="absolute bottom-0 right-0 font-black italic text-6xl text-white opacity-20 p-4"
@@ -134,7 +137,7 @@ export default function Drivers() {
                   ))}
                 </div>
               </div>
-            </div>
+            </button>
           ))}
 
           {/* CTA Card */}
@@ -180,6 +183,7 @@ export default function Drivers() {
         </div>
       </section>
       <Footer />
+      <DetailModal isOpen={Boolean(selectedDriver)} onClose={() => setSelectedDriver(null)} item={selectedDriver} type="driver" />
     </div>
   );
 }
